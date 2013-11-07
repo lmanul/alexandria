@@ -21,7 +21,10 @@ window.Readium = {
     // load the library data from localstorage and 
     // use it trigger a reset event on the library
     _lawnchair = new Lawnchair(function() {
+      debugger;
+      this.all(function(all) { window.console.log(all.length); } )
       this.all(function(all) {
+        debugger;
 
         // Exclude entries in the store that are for epubView properties. These should not be 
         // rendered in the list of epubs in the library

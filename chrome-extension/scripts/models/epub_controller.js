@@ -91,6 +91,7 @@ Readium.Models.EPUBController = Backbone.Model.extend({
 
     // Persist viewer properties
     Lawnchair(function() {
+      debugger;
       this.save(that.toJSON(), ops.success);
     });
   },

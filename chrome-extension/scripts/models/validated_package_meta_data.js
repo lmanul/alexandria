@@ -52,6 +52,7 @@ Readium.Models.ValidatedPackageMetaData = Backbone.Model.extend({
     var that = this;
     this.set("updated_at", new Date());
     Lawnchair(function() {
+      debugger;
       this.save(that.toJSON(), options.success);
     });
   },

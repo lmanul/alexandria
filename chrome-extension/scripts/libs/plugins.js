@@ -5,7 +5,7 @@
 
 // 1. Underscore.js
 // 2. Backbone.js
-// 3. Lawnchair v0.6.1
+// 3. Lawnchair v0.6.1, with Chrome storage adapter.
 // 4. Twitter Bootstrap.js
 // 5. Jquery mousewheel
 // 6. Pan and Zoom
@@ -88,18 +88,633 @@ null:f.isFunction(a[b])?a[b]():a[b]},o=function(){throw Error('A "url" property 
  * clientside json store 
  *
  */
-var Lawnchair=function(b,a){if(!(this instanceof Lawnchair))return new Lawnchair(b,a);if(!JSON)throw"JSON unavailable! Include http://www.json.org/json2.js to fix.";if(arguments.length<=2&&arguments.length>0)a=typeof arguments[0]==="function"?arguments[0]:arguments[1],b=typeof arguments[0]==="function"?{}:arguments[0];else throw"Incorrect # of ctor args!";if(typeof a!=="function")throw"No callback was provided";this.record=b.record||"record";this.name=b.name||"records";var e;if(b.adapter)for(var c=
-0,d=Lawnchair.adapters.length;c<d;c++){if(Lawnchair.adapters[c].adapter===b.adapter){e=Lawnchair.adapters[c].valid()?Lawnchair.adapters[c]:void 0;break}}else{c=0;for(d=Lawnchair.adapters.length;c<d;c++)if(e=Lawnchair.adapters[c].valid()?Lawnchair.adapters[c]:void 0)break}if(!e)throw"No valid adapter.";for(var f in e)this[f]=e[f];c=0;for(d=Lawnchair.plugins.length;c<d;c++)Lawnchair.plugins[c].call(this);this.init(b,a)};Lawnchair.adapters=[];
-Lawnchair.adapter=function(b,a){a.adapter=b;var e="adapter valid init keys save batch get exists all remove nuke".split(" "),c=this.prototype.indexOf,d;for(d in a)if(c(e,d)===-1)throw"Invalid adapter! Nonstandard method: "+d;Lawnchair.adapters.push(a)};Lawnchair.plugins=[];Lawnchair.plugin=function(b){for(var a in b)a==="init"?Lawnchair.plugins.push(b[a]):this.prototype[a]=b[a]};
-Lawnchair.prototype={isArray:Array.isArray||function(b){return Object.prototype.toString.call(b)==="[object Array]"},indexOf:function(b,a,e,c){if(b.indexOf)return b.indexOf(a);for(e=0,c=b.length;e<c;e++)if(b[e]===a)return e;return-1},lambda:function(b){return this.fn(this.record,b)},fn:function(b,a){return typeof a=="string"?new Function(b,a):a},uuid:function(){var b=function(){return((1+Math.random())*65536|0).toString(16).substring(1)};return b()+b()+"-"+b()+"-"+b()+"-"+b()+"-"+b()+b()+b()},each:function(b){var a=
-this.lambda(b);if(this.__results)for(var b=0,e=this.__results.length;b<e;b++)a.call(this,this.__results[b],b);else this.all(function(c){for(var b=0,e=c.length;b<e;b++)a.call(this,c[b],b)});return this}};
-Lawnchair.adapter("webkit-sqlite",function(){var b=function(a,b){console.log("error in sqlite adaptor!",a,b)};if(!Function.prototype.bind)Function.prototype.bind=function(b){var e=[].slice,c=e.call(arguments,1),d=this,f=function(){},g=function(){return d.apply(this instanceof f?this:b||{},c.concat(e.call(arguments)))};f.prototype=d.prototype;g.prototype=new f;return g};return{valid:function(){return!!window.openDatabase},init:function(a,e){var c=this,d=c.fn(c.name,e),f="CREATE TABLE IF NOT EXISTS "+
-this.name+" (id NVARCHAR(32) UNIQUE PRIMARY KEY, value TEXT, timestamp REAL)",g=function(){return d.call(c,c)};this.db=openDatabase(this.name,"1.0.0",this.name,65536);this.db.transaction(function(c){c.executeSql(f,[],g,b)})},keys:function(a){var e=this.lambda(a),c=this,d="SELECT id FROM "+this.name+" ORDER BY timestamp DESC";this.db.transaction(function(a){a.executeSql(d,[],function(b,a){if(a.rows.length==0)e.call(c,[]);else{for(var d=[],f=0,j=a.rows.length;f<j;f++)d.push(a.rows.item(f).id);e.call(c,
-d)}},b)});return this},save:function(a,e){var c=this,d=a.key||c.uuid(),f="INSERT INTO "+this.name+" (value, timestamp, id) VALUES (?,?,?)",g="UPDATE "+this.name+" SET value=?, timestamp=? WHERE id=?",k=function(){if(e)a.key=d,c.lambda(e).call(c,a)},h=[new Date,d];c.exists(a.key,function(e){c.db.transaction(function(c){var d=function(a){delete a.key;h.unshift(JSON.stringify(a));c.executeSql(g,h,k,b)};e?d(a):(h.unshift(JSON.stringify(a)),c.executeSql(f,h,k,b))})});return this},batch:function(a,b){for(var c=
-[],d=!1,f=this,g=function(b){c.push(b);d=c.length===a.length},k=setInterval(function(){d&&(b&&f.lambda(b).call(f,c),clearInterval(k))},200),h=0,i=a.length;h<i;h++)this.save(a[h],g);return this},get:function(a,e){var c=this,d="",d=this.isArray(a)?"SELECT id, value FROM "+this.name+" WHERE id IN ('"+a.join("','")+"')":"SELECT id, value FROM "+this.name+" WHERE id = '"+a+"'",f=function(b,d){var f=null,i=[];if(d.rows.length)for(var j=0,l=d.rows.length;j<l;j++)f=JSON.parse(d.rows.item(j).value),f.key=
-d.rows.item(j).id,i.push(f);c.isArray(a)||(i=i.length?i[0]:null);e&&c.lambda(e).call(c,i)};this.db.transaction(function(a){a.executeSql(d,[],f,b)});return this},exists:function(a,e){var c="SELECT * FROM "+this.name+" WHERE id = ?",d=this,f=function(b,a){e&&d.fn("exists",e).call(d,a.rows.length>0)};this.db.transaction(function(d){d.executeSql(c,[a],f,b)});return this},all:function(a){var e=this,c="SELECT * FROM "+this.name,d=[],f=this.fn(this.name,a)||void 0,g=function(a,b){if(b.rows.length!=0)for(var c=
-0,g=b.rows.length;c<g;c++){var l=JSON.parse(b.rows.item(c).value);l.key=b.rows.item(c).id;d.push(l)}f&&f.call(e,d)};this.db.transaction(function(a){a.executeSql(c,[],g,b)});return this},remove:function(a,e){var c=this,d=typeof a==="string"?a:a.key,f="DELETE FROM "+this.name+" WHERE id = ?",g=function(){e&&c.lambda(e).call(c)};this.db.transaction(function(a){a.executeSql(f,[d],g,b)});return this},nuke:function(a){var e="DELETE FROM "+this.name,c=this,d=a?function(){c.lambda(a).call(c)}:function(){};
-this.db.transaction(function(a){a.executeSql(e,[],d,b)});return this}}}());
+/**
+ * Lawnchair!
+ * --- 
+ * clientside json store 
+ *
+ */
+var Lawnchair = function (options, callback) {
+    // ensure Lawnchair was called as a constructor
+    if (!(this instanceof Lawnchair)) return new Lawnchair(options, callback);
+
+    // lawnchair requires json 
+    if (!JSON) throw 'JSON unavailable! Include http://www.json.org/json2.js to fix.'
+    // options are optional; callback is not
+    if (arguments.length <= 2) {
+        callback = (typeof arguments[0] === 'function') ? arguments[0] : arguments[1];
+        options  = (typeof arguments[0] === 'function') ? {} : arguments[0] || {};
+    } else {
+        throw 'Incorrect # of ctor args!'
+    }
+    
+    // default configuration 
+    this.record = options.record || 'record'  // default for records
+    this.name   = options.name   || 'records' // default name for underlying store
+    
+    // mixin first valid  adapter
+    var adapter
+    // if the adapter is passed in we try to load that only
+    if (options.adapter) {
+        
+        // the argument passed should be an array of prefered adapters
+        // if it is not, we convert it
+        if(typeof(options.adapter) === 'string'){
+            options.adapter = [options.adapter];    
+        }
+            
+        // iterates over the array of passed adapters 
+        for(var j = 0, k = options.adapter.length; j < k; j++){
+            
+            // itirates over the array of available adapters
+            for (var i = Lawnchair.adapters.length-1; i >= 0; i--) {
+                if (Lawnchair.adapters[i].adapter === options.adapter[j]) {
+                    adapter = Lawnchair.adapters[i].valid() ? Lawnchair.adapters[i] : undefined;
+                    if (adapter) break 
+                }
+            }
+            if (adapter) break
+        }
+    
+    // otherwise find the first valid adapter for this env
+    } 
+    else {
+        for (var i = 0, l = Lawnchair.adapters.length; i < l; i++) {
+            adapter = Lawnchair.adapters[i].valid() ? Lawnchair.adapters[i] : undefined
+            if (adapter) break 
+        }
+    } 
+    
+    // we have failed 
+    if (!adapter) throw 'No valid adapter.' 
+    
+    // yay! mixin the adapter 
+    for (var j in adapter)  
+        this[j] = adapter[j]
+    
+    // call init for each mixed in plugin
+    for (var i = 0, l = Lawnchair.plugins.length; i < l; i++) 
+        Lawnchair.plugins[i].call(this)
+
+    // init the adapter 
+    this.init(options, callback)
+}
+
+Lawnchair.adapters = [] 
+
+/** 
+ * queues an adapter for mixin
+ * ===
+ * - ensures an adapter conforms to a specific interface
+ *
+ */
+Lawnchair.adapter = function (id, obj) {
+    // add the adapter id to the adapter obj
+    // ugly here for a  cleaner dsl for implementing adapters
+    obj['adapter'] = id
+    // methods required to implement a lawnchair adapter 
+    var implementing = 'adapter valid init keys save batch get exists all remove nuke'.split(' ')
+    ,   indexOf = this.prototype.indexOf
+    // mix in the adapter   
+    for (var i in obj) {
+        if (indexOf(implementing, i) === -1) throw 'Invalid adapter! Nonstandard method: ' + i
+    }
+    // if we made it this far the adapter interface is valid 
+	// insert the new adapter as the preferred adapter
+	Lawnchair.adapters.splice(0,0,obj)
+}
+
+Lawnchair.plugins = []
+
+/**
+ * generic shallow extension for plugins
+ * ===
+ * - if an init method is found it registers it to be called when the lawnchair is inited 
+ * - yes we could use hasOwnProp but nobody here is an asshole
+ */ 
+Lawnchair.plugin = function (obj) {
+    for (var i in obj) 
+        i === 'init' ? Lawnchair.plugins.push(obj[i]) : this.prototype[i] = obj[i]
+}
+
+/**
+ * helpers
+ *
+ */
+Lawnchair.prototype = {
+
+    isArray: Array.isArray || function(o) { return Object.prototype.toString.call(o) === '[object Array]' },
+    
+    /**
+     * this code exists for ie8... for more background see:
+     * http://www.flickr.com/photos/westcoastlogic/5955365742/in/photostream
+     */
+    indexOf: function(ary, item, i, l) {
+        if (ary.indexOf) return ary.indexOf(item)
+        for (i = 0, l = ary.length; i < l; i++) if (ary[i] === item) return i
+        return -1
+    },
+
+    // awesome shorthand callbacks as strings. this is shameless theft from dojo.
+    lambda: function (callback) {
+        return this.fn(this.record, callback)
+    },
+
+    // first stab at named parameters for terse callbacks; dojo: first != best // ;D
+    fn: function (name, callback) {
+        return typeof callback == 'string' ? new Function(name, callback) : callback
+    },
+
+    // returns a unique identifier (by way of Backbone.localStorage.js)
+    // TODO investigate smaller UUIDs to cut on storage cost
+    uuid: function () {
+        var S4 = function () {
+            return (((1+Math.random())*0x10000)|0).toString(16).substring(1);
+        }
+        return (S4()+S4()+"-"+S4()+"-"+S4()+"-"+S4()+"-"+S4()+S4()+S4());
+    },
+
+    // a classic iterator
+    each: function (callback) {
+        var cb = this.lambda(callback)
+        // iterate from chain
+        if (this.__results) {
+            for (var i = 0, l = this.__results.length; i < l; i++) cb.call(this, this.__results[i], i) 
+        }  
+        // otherwise iterate the entire collection 
+        else {
+            this.all(function(r) {
+                for (var i = 0, l = r.length; i < l; i++) cb.call(this, r[i], i)
+            })
+        }
+        return this
+    }
+// --
+};
+
+/**
+ * Expose nodeJS module
+ */
+if (typeof module !== 'undefined' && module.exports) {
+  module.exports = Lawnchair;
+}
+Lawnchair.adapter('webkit-sqlite', (function () {
+    // private methods 
+    var fail = function (e, i) { console.error('error in sqlite adaptor!', e, i) }
+    ,   now  = function () { return new Date() } // FIXME need to use better date fn
+	// not entirely sure if this is needed...
+    if (!Function.prototype.bind) {
+        Function.prototype.bind = function( obj ) {
+            var slice = [].slice
+            ,   args  = slice.call(arguments, 1) 
+            ,   self  = this
+            ,   nop   = function () {} 
+            ,   bound = function () {
+                    return self.apply(this instanceof nop ? this : (obj || {}), args.concat(slice.call(arguments))) 
+                }
+            nop.prototype   = self.prototype
+            bound.prototype = new nop()
+            return bound
+        }
+    }
+
+    // public methods
+    return {
+    
+        valid: function() { return !!(window.openDatabase) },
+
+        init: function (options, callback) {
+            var that   = this
+            ,   cb     = that.fn(that.name, callback)
+            ,   create = "CREATE TABLE IF NOT EXISTS " + this.record + " (id NVARCHAR(32) UNIQUE PRIMARY KEY, value TEXT, timestamp REAL)"
+            ,   win    = function(){ if(cb) return cb.call(that, that); }
+
+            if (cb && typeof cb != 'function') throw 'callback not valid';
+
+            // open a connection and create the db if it doesn't exist 
+            this.db = openDatabase(this.name, '1.0.0', this.name, 65536)
+            this.db.transaction(function (t) { 
+                t.executeSql(create, []) 
+            }, fail, win)
+        }, 
+
+        keys:  function (callback) {
+            var cb   = this.lambda(callback)
+            ,   that = this
+            ,   keys = "SELECT id FROM " + this.record + " ORDER BY timestamp DESC"
+
+            this.db.readTransaction(function(t) {
+                var win = function (xxx, results) {
+                    if (results.rows.length == 0 ) {
+                        cb.call(that, [])
+                    } else {
+                        var r = [];
+                        for (var i = 0, l = results.rows.length; i < l; i++) {
+                            r.push(results.rows.item(i).id);
+                        }
+                        cb.call(that, r)
+                    }
+                }
+                t.executeSql(keys, [], win, fail)
+            })
+            return this
+        },
+        // you think thats air you're breathing now?
+        save: function (obj, callback, error) {
+          var that = this
+          ,   objs = (this.isArray(obj) ? obj : [obj]).map(function(o){if(!o.key) { o.key = that.uuid()} return o})
+          ,   ins  = "INSERT OR REPLACE INTO " + this.record + " (value, timestamp, id) VALUES (?,?,?)"
+          ,   win  = function () { if (callback) { that.lambda(callback).call(that, that.isArray(obj)?objs:objs[0]) }}
+          ,   error= error || function() {}
+          ,   insvals = []
+          ,   ts = now()
+
+          try {
+            for (var i = 0, l = objs.length; i < l; i++) {
+              insvals[i] = [JSON.stringify(objs[i]), ts, objs[i].key];
+            }
+          } catch (e) {
+            fail(e)
+            throw e;
+          }
+
+			 that.db.transaction(function(t) {
+            for (var i = 0, l = objs.length; i < l; i++)
+              t.executeSql(ins, insvals[i])
+			 }, function(e,i){fail(e,i)}, win)
+
+          return this
+        }, 
+
+
+        batch: function (objs, callback) {
+          return this.save(objs, callback)
+        },
+
+        get: function (keyOrArray, cb) {
+			var that = this
+			,   sql  = ''
+            ,   args = this.isArray(keyOrArray) ? keyOrArray : [keyOrArray];
+            // batch selects support
+            sql = 'SELECT id, value FROM ' + this.record + " WHERE id IN (" +
+                args.map(function(){return '?'}).join(",") + ")"
+			// FIXME
+            // will always loop the results but cleans it up if not a batch return at the end..
+			// in other words, this could be faster
+			var win = function (xxx, results) {
+				var o
+				,   r
+                ,   lookup = {}
+                // map from results to keys
+				for (var i = 0, l = results.rows.length; i < l; i++) {
+					o = JSON.parse(results.rows.item(i).value)
+					o.key = results.rows.item(i).id
+                    lookup[o.key] = o;
+				}
+                r = args.map(function(key) { return lookup[key]; });
+				if (!that.isArray(keyOrArray)) r = r.length ? r[0] : null
+				if (cb) that.lambda(cb).call(that, r)
+            }
+            this.db.readTransaction(function(t){ t.executeSql(sql, args, win, fail) })
+            return this 
+		},
+
+		exists: function (key, cb) {
+			var is = "SELECT * FROM " + this.record + " WHERE id = ?"
+			,   that = this
+			,   win = function(xxx, results) { if (cb) that.fn('exists', cb).call(that, (results.rows.length > 0)) }
+			this.db.readTransaction(function(t){ t.executeSql(is, [key], win, fail) })
+			return this
+		},
+
+		all: function (callback) {
+			var that = this
+			,   all  = "SELECT * FROM " + this.record
+			,   r    = []
+			,   cb   = this.fn(this.name, callback) || undefined
+			,   win  = function (xxx, results) {
+				if (results.rows.length != 0) {
+					for (var i = 0, l = results.rows.length; i < l; i++) {
+						var obj = JSON.parse(results.rows.item(i).value)
+						obj.key = results.rows.item(i).id
+						r.push(obj)
+					}
+				}
+				if (cb) cb.call(that, r)
+			}
+
+			this.db.readTransaction(function (t) { 
+				t.executeSql(all, [], win, fail) 
+			})
+			return this
+		},
+
+		remove: function (keyOrArray, cb) {
+			var that = this
+                        ,   args
+			,   sql  = "DELETE FROM " + this.record + " WHERE id "
+			,   win  = function () { if (cb) that.lambda(cb).call(that) }
+                        if (!this.isArray(keyOrArray)) {
+                            sql += '= ?';
+                            args = [keyOrArray];
+                        } else {
+                            args = keyOrArray;
+                            sql += "IN (" +
+                                args.map(function(){return '?'}).join(',') +
+                                ")";
+                        }
+                        args = args.map(function(obj) {
+                            return obj.key ? obj.key : obj;
+                        });
+
+			this.db.transaction( function (t) {
+			    t.executeSql(sql, args, win, fail);
+			});
+
+			return this;
+		},
+
+		nuke: function (cb) {
+			var nuke = "DELETE FROM " + this.record
+			,   that = this
+			,   win  = cb ? function() { that.lambda(cb).call(that) } : function(){}
+				this.db.transaction(function (t) { 
+				t.executeSql(nuke, [], win, fail) 
+			})
+			return this
+		}
+//////
+}})());
+/**
+ * chrome.storage storage adapter 
+ * === 
+ * - originally authored by Joseph Pecoraro
+ *
+ */ 
+//
+// Oh, what a tangled web we weave when a callback is what we use to receive - jrschifa
+//
+Lawnchair.adapter('chrome-storage', (function() {
+    var storage = chrome.storage.local
+
+    var indexer = function(name) {
+        return {
+            // the key
+            key: name + '._index_',
+            // returns the index
+            all: function(callback) {
+                var _this = this
+
+                var initStorage = function() {
+                    var obj = JSON.stringify([])
+                    var _set = {}
+                    _set[_this.key] = obj
+                    storage.set(_set)
+
+                    obj = JSON.parse(obj)
+
+                    return obj
+                }
+
+                storage.get(this.key, function(items) {
+                    var obj
+                    if (Object.keys(items).length > 0) {
+                        for (itemKey in items) {
+                            obj = items[itemKey]
+                            if (obj) {
+                                obj = JSON.parse(obj)
+                            }
+
+                            if (obj === null || typeof obj === 'undefined') {
+                                obj = initStorage()
+                            } 
+                            
+                            if (callback) {
+                                callback(obj)
+                            }
+                        }
+                    } else {
+                        obj = initStorage()
+                        callback(obj)
+                    }
+                })
+            },
+            // adds a key to the index
+            add: function (key) {
+                this.all(function(a) {
+                    a.push(key)
+                
+                    var _set = {}
+                    _set[this.key] = JSON.stringify(a)
+                    storage.set(_set)
+                })  
+            },
+            // deletes a key from the index
+            del: function (key) {
+                var r = []
+                this.all(function(a) {    
+                    for (var i = 0, l = a.length; i < l; i++) {
+                        if (a[i] != key) r.push(a[i])
+                    } 
+
+                    var _set = {}
+                    _set[this.key] = JSON.stringify(r) 
+                    storage.set(_set)
+                })
+            },
+            // returns index for a key
+            find: function (key, callback) {
+                this.all(function(a) {
+                    for (var i = 0, l = a.length; i < l; i++) {
+                        if (key === a[i]) {
+                            if (callback) callback(i)
+                        } 
+                    }
+                    
+                    if (callback) callback(false)
+                })    
+            }
+        }
+    }
+    
+    // adapter api 
+    return {
+    
+        // ensure we are in an env with chrome.storage 
+        valid: function () {
+            return !!storage && function() {
+                // in mobile safari if safe browsing is enabled, window.storage
+                // is defined but setItem calls throw exceptions.
+                var success = true
+                var value = Math.random()
+                value = "" + value + "" //ensure that we are dealing with a string
+                try {
+                    var _set = {}
+                    _set[value] = value;
+                    storage.set(_set)
+                } catch (e) {
+                    success = false
+                }
+                storage.remove(value)
+                return success
+            }()
+        },
+
+        init: function (options, callback) {
+            this.indexer = indexer(this.name)
+            if (callback) this.fn(this.name, callback).call(this, this)  
+        },
+        
+        save: function (obj, callback) {
+            var key = obj.key ? this.name + '.' + obj.key : this.name + '.' + this.uuid()
+            // if the key is not in the index push it on
+            if (this.indexer.find(key) === false) this.indexer.add(key)
+            // now we kil the key and use it in the store colleciton    
+            delete obj.key;
+            var _set = {}
+            _set[key] = JSON.stringify(obj)
+            storage.set(_set)
+            obj.key = key.slice(this.name.length + 1)
+            if (callback) {
+                this.lambda(callback).call(this, obj)
+            }
+            return this
+        },
+
+        batch: function (ary, callback) {
+            var saved = []
+            // not particularily efficient but this is more for sqlite situations
+            for (var i = 0, l = ary.length; i < l; i++) {
+                this.save(ary[i], function(r){
+                    saved.push(r)
+                })
+            }
+            if (callback) this.lambda(callback).call(this, saved)
+            return this
+        },
+       
+        // accepts [options], callback
+        keys: function(callback) {
+            if (callback) { 
+                var _this = this
+                var name = this.name
+                var keys
+
+                this.indexer.all(function(data) {
+                    keys = data.map(function(r) {
+                       return r.replace(name + '.', '')   
+                    })
+
+                    _this.fn('keys', callback).call(_this, keys)
+                })
+            }
+            return this
+        },
+        
+        get: function (key, callback) {
+            var _this = this
+            var obj
+
+            if (this.isArray(key)) {
+                var r = []
+                for (var i = 0, l = key.length; i < l; i++) {
+                    var k = this.name + '.' + key[i]
+
+                    storage.get(k, function(items) {
+                        if (items) {
+                            for (itemKey in items) {
+                                obj = items[itemKey]
+                                obj = JSON.parse(obj)
+                                obj.key = itemKey.replace(_this.name + '.', '')
+                                r.push(obj)
+                            }
+                        }
+
+                        if (i == l) {
+                            if (callback) _this.lambda(callback).call(_this, r)
+                        }
+                    })
+                }
+            } else {
+                var k = this.name + '.' + key
+                
+                storage.get(k, function(items) {
+                    if (items) {
+                        for (itemKey in items) {
+                            obj = items[itemKey]
+                            obj = JSON.parse(obj)
+                            obj.key = itemKey.replace(_this.name + '.', '')
+                        }
+                    }  
+                    if (callback) _this.lambda(callback).call(_this, obj)
+                })        
+            }
+            return this
+        },
+
+        exists: function (key, callback) {
+            var _this = this
+            this.indexer.find((this.name+'.'+key), function(response) {
+                response = (response === false) ? false : true;
+                _this.lambda(callback).call(_this, response)            
+            })
+            
+            return this;
+        },
+        // NOTE adapters cannot set this.__results but plugins do
+        // this probably should be reviewed
+        all: function (callback) {
+            var _this = this
+
+            this.indexer.all(function(idx) {
+                //console.log('adapter all');
+                //console.log(idx);
+                var r = []
+                ,   o
+                ,   k
+
+                //console.log(idx);
+                if (idx.length > 0) {
+                    for (var i = 0, l = idx.length; i < l; i++) {
+                        storage.get(idx[i], function(items) {
+                            for (k in items) {
+                                o = JSON.parse(items[k])
+                                o.key = k.replace(_this.name + '.', '')
+                                r.push(o)
+                            }
+
+                            if (i == l) {
+                                if (callback) _this.fn(_this.name, callback).call(_this, r)
+                            } 
+                        })
+                    }
+                } else {
+                    if (callback) _this.fn(_this.name, callback).call(_this, r)
+                }    
+            })
+            return this  
+        },
+        
+        remove: function (keyOrObj, callback) {
+            var key = this.name + '.' + ((keyOrObj.key) ? keyOrObj.key : keyOrObj)
+            this.indexer.del(key)
+            storage.remove(key)
+            if (callback) this.lambda(callback).call(this)
+            return this
+        },
+        
+        nuke: function (callback) {
+            //could probably just use storage.clear() hear
+            this.all(function(r) {
+                for (var i = 0, l = r.length; i < l; i++) {
+                    r[i] = "" + r[i] + ""
+                    this.remove(r[i]);
+                }
+                if (callback) this.lambda(callback).call(this)
+            })
+            return this 
+        }
+}})());
 /**
 * Bootstrap.js by @fat & @mdo
 * plugins: bootstrap-transition.js, bootstrap-modal.js, bootstrap-tooltip.js, bootstrap-popover.js, bootstrap-alert.js, bootstrap-button.js

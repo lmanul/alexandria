@@ -13,7 +13,8 @@ Readium.Utils.LocalStorageAdaptor = function(storeName) {
   var _data;
 
   var save = function() {
-    localStorage.setItem(storeName, JSON.stringify(_data));
+    debugger;
+    chrome.storage.local.set({storeName: _data});
   };
 
   var create = function(model) {
@@ -47,25 +48,32 @@ Readium.Utils.LocalStorageAdaptor = function(storeName) {
   return function(method, model, options) {
 
     var resp;
-    var strData = localStorage.getItem(storeName);
-    _data = ( strData && JSON.parse(strData)) || {};
-
-    switch (method) {
-      case "read":    resp = model.id ? find(model) : findAll(); break;
-      case "create":  resp = create(model);                            break;
-      case "update":  resp = update(model);                            break;
-      case "delete":  resp = destroy(model);                           break;
-    }
-
-    if (resp) {
-      if(options.success) {
-        options.success(resp);
+    chrome.storage.local.get(storeName, function(data) {
+      debugger;
+      var strData;
+      if (storeName in data && data.storeName) {
+        strData = data.storeName;
+      } else {
+        strData = "";
       }
-    } else {
-      if(options.error) {
-        options.error("Record not found");  
+      _data = ( strData && JSON.parse(strData)) || {};
+
+      switch (method) {
+        case "read":    resp = model.id ? find(model) : findAll(); break;
+        case "create":  resp = create(model);                            break;
+        case "update":  resp = update(model);                            break;
+        case "delete":  resp = destroy(model);                           break;
       }
-    }
+
+      if (resp) {
+        if(options.success) {
+          options.success(resp);
+        }
+      } else {
+        if(options.error) {
+          options.error("Record not found");  
+        }
+      }
+    });
   };
-
 };

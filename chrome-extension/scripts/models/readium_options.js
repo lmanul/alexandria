@@ -14,10 +14,14 @@ Readium.Models.ReadiumOptions = Backbone.Model.extend({
 }, {
   getInstance: function() {
     var instance = new Readium.Models.ReadiumOptions();
+    debugger;
     instance.fetch({
       error: function() {
-        localStorage.setItem("READIUM_OPTIONS", "");
-        instance.save();
+        /* debugger;
+        chrome.storage.local.set({"READIUM_OPTIONS": ""} /*, function() {
+          debugger;
+          instance.save();
+        } ); */
       }
     });
     return instance;

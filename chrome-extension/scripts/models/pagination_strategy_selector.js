@@ -62,6 +62,7 @@ Readium.Models.PaginationStrategySelector = Backbone.Model.extend({
   // ------------------------------------------------------------------------------------ //  
 
   shouldScroll: function() {
+    debugger;
     var optionString = localStorage["READIUM_OPTIONS"];
     var options = (optionString && JSON.parse(optionString) ) || {"singleton": {}};
     return !options["singleton"]["paginate_everything"];

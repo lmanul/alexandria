@@ -22,6 +22,7 @@ Readium.Models.LibraryItem = Backbone.Model.extend({
   destroy: function() {
     var key = this.get('key');
     Lawnchair(function() {
+      debugger;
       var that = this; // <=== capture Lawnchair scope
       this.get(key, function(book) {
         if(book) {

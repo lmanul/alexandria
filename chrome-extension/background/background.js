@@ -11,9 +11,10 @@ function getClickHandler() {
 
 chrome.extension.onRequest.addListener(
   function(request, sender, sendResponse) {
-    var optionString = localStorage["READIUM_OPTIONS"];
-    var options = (optionString && JSON.parse(optionString) ) || {"singleton": {}};
-    sendResponse(options["singleton"]);
+    chrome.storage.local.get("READIUM_OPTIONS", function(data) {
+      var options = (data && JSON.parse(data) ) || {"singleton": {}};
+      sendResponse(options["singleton"]);
+    });
   });
 
 // create a context menu item
