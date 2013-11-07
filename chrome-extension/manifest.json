@@ -1,14 +1,13 @@
 {
-  "manifest_version": 2,
   "content_security_policy": "script-src 'self' https://ssl.google-analytics.com; object-src 'self'",
    "app": {
       "launch": {
          "local_path": "views/library.html"
-      }
+      },
+    "background": {
+      "scripts": ["background/background.js"]
+    }
    },
-   "background" : {
-      "page": "background/background.html"
-    },
    "description": "__MSG_chrome_extension_description__",
    "default_locale" : "en_US",
    
@@ -17,14 +16,12 @@
       "48": "images/main_icon/medium.png",
       "128": "images/main_icon/large.png"
    },
-
-   "minimum_chrome_version": "14",
    "name": "Alexandria",
-   "permissions": [ 
-	  "contextMenus",
-      "tabs",
-      "http://*/"
-	],
+   "permissions": [
+     "storage",
+     "contextMenus",
+     "http://*/"
+   ],
    "content_scripts": [
     {
       "run_at": "document_idle",

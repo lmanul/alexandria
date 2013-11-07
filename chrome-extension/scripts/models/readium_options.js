@@ -16,7 +16,7 @@ Readium.Models.ReadiumOptions = Backbone.Model.extend({
     var instance = new Readium.Models.ReadiumOptions();
     instance.fetch({
       error: function() {
-        localStorage.setItem("READIUM_OPTIONS", "");
+        localStorage.set({"READIUM_OPTIONS": ""});
         instance.save();
       }
     });

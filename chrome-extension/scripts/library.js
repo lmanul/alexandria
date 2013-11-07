@@ -281,7 +281,10 @@ Readium.Views.FilePickerView = Backbone.View.extend({
 
   handleFileSelect: function(evt) {
     var files = evt.target.files; // FileList object
-    var extractor = new Readium.Models.ZipBookExtractor({file: files[0], src_filename: files[0].name});
+    var file = files[0];
+    var extractor = new Readium.Models.ZipBookExtractor({file: file, src_filename: file.name});
+    window.console.log('Got file ' + file);
+    window.console.log(chrome.fileSystem);
     this.beginExtraction(extractor);
   },
 
@@ -301,6 +304,7 @@ Readium.Views.FilePickerView = Backbone.View.extend({
       var book = extractor.packageDoc.toJSON();
       timer.stop();
       timer.report();
+      debugger;
       that.collection.add(new Readium.Models.LibraryItem(book));
       that.resetForm();
     });
