@@ -60,7 +60,7 @@ templates['library_item_template'] = template(function (Handlebars,depth0,helper
   var buffer = "", stack1, foundHelper, functionType="function", escapeExpression=this.escapeExpression, helperMissing=helpers.helperMissing;
 
 
-  buffer += "<div class='info-wrap'>\n  <div class='caption book-info'>\n    <h2 class='green info-item title'>";
+  buffer += "<div class='info-wrap'>\n  <div class='caption book-info'>\n    <h2 class='info-item title'>";
   stack1 = depth0.data;
   stack1 = stack1 == null || stack1 === false ? stack1 : stack1.title;
   stack1 = typeof stack1 === functionType ? stack1() : stack1;
