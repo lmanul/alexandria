@@ -1957,8 +1957,9 @@ button.btn, input[type="submit"].btn {
 .modal-header {
   padding: 9px 15px;
   border-bottom: 1px solid #eee; }
-  .modal-header .close {
-    margin-top: 2px; }
+.close {
+  margin: 10px;
+}
 
 .modal-body {
   overflow-y: auto;
