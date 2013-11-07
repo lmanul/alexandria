@@ -280,9 +280,6 @@ button.close {
 
 .btn {
   display: inline-block;
-  *display: inline;
-  /* IE7 inline-block hack */
-  *zoom: 1;
   padding: 4px 10px 4px;
   margin-bottom: 0;
   font-size: 13px;
@@ -1778,9 +1775,6 @@ Version: 3.2 Timestamp: Mon Sep 10 10:38:04 PDT 2012
 .select2-container {
   position: relative;
   display: inline-block;
-  /* inline-block for ie7 */
-  zoom: 1;
-  *display: inline;
   vertical-align: top; }
 
 .select2-container,
@@ -2267,8 +2261,6 @@ disabled look for already selected choices in the results dropdown
 /* Necessary for screen reader users. Must not include display:none or visibility:hidden */
 .offscreenText {
   position: absolute;
-  clip: rect(1px 1px 1px 1px);
-  /* IE6, IE7 */
   clip: rect(1px, 1px, 1px, 1px);
   padding: 0;
   border: 0;

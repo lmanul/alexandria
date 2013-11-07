@@ -496,8 +496,6 @@ input[type="image"], input[type="checkbox"], input[type="radio"] {
   height: auto;
   padding: 0;
   margin: 3px 0;
-  *margin-top: 0;
-  /* IE7 */
   line-height: normal;
   cursor: pointer;
   background-color: transparent;
@@ -528,8 +526,6 @@ input[type="button"], input[type="reset"], input[type="submit"] {
 select, input[type="file"] {
   height: 28px;
   /* In IE7, the height of the select element cannot be changed by height, only font-size */
-  *margin-top: 4px;
-  /* For IE7, add top margin to align select with labels */
   line-height: 28px; }
 
 input[type="file"] {
@@ -762,9 +758,6 @@ input:focus:required:invalid, textarea:focus:required:invalid, select:focus:requ
 
 .help-inline {
   display: inline-block;
-  *display: inline;
-  /* IE7 inline-block hack */
-  *zoom: 1;
   vertical-align: middle;
   padding-left: 5px; }
 
@@ -840,10 +833,7 @@ input:focus:required:invalid, textarea:focus:required:invalid, select:focus:requ
 
 .search-query {
   padding-right: 14px;
-  padding-right: 4px \9;
   padding-left: 14px;
-  padding-left: 4px \9;
-  /* IE7-8 doesn't have border-radius, so don't indent the padding */
   margin-bottom: 0;
   -webkit-border-radius: 14px;
   -moz-border-radius: 14px;
@@ -851,9 +841,6 @@ input:focus:required:invalid, textarea:focus:required:invalid, select:focus:requ
 
 .form-search input, .form-search textarea, .form-search select, .form-search .help-inline, .form-search .uneditable-input, .form-search .input-prepend, .form-search .input-append, .form-inline input, .form-inline textarea, .form-inline select, .form-inline .help-inline, .form-inline .uneditable-input, .form-inline .input-prepend, .form-inline .input-append, .form-horizontal input, .form-horizontal textarea, .form-horizontal select, .form-horizontal .help-inline, .form-horizontal .uneditable-input, .form-horizontal .input-prepend, .form-horizontal .input-append {
   display: inline-block;
-  *display: inline;
-  /* IE7 inline-block hack */
-  *zoom: 1;
   margin-bottom: 0; }
 .form-search .hide, .form-inline .hide, .form-horizontal .hide {
   display: none; }
@@ -1088,9 +1075,6 @@ button.close {
 
 .btn {
   display: inline-block;
-  *display: inline;
-  /* IE7 inline-block hack */
-  *zoom: 1;
   padding: 4px 10px 4px;
   margin-bottom: 0;
   font-size: 13px;
