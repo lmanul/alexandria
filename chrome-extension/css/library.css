@@ -2444,7 +2444,8 @@ body {
 .book-item .cover-image {
   -webkit-box-shadow: -7px 6px 12px rgba(50, 50, 50, 0.45);
   -moz-box-shadow: -7px 6px 12px rgba(50, 50, 50, 0.45);
-  box-shadow: -7px 6px 12px rgba(50, 50, 50, 0.45); }
+  box-shadow: -7px 6px 12px rgba(50, 50, 50, 0.45);
+  cursor: pointer; }
 
 .book-item .info-item.title {
   font-weight: 300; }
@@ -2469,13 +2470,10 @@ img.read:hover {
   .block-view .caption.book-info {
     display:none; }
   .block-view .buttons {
-    display: block;
-    left: 0;
-    padding: 1em;
     position: absolute;
-    right: 0;
+    right: 5px;
     text-align:center;
-    top: 24px;
+    bottom: 5px;
   }
     /* Only show buttons on hover. */
     .block-view .buttons {
@@ -2485,10 +2483,8 @@ img.read:hover {
       display: block;
     }
     .block-view .buttons .btn {
-      font-size: 170%;
-      margin: 17px 0;
-      padding: 0.5em 0;
-      width: 100%;
+      margin: 5px;
+      padding: 0;
     }
   .block-view .info-icon {
     display: none; }
