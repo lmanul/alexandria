@@ -1,0 +1,15 @@
+.book-item .cover-image {
+  -webkit-box-shadow: -7px 6px 12px rgba(50, 50, 50, 0.75);
+  -moz-box-shadow: -7px 6px 12px rgba(50, 50, 50, 0.75);
+  box-shadow: -7px 6px 12px rgba(50, 50, 50, 0.75); }
+
+.book-item .info-item.title {
+  font-weight: 300; }
+
+.info-item.epub-version, .info-item.author, .modal-detail {
+  font-size: 14px;
+  font-weight: normal;
+  color: #999; }
+
+img.read:hover {
+  cursor: pointer; }

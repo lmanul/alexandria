@@ -1,0 +1,75 @@
+/*
+Syntax error: Undefined mixin 'border-radius'.
+        on line 24 of css/sass/regions_warning_modal.scss, in `border-radius'
+        from line 24 of css/sass/regions_warning_modal.scss
+
+19: 	code {
+20: 		color: #111111;
+21: 		background-color: white;
+22: 		border: 1px solid #B94A48;
+23: 		padding: 2px 5px;
+24: 		@include border-radius(3px);
+25: 	}
+26: 
+27: 	li {
+28: 		margin: 10px 0px;
+29: 	}
+
+Backtrace:
+css/sass/regions_warning_modal.scss:24:in `border-radius'
+css/sass/regions_warning_modal.scss:24
+/Users/matthew/.rvm/gems/ruby-1.9.2-p290@readium/gems/sass-3.1.19/lib/sass/tree/visitors/perform.rb:170:in `visit_mixin'
+/Users/matthew/.rvm/gems/ruby-1.9.2-p290@readium/gems/sass-3.1.19/lib/sass/tree/visitors/base.rb:37:in `visit'
+/Users/matthew/.rvm/gems/ruby-1.9.2-p290@readium/gems/sass-3.1.19/lib/sass/tree/visitors/perform.rb:18:in `visit'
+/Users/matthew/.rvm/gems/ruby-1.9.2-p290@readium/gems/sass-3.1.19/lib/sass/tree/visitors/base.rb:53:in `block in visit_children'
+/Users/matthew/.rvm/gems/ruby-1.9.2-p290@readium/gems/sass-3.1.19/lib/sass/tree/visitors/base.rb:53:in `map'
+/Users/matthew/.rvm/gems/ruby-1.9.2-p290@readium/gems/sass-3.1.19/lib/sass/tree/visitors/base.rb:53:in `visit_children'
+/Users/matthew/.rvm/gems/ruby-1.9.2-p290@readium/gems/sass-3.1.19/lib/sass/tree/visitors/perform.rb:27:in `block in visit_children'
+/Users/matthew/.rvm/gems/ruby-1.9.2-p290@readium/gems/sass-3.1.19/lib/sass/tree/visitors/perform.rb:39:in `with_environment'
+/Users/matthew/.rvm/gems/ruby-1.9.2-p290@readium/gems/sass-3.1.19/lib/sass/tree/visitors/perform.rb:26:in `visit_children'
+/Users/matthew/.rvm/gems/ruby-1.9.2-p290@readium/gems/sass-3.1.19/lib/sass/tree/visitors/base.rb:37:in `block in visit'
+/Users/matthew/.rvm/gems/ruby-1.9.2-p290@readium/gems/sass-3.1.19/lib/sass/tree/visitors/perform.rb:238:in `visit_rule'
+/Users/matthew/.rvm/gems/ruby-1.9.2-p290@readium/gems/sass-3.1.19/lib/sass/tree/visitors/base.rb:37:in `visit'
+/Users/matthew/.rvm/gems/ruby-1.9.2-p290@readium/gems/sass-3.1.19/lib/sass/tree/visitors/perform.rb:18:in `visit'
+/Users/matthew/.rvm/gems/ruby-1.9.2-p290@readium/gems/sass-3.1.19/lib/sass/tree/visitors/base.rb:53:in `block in visit_children'
+/Users/matthew/.rvm/gems/ruby-1.9.2-p290@readium/gems/sass-3.1.19/lib/sass/tree/visitors/base.rb:53:in `map'
+/Users/matthew/.rvm/gems/ruby-1.9.2-p290@readium/gems/sass-3.1.19/lib/sass/tree/visitors/base.rb:53:in `visit_children'
+/Users/matthew/.rvm/gems/ruby-1.9.2-p290@readium/gems/sass-3.1.19/lib/sass/tree/visitors/perform.rb:27:in `block in visit_children'
+/Users/matthew/.rvm/gems/ruby-1.9.2-p290@readium/gems/sass-3.1.19/lib/sass/tree/visitors/perform.rb:39:in `with_environment'
+/Users/matthew/.rvm/gems/ruby-1.9.2-p290@readium/gems/sass-3.1.19/lib/sass/tree/visitors/perform.rb:26:in `visit_children'
+/Users/matthew/.rvm/gems/ruby-1.9.2-p290@readium/gems/sass-3.1.19/lib/sass/tree/visitors/base.rb:37:in `block in visit'
+/Users/matthew/.rvm/gems/ruby-1.9.2-p290@readium/gems/sass-3.1.19/lib/sass/tree/visitors/perform.rb:238:in `visit_rule'
+/Users/matthew/.rvm/gems/ruby-1.9.2-p290@readium/gems/sass-3.1.19/lib/sass/tree/visitors/base.rb:37:in `visit'
+/Users/matthew/.rvm/gems/ruby-1.9.2-p290@readium/gems/sass-3.1.19/lib/sass/tree/visitors/perform.rb:18:in `visit'
+/Users/matthew/.rvm/gems/ruby-1.9.2-p290@readium/gems/sass-3.1.19/lib/sass/tree/visitors/base.rb:53:in `block in visit_children'
+/Users/matthew/.rvm/gems/ruby-1.9.2-p290@readium/gems/sass-3.1.19/lib/sass/tree/visitors/base.rb:53:in `map'
+/Users/matthew/.rvm/gems/ruby-1.9.2-p290@readium/gems/sass-3.1.19/lib/sass/tree/visitors/base.rb:53:in `visit_children'
+/Users/matthew/.rvm/gems/ruby-1.9.2-p290@readium/gems/sass-3.1.19/lib/sass/tree/visitors/perform.rb:27:in `block in visit_children'
+/Users/matthew/.rvm/gems/ruby-1.9.2-p290@readium/gems/sass-3.1.19/lib/sass/tree/visitors/perform.rb:39:in `with_environment'
+/Users/matthew/.rvm/gems/ruby-1.9.2-p290@readium/gems/sass-3.1.19/lib/sass/tree/visitors/perform.rb:26:in `visit_children'
+/Users/matthew/.rvm/gems/ruby-1.9.2-p290@readium/gems/sass-3.1.19/lib/sass/tree/visitors/base.rb:37:in `block in visit'
+/Users/matthew/.rvm/gems/ruby-1.9.2-p290@readium/gems/sass-3.1.19/lib/sass/tree/visitors/perform.rb:47:in `visit_root'
+/Users/matthew/.rvm/gems/ruby-1.9.2-p290@readium/gems/sass-3.1.19/lib/sass/tree/visitors/base.rb:37:in `visit'
+/Users/matthew/.rvm/gems/ruby-1.9.2-p290@readium/gems/sass-3.1.19/lib/sass/tree/visitors/perform.rb:18:in `visit'
+/Users/matthew/.rvm/gems/ruby-1.9.2-p290@readium/gems/sass-3.1.19/lib/sass/tree/visitors/perform.rb:7:in `visit'
+/Users/matthew/.rvm/gems/ruby-1.9.2-p290@readium/gems/sass-3.1.19/lib/sass/tree/root_node.rb:20:in `render'
+/Users/matthew/.rvm/gems/ruby-1.9.2-p290@readium/gems/sass-3.1.19/lib/sass/engine.rb:300:in `_render'
+/Users/matthew/.rvm/gems/ruby-1.9.2-p290@readium/gems/sass-3.1.19/lib/sass/engine.rb:247:in `render'
+/Users/matthew/.rvm/gems/ruby-1.9.2-p290@readium/gems/sass-3.1.19/lib/sass/plugin/compiler.rb:340:in `update_stylesheet'
+/Users/matthew/.rvm/gems/ruby-1.9.2-p290@readium/gems/sass-3.1.19/lib/sass/plugin/compiler.rb:202:in `block in update_stylesheets'
+/Users/matthew/.rvm/gems/ruby-1.9.2-p290@readium/gems/sass-3.1.19/lib/sass/plugin/compiler.rb:200:in `each'
+/Users/matthew/.rvm/gems/ruby-1.9.2-p290@readium/gems/sass-3.1.19/lib/sass/plugin/compiler.rb:200:in `update_stylesheets'
+/Users/matthew/.rvm/gems/ruby-1.9.2-p290@readium/gems/sass-3.1.19/lib/sass/plugin/compiler.rb:234:in `watch'
+/Users/matthew/.rvm/gems/ruby-1.9.2-p290@readium/gems/sass-3.1.19/lib/sass/plugin.rb:107:in `method_missing'
+/Users/matthew/.rvm/gems/ruby-1.9.2-p290@readium/gems/sass-3.1.19/lib/sass/exec.rb:431:in `watch_or_update'
+/Users/matthew/.rvm/gems/ruby-1.9.2-p290@readium/gems/sass-3.1.19/lib/sass/exec.rb:302:in `process_result'
+/Users/matthew/.rvm/gems/ruby-1.9.2-p290@readium/gems/sass-3.1.19/lib/sass/exec.rb:41:in `parse'
+/Users/matthew/.rvm/gems/ruby-1.9.2-p290@readium/gems/sass-3.1.19/lib/sass/exec.rb:21:in `parse!'
+/Users/matthew/.rvm/gems/ruby-1.9.2-p290@readium/gems/sass-3.1.19/bin/sass:8:in `<top (required)>'
+/Users/matthew/.rvm/gems/ruby-1.9.2-p290/bin/sass:19:in `load'
+/Users/matthew/.rvm/gems/ruby-1.9.2-p290/bin/sass:19:in `<main>'
+*/
+body:before {
+  white-space: pre;
+  font-family: monospace;
+  content: "Syntax error: Undefined mixin 'border-radius'.\A         on line 24 of css/sass/regions_warning_modal.scss, in `border-radius'\A         from line 24 of css/sass/regions_warning_modal.scss\A \A 19: 	code {\A 20: 		color: #111111;\A 21: 		background-color: white;\A 22: 		border: 1px solid #B94A48;\A 23: 		padding: 2px 5px;\A 24: 		@include border-radius(3px);\A 25: 	}\A 26: \A 27: 	li {\A 28: 		margin: 10px 0px;\A 29: 	}"; }

@@ -1,0 +1,63 @@
+/*
+Syntax error: Undefined variable: "$top_bar_height".
+        on line 11 of css/sass/library_container.scss
+
+6: }
+7: 
+8: .library-container {
+9:   width: 100%;
+10:   position: absolute;
+11:   top: $top_bar_height; 
+12:   bottom: 0;
+13:   overflow-x: hidden;
+14:   overflow-y: scroll;
+15: }
+16: 
+
+Backtrace:
+css/sass/library_container.scss:11
+/Users/matthewrobertson03/.rvm/gems/ruby-1.9.3-p194@readium/gems/sass-3.1.20/lib/sass/script/variable.rb:49:in `_perform'
+/Users/matthewrobertson03/.rvm/gems/ruby-1.9.3-p194@readium/gems/sass-3.1.20/lib/sass/script/node.rb:40:in `perform'
+/Users/matthewrobertson03/.rvm/gems/ruby-1.9.3-p194@readium/gems/sass-3.1.20/lib/sass/tree/visitors/perform.rb:216:in `visit_prop'
+/Users/matthewrobertson03/.rvm/gems/ruby-1.9.3-p194@readium/gems/sass-3.1.20/lib/sass/tree/visitors/base.rb:37:in `visit'
+/Users/matthewrobertson03/.rvm/gems/ruby-1.9.3-p194@readium/gems/sass-3.1.20/lib/sass/tree/visitors/perform.rb:18:in `visit'
+/Users/matthewrobertson03/.rvm/gems/ruby-1.9.3-p194@readium/gems/sass-3.1.20/lib/sass/tree/visitors/base.rb:53:in `block in visit_children'
+/Users/matthewrobertson03/.rvm/gems/ruby-1.9.3-p194@readium/gems/sass-3.1.20/lib/sass/tree/visitors/base.rb:53:in `map'
+/Users/matthewrobertson03/.rvm/gems/ruby-1.9.3-p194@readium/gems/sass-3.1.20/lib/sass/tree/visitors/base.rb:53:in `visit_children'
+/Users/matthewrobertson03/.rvm/gems/ruby-1.9.3-p194@readium/gems/sass-3.1.20/lib/sass/tree/visitors/perform.rb:27:in `block in visit_children'
+/Users/matthewrobertson03/.rvm/gems/ruby-1.9.3-p194@readium/gems/sass-3.1.20/lib/sass/tree/visitors/perform.rb:39:in `with_environment'
+/Users/matthewrobertson03/.rvm/gems/ruby-1.9.3-p194@readium/gems/sass-3.1.20/lib/sass/tree/visitors/perform.rb:26:in `visit_children'
+/Users/matthewrobertson03/.rvm/gems/ruby-1.9.3-p194@readium/gems/sass-3.1.20/lib/sass/tree/visitors/base.rb:37:in `block in visit'
+/Users/matthewrobertson03/.rvm/gems/ruby-1.9.3-p194@readium/gems/sass-3.1.20/lib/sass/tree/visitors/perform.rb:238:in `visit_rule'
+/Users/matthewrobertson03/.rvm/gems/ruby-1.9.3-p194@readium/gems/sass-3.1.20/lib/sass/tree/visitors/base.rb:37:in `visit'
+/Users/matthewrobertson03/.rvm/gems/ruby-1.9.3-p194@readium/gems/sass-3.1.20/lib/sass/tree/visitors/perform.rb:18:in `visit'
+/Users/matthewrobertson03/.rvm/gems/ruby-1.9.3-p194@readium/gems/sass-3.1.20/lib/sass/tree/visitors/base.rb:53:in `block in visit_children'
+/Users/matthewrobertson03/.rvm/gems/ruby-1.9.3-p194@readium/gems/sass-3.1.20/lib/sass/tree/visitors/base.rb:53:in `map'
+/Users/matthewrobertson03/.rvm/gems/ruby-1.9.3-p194@readium/gems/sass-3.1.20/lib/sass/tree/visitors/base.rb:53:in `visit_children'
+/Users/matthewrobertson03/.rvm/gems/ruby-1.9.3-p194@readium/gems/sass-3.1.20/lib/sass/tree/visitors/perform.rb:27:in `block in visit_children'
+/Users/matthewrobertson03/.rvm/gems/ruby-1.9.3-p194@readium/gems/sass-3.1.20/lib/sass/tree/visitors/perform.rb:39:in `with_environment'
+/Users/matthewrobertson03/.rvm/gems/ruby-1.9.3-p194@readium/gems/sass-3.1.20/lib/sass/tree/visitors/perform.rb:26:in `visit_children'
+/Users/matthewrobertson03/.rvm/gems/ruby-1.9.3-p194@readium/gems/sass-3.1.20/lib/sass/tree/visitors/base.rb:37:in `block in visit'
+/Users/matthewrobertson03/.rvm/gems/ruby-1.9.3-p194@readium/gems/sass-3.1.20/lib/sass/tree/visitors/perform.rb:47:in `visit_root'
+/Users/matthewrobertson03/.rvm/gems/ruby-1.9.3-p194@readium/gems/sass-3.1.20/lib/sass/tree/visitors/base.rb:37:in `visit'
+/Users/matthewrobertson03/.rvm/gems/ruby-1.9.3-p194@readium/gems/sass-3.1.20/lib/sass/tree/visitors/perform.rb:18:in `visit'
+/Users/matthewrobertson03/.rvm/gems/ruby-1.9.3-p194@readium/gems/sass-3.1.20/lib/sass/tree/visitors/perform.rb:7:in `visit'
+/Users/matthewrobertson03/.rvm/gems/ruby-1.9.3-p194@readium/gems/sass-3.1.20/lib/sass/tree/root_node.rb:20:in `render'
+/Users/matthewrobertson03/.rvm/gems/ruby-1.9.3-p194@readium/gems/sass-3.1.20/lib/sass/engine.rb:300:in `_render'
+/Users/matthewrobertson03/.rvm/gems/ruby-1.9.3-p194@readium/gems/sass-3.1.20/lib/sass/engine.rb:247:in `render'
+/Users/matthewrobertson03/.rvm/gems/ruby-1.9.3-p194@readium/gems/sass-3.1.20/lib/sass/plugin/compiler.rb:340:in `update_stylesheet'
+/Users/matthewrobertson03/.rvm/gems/ruby-1.9.3-p194@readium/gems/sass-3.1.20/lib/sass/plugin/compiler.rb:202:in `block in update_stylesheets'
+/Users/matthewrobertson03/.rvm/gems/ruby-1.9.3-p194@readium/gems/sass-3.1.20/lib/sass/plugin/compiler.rb:200:in `each'
+/Users/matthewrobertson03/.rvm/gems/ruby-1.9.3-p194@readium/gems/sass-3.1.20/lib/sass/plugin/compiler.rb:200:in `update_stylesheets'
+/Users/matthewrobertson03/.rvm/gems/ruby-1.9.3-p194@readium/gems/sass-3.1.20/lib/sass/plugin/compiler.rb:298:in `block in watch'
+/Users/matthewrobertson03/.rvm/gems/ruby-1.9.3-p194@readium/gems/listen-0.4.7/lib/listen/multi_listener.rb:86:in `call'
+/Users/matthewrobertson03/.rvm/gems/ruby-1.9.3-p194@readium/gems/listen-0.4.7/lib/listen/multi_listener.rb:86:in `on_change'
+/Users/matthewrobertson03/.rvm/gems/ruby-1.9.3-p194@readium/gems/listen-0.4.7/lib/listen/multi_listener.rb:95:in `block in initialize_adapter'
+/Users/matthewrobertson03/.rvm/gems/ruby-1.9.3-p194@readium/gems/listen-0.4.7/lib/listen/adapter.rb:162:in `call'
+/Users/matthewrobertson03/.rvm/gems/ruby-1.9.3-p194@readium/gems/listen-0.4.7/lib/listen/adapter.rb:162:in `poll_changed_dirs'
+/Users/matthewrobertson03/.rvm/gems/ruby-1.9.3-p194@readium/gems/listen-0.4.7/lib/listen/adapters/darwin.rb:28:in `block in start'
+*/
+body:before {
+  white-space: pre;
+  font-family: monospace;
+  content: "Syntax error: Undefined variable: \"$top_bar_height\".\A         on line 11 of css/sass/library_container.scss\A \A 6: }\A 7: \A 8: .library-container {\A 9:   width: 100%;\A 10:   position: absolute;\A 11:   top: $top_bar_height; \A 12:   bottom: 0;\A 13:   overflow-x: hidden;\A 14:   overflow-y: scroll;\A 15: }\A 16: "; }

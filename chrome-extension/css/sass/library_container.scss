@@ -1,0 +1,36 @@
+body {
+  width: 100%;
+  position: absolute;
+  top: 0; bottom: 0;
+  overflow: hidden;
+}
+
+.library-container {
+  width: 100%;
+  position: absolute;
+  top: $top_bar_height; 
+  bottom: 0;
+  overflow-x: hidden;
+  overflow-y: scroll;
+}
+
+.green {
+  color: #6FA64D;
+}
+
+#empty-message {
+  padding: 7px 0px;
+  text-align: right;
+}
+
+#empty-message-text {
+  text-align: center;
+  width: 250px;
+  font-size: 2em;
+  line-height: 1.1;
+  font-weight: 200;
+  display: inline-block;
+  position: relative;
+  left: 54px;
+  top: 62px;
+}

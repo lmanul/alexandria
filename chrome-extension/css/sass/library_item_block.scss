@@ -1,0 +1,105 @@
+.block-view {
+  text-align: center;
+  margin: auto;
+
+  .book-item {
+    position: relative;
+    text-align: center;
+    float: left;
+    margin-bottom: 20px;
+  }
+
+  .info-wrap {
+    position: relative;
+  }
+
+  .caption.book-info {
+    padding: 0 10px;
+    height: 50px;
+  }
+
+  .buttons {
+    margin: 10px 0;
+    position: relative;
+
+    .btn.read {
+      margin-right: 13px;
+      width: 36px;
+    }
+
+    .btn.details {
+      margin-left: 13px;
+      width: 36px;
+    }
+  }
+
+  
+
+  .info-icon {
+    display: none;
+  }
+
+  .cover-image {
+    width: 150px;
+    height: 220px;
+    position: relative;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  .info-icon {
+    visibility: hidden;
+  }
+
+  .info-item {
+    text-align: center;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow: hidden;
+  }
+
+  .info-item.title {
+    font-weight: 300;
+    position: relative;
+  }
+
+  .info-item.epub-version {
+    display: none;
+  }
+
+  .info-item.author {
+    margin-top: -5px;
+  }  
+
+  .book-item {
+    width: 16.6%;
+  }
+
+  @media (max-width: 1200px) {
+    .book-item {
+      width: 20%;
+    }
+  }
+
+  @media (max-width: 1000px) {
+    .book-item {
+      width: 25%;
+    }
+  }
+  @media (max-width: 800px) {
+    .book-item {
+      width: 33%;
+    }
+  }
+  @media (max-width: 600px) {
+    .book-item {
+      width: 50%;
+    }
+  }
+  @media (max-width: 400px) {
+    .book-item {
+      width: 100%;
+    }
+  }
+
+}

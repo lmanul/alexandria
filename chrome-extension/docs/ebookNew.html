@@ -1,0 +1,345 @@
+<!DOCTYPE html>  <html> <head>   <title>ebookNew.js</title>   <meta http-equiv="content-type" content="text/html; charset=UTF-8">   <link rel="stylesheet" media="all" href="docco.css" /> </head> <body>   <div id="container">     <div id="background"></div>            <div id="jump_to">         Jump To &hellip;         <div id="jump_wrapper">           <div id="jump_page">                                           <a class="source" href="extractBook.html">                 extractBook.js               </a>                                           <a class="source" href="fileSystemApi.html">                 fileSystemApi.js               </a>                                           <a class="source" href="library.html">                 library.js               </a>                                           <a class="source" href="plugins.html">                 plugins.js               </a>                                           <a class="source" href="web_plugins.html">                 web_plugins.js               </a>                                           <a class="source" href="alternate_style_tag_selector.html">                 alternate_style_tag_selector.js               </a>                                           <a class="source" href="audioClipPlayer.html">                 audioClipPlayer.js               </a>                                           <a class="source" href="ebook.html">                 ebook.js               </a>                                           <a class="source" href="manifest_item.html">                 manifest_item.js               </a>                                           <a class="source" href="mediaOverlay.html">                 mediaOverlay.js               </a>                                           <a class="source" href="options_presenter.html">                 options_presenter.js               </a>                                           <a class="source" href="packageDocument.html">                 packageDocument.js               </a>                                           <a class="source" href="paginator.html">                 paginator.js               </a>                                           <a class="source" href="path_resolver.html">                 path_resolver.js               </a>                                           <a class="source" href="readium_options.html">                 readium_options.js               </a>                                           <a class="source" href="smilModel.html">                 smilModel.js               </a>                                           <a class="source" href="toc.html">                 toc.js               </a>                                           <a class="source" href="trigger.html">                 trigger.js               </a>                                           <a class="source" href="crx_library_namespace.html">                 crx_library_namespace.js               </a>                                           <a class="source" href="crx_viewer_namespace.html">                 crx_viewer_namespace.js               </a>                                           <a class="source" href="ws_lib_namespace.html">                 ws_lib_namespace.js               </a>                                           <a class="source" href="readium_library_data.html">                 readium_library_data.js               </a>                                           <a class="source" href="crx_library_router.html">                 crx_library_router.js               </a>                                           <a class="source" href="crx_viewer_router.html">                 crx_viewer_router.js               </a>                                           <a class="source" href="ws_router.html">                 ws_router.js               </a>                                           <a class="source" href="bb_file_system_sync.html">                 bb_file_system_sync.js               </a>                                           <a class="source" href="cookie_utils.html">                 cookie_utils.js               </a>                                           <a class="source" href="local_storage_sync.html">                 local_storage_sync.js               </a>                                           <a class="source" href="md5.html">                 md5.js               </a>                                           <a class="source" href="user_agent_utils.html">                 user_agent_utils.js               </a>                                           <a class="source" href="viewer.html">                 viewer.js               </a>                                           <a class="source" href="nav_widget_view.html">                 nav_widget_view.js               </a>                                           <a class="source" href="options_view.html">                 options_view.js               </a>                                           <a class="source" href="fixed_pagination_view.html">                 fixed_pagination_view.js               </a>                                           <a class="source" href="old_reflowable_pagination_view.html">                 old_reflowable_pagination_view.js               </a>                                           <a class="source" href="pagination_view_base.html">                 pagination_view_base.js               </a>                                           <a class="source" href="reflowable_pagination_view.html">                 reflowable_pagination_view.js               </a>                                           <a class="source" href="scrolling_pagination_view.html">                 scrolling_pagination_view.js               </a>                                           <a class="source" href="toc_view.html">                 toc_view.js               </a>                                           <a class="source" href="toolbar_view.html">                 toolbar_view.js               </a>                                           <a class="source" href="httpFileApi.html">                 httpFileApi.js               </a>                                           <a class="source" href="library.html">                 library.js               </a>                                           <a class="source" href="ebookNew.html">                 ebookNew.js               </a>                                           <a class="source" href="packDocNew.html">                 packDocNew.js               </a>                                           <a class="source" href="viewer.html">                 viewer.js               </a>                        </div>         </div>       </div>          <table cellpadding="0" cellspacing="0">       <thead>         <tr>           <th class="docs">             <h1>               ebookNew.js             </h1>           </th>           <th class="code">           </th>         </tr>       </thead>       <tbody>                               <tr id="section-1">             <td class="docs">               <div class="pilwrap">                 <a class="pilcrow" href="#section-1">&#182;</a>               </div>                            </td>             <td class="code">               <div class="highlight"><pre><span class="nx">Readium</span><span class="p">.</span><span class="nx">Models</span><span class="p">.</span><span class="nx">EbookBase</span> <span class="o">=</span> <span class="nx">Backbone</span><span class="p">.</span><span class="nx">Model</span><span class="p">.</span><span class="nx">extend</span><span class="p">({</span>
+
+	<span class="nx">initialize</span><span class="o">:</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+		<span class="kd">var</span> <span class="nx">that</span> <span class="o">=</span> <span class="k">this</span><span class="p">;</span>
+		<span class="kd">var</span> <span class="nx">url</span> <span class="o">=</span> <span class="k">this</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="s2">&quot;package_doc_path&quot;</span><span class="p">);</span>
+		<span class="k">this</span><span class="p">.</span><span class="nx">packageDocument</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Readium</span><span class="p">.</span><span class="nx">Models</span><span class="p">.</span><span class="nx">PackageDocument</span><span class="p">({</span>
+			<span class="nx">url</span><span class="o">:</span> <span class="nx">url</span>
+		<span class="p">});</span>
+		<span class="k">this</span><span class="p">.</span><span class="nx">packageDocument</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s2">&quot;change:spine_position&quot;</span><span class="p">,</span> <span class="k">this</span><span class="p">.</span><span class="nx">spinePositionChangedHandler</span><span class="p">,</span> <span class="k">this</span><span class="p">);</span>
+		<span class="k">this</span><span class="p">.</span><span class="nx">packageDocument</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s2">&quot;change:spine&quot;</span><span class="p">,</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span></pre></div>             </td>           </tr>                               <tr id="section-2">             <td class="docs">               <div class="pilwrap">                 <a class="pilcrow" href="#section-2">&#182;</a>               </div>               <p>TODO: restore location here</p>             </td>             <td class="code">               <div class="highlight"><pre>			<span class="nx">that</span><span class="p">.</span><span class="nx">packageDocument</span><span class="p">.</span><span class="nx">set</span><span class="p">({</span><span class="nx">spine_position</span><span class="o">:</span> <span class="mi">0</span><span class="p">},</span> <span class="p">{</span><span class="nx">silent</span><span class="o">:</span> <span class="kc">true</span><span class="p">});</span></pre></div>             </td>           </tr>                               <tr id="section-3">             <td class="docs">               <div class="pilwrap">                 <a class="pilcrow" href="#section-3">&#182;</a>               </div>               <p>that.packageDocument.trigger("change:spine_position");</p>             </td>             <td class="code">               <div class="highlight"><pre>			<span class="nx">that</span><span class="p">.</span><span class="nx">set</span><span class="p">(</span><span class="s2">&quot;has_toc&quot;</span><span class="p">,</span> <span class="p">(</span><span class="o">!!</span><span class="nx">that</span><span class="p">.</span><span class="nx">packageDocument</span><span class="p">.</span><span class="nx">getTocItem</span><span class="p">()</span> <span class="p">)</span> <span class="p">);</span>
+		<span class="p">});</span>
+		<span class="k">this</span><span class="p">.</span><span class="nx">packageDocument</span><span class="p">.</span><span class="nx">fetch</span><span class="p">({</span><span class="nx">dataType</span><span class="o">:</span> <span class="s2">&quot;xml&quot;</span><span class="p">});</span>
+		<span class="k">this</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s2">&quot;change:num_pages&quot;</span><span class="p">,</span> <span class="k">this</span><span class="p">.</span><span class="nx">adjustCurrentPage</span><span class="p">,</span> <span class="k">this</span><span class="p">);</span>
+	<span class="p">},</span>
+
+	<span class="nx">defaults</span><span class="o">:</span> <span class="p">{</span>
+		<span class="s2">&quot;font_size&quot;</span><span class="o">:</span> <span class="mi">10</span><span class="p">,</span>
+    	<span class="s2">&quot;current_page&quot;</span><span class="o">:</span> <span class="p">[</span><span class="mi">1</span><span class="p">],</span>
+    	<span class="s2">&quot;num_pages&quot;</span><span class="o">:</span> <span class="mi">0</span><span class="p">,</span>
+    	<span class="s2">&quot;two_up&quot;</span><span class="o">:</span> <span class="kc">false</span><span class="p">,</span>
+    	<span class="s2">&quot;full_screen&quot;</span><span class="o">:</span> <span class="kc">false</span><span class="p">,</span>
+    	<span class="s2">&quot;toolbar_visible&quot;</span><span class="o">:</span> <span class="kc">true</span><span class="p">,</span>
+    	<span class="s2">&quot;toc_visible&quot;</span><span class="o">:</span> <span class="kc">false</span>
+  	<span class="p">},</span>
+
+	<span class="nx">toggleTwoUp</span><span class="o">:</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+		<span class="kd">var</span> <span class="nx">twoUp</span> <span class="o">=</span> <span class="k">this</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="s2">&quot;two_up&quot;</span><span class="p">);</span>
+		<span class="kd">var</span> <span class="nx">displayed</span> <span class="o">=</span> <span class="k">this</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="s2">&quot;current_page&quot;</span><span class="p">);</span>
+		<span class="kd">var</span> <span class="nx">newPages</span> <span class="o">=</span> <span class="p">[];</span>
+		<span class="k">if</span><span class="p">(</span><span class="nx">twoUp</span><span class="p">)</span> <span class="p">{</span>
+			<span class="k">if</span> <span class="p">(</span><span class="nx">displayed</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">===</span> <span class="mi">0</span><span class="p">)</span> <span class="p">{</span>
+				<span class="nx">newPages</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span>
+			<span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+				<span class="nx">newPages</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="nx">displayed</span><span class="p">[</span><span class="mi">0</span><span class="p">];</span>
+			<span class="p">}</span>
+		<span class="p">}</span>
+		<span class="k">else</span> <span class="k">if</span><span class="p">(</span><span class="nx">displayed</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">%</span> <span class="mi">2</span> <span class="o">===</span> <span class="mi">0</span><span class="p">)</span> <span class="p">{</span>
+			<span class="nx">newPages</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="nx">displayed</span><span class="p">[</span><span class="mi">0</span><span class="p">];</span>
+			<span class="nx">newPages</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="nx">displayed</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">+</span> <span class="mi">1</span><span class="p">;</span>
+		<span class="p">}</span>
+		<span class="k">else</span> <span class="p">{</span>
+			<span class="nx">newPages</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="nx">displayed</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">-</span> <span class="mi">1</span><span class="p">;</span>
+			<span class="nx">newPages</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="nx">displayed</span><span class="p">[</span><span class="mi">0</span><span class="p">];</span>
+		<span class="p">}</span>
+		<span class="k">this</span><span class="p">.</span><span class="nx">set</span><span class="p">({</span><span class="nx">two_up</span><span class="o">:</span> <span class="o">!</span><span class="nx">twoUp</span><span class="p">,</span> <span class="nx">current_page</span><span class="o">:</span> <span class="nx">newPages</span><span class="p">});</span>
+	<span class="p">},</span>
+
+	<span class="nx">toggleFullScreen</span><span class="o">:</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+		<span class="kd">var</span> <span class="nx">fullScreen</span> <span class="o">=</span> <span class="k">this</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="s2">&quot;full_screen&quot;</span><span class="p">);</span>
+		<span class="k">this</span><span class="p">.</span><span class="nx">set</span><span class="p">({</span><span class="nx">full_screen</span><span class="o">:</span> <span class="o">!</span><span class="nx">fullScreen</span><span class="p">});</span>
+	<span class="p">},</span>
+
+	<span class="nx">increaseFont</span><span class="o">:</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+		<span class="kd">var</span> <span class="nx">size</span> <span class="o">=</span> <span class="k">this</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="s2">&quot;font_size&quot;</span><span class="p">);</span>
+		<span class="k">this</span><span class="p">.</span><span class="nx">set</span><span class="p">({</span><span class="nx">font_size</span><span class="o">:</span> <span class="nx">size</span> <span class="o">+</span> <span class="mi">1</span><span class="p">})</span>
+	<span class="p">},</span>
+
+	<span class="nx">decreaseFont</span><span class="o">:</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+		<span class="kd">var</span> <span class="nx">size</span> <span class="o">=</span> <span class="k">this</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="s2">&quot;font_size&quot;</span><span class="p">);</span>
+		<span class="k">this</span><span class="p">.</span><span class="nx">set</span><span class="p">({</span><span class="nx">font_size</span><span class="o">:</span> <span class="nx">size</span> <span class="o">-</span> <span class="mi">1</span><span class="p">})</span>
+	<span class="p">},</span>
+
+	<span class="nx">toggleToc</span><span class="o">:</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+		<span class="kd">var</span> <span class="nx">vis</span> <span class="o">=</span> <span class="k">this</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="s2">&quot;toc_visible&quot;</span><span class="p">);</span>
+		<span class="k">this</span><span class="p">.</span><span class="nx">set</span><span class="p">(</span><span class="s2">&quot;toc_visible&quot;</span><span class="p">,</span> <span class="o">!</span><span class="nx">vis</span><span class="p">);</span>
+	<span class="p">},</span>
+	
+	<span class="nx">prevPage</span><span class="o">:</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+
+		<span class="kd">var</span> <span class="nx">curr_pg</span> <span class="o">=</span> <span class="k">this</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="s2">&quot;current_page&quot;</span><span class="p">);</span>
+		<span class="kd">var</span> <span class="nx">lastPage</span> <span class="o">=</span> <span class="nx">curr_pg</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">-</span> <span class="mi">1</span><span class="p">;</span>
+
+		<span class="k">if</span><span class="p">(</span><span class="nx">curr_pg</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">&lt;=</span> <span class="mi">1</span><span class="p">)</span> <span class="p">{</span>
+			<span class="k">this</span><span class="p">.</span><span class="nx">packageDocument</span><span class="p">.</span><span class="nx">goToPrevSection</span><span class="p">();</span>
+		<span class="p">}</span>
+		<span class="k">else</span> <span class="k">if</span><span class="p">(</span><span class="o">!</span><span class="k">this</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="s2">&quot;two_up&quot;</span><span class="p">)){</span>
+			<span class="k">this</span><span class="p">.</span><span class="nx">set</span><span class="p">(</span><span class="s2">&quot;current_page&quot;</span><span class="p">,</span> <span class="p">[</span><span class="nx">lastPage</span><span class="p">]);</span>
+		<span class="p">}</span>
+		<span class="k">else</span> <span class="p">{</span>
+			<span class="k">this</span><span class="p">.</span><span class="nx">set</span><span class="p">(</span><span class="s2">&quot;current_page&quot;</span><span class="p">,</span> <span class="p">[</span><span class="nx">lastPage</span> <span class="o">-</span> <span class="mi">1</span><span class="p">,</span> <span class="nx">lastPage</span><span class="p">]);</span>
+		<span class="p">}</span>
+	<span class="p">},</span>
+	
+	<span class="nx">nextPage</span><span class="o">:</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+		<span class="kd">var</span> <span class="nx">curr_pg</span> <span class="o">=</span> <span class="k">this</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="s2">&quot;current_page&quot;</span><span class="p">);</span>
+		<span class="kd">var</span> <span class="nx">firstPage</span> <span class="o">=</span><span class="nx">curr_pg</span><span class="p">[</span><span class="nx">curr_pg</span><span class="p">.</span><span class="nx">length</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="o">+</span> <span class="mi">1</span><span class="p">;</span>
+		<span class="k">if</span> <span class="p">(</span><span class="nx">curr_pg</span><span class="p">[</span><span class="nx">curr_pg</span><span class="p">.</span><span class="nx">length</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="o">&gt;=</span> <span class="k">this</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="s2">&quot;num_pages&quot;</span><span class="p">)</span> <span class="p">)</span> <span class="p">{</span>
+			<span class="k">this</span><span class="p">.</span><span class="nx">packageDocument</span><span class="p">.</span><span class="nx">goToNextSection</span><span class="p">();</span>
+		<span class="p">}</span>
+		<span class="k">else</span> <span class="k">if</span><span class="p">(</span><span class="o">!</span><span class="k">this</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="s2">&quot;two_up&quot;</span><span class="p">)){</span>
+			<span class="k">return</span> <span class="k">this</span><span class="p">.</span><span class="nx">set</span><span class="p">(</span><span class="s2">&quot;current_page&quot;</span><span class="p">,</span> <span class="p">[</span><span class="nx">firstPage</span><span class="p">]);</span>
+		<span class="p">}</span>
+		<span class="k">else</span> <span class="p">{</span>
+			<span class="k">return</span> <span class="k">this</span><span class="p">.</span><span class="nx">set</span><span class="p">(</span><span class="s2">&quot;current_page&quot;</span><span class="p">,</span> <span class="p">[</span><span class="nx">firstPage</span><span class="p">,</span> <span class="nx">firstPage</span><span class="o">+</span><span class="mi">1</span><span class="p">]);</span>
+		<span class="p">}</span>
+	<span class="p">},</span>
+	
+	<span class="nx">goToFirstPage</span><span class="o">:</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+		<span class="k">if</span><span class="p">(</span> <span class="k">this</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="s2">&quot;two_up&quot;</span><span class="p">)</span> <span class="p">)</span> <span class="p">{</span>
+			<span class="k">this</span><span class="p">.</span><span class="nx">set</span><span class="p">(</span><span class="s2">&quot;current_page&quot;</span><span class="p">,</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">])</span>
+		<span class="p">}</span>
+		<span class="k">else</span> <span class="p">{</span>
+			<span class="k">this</span><span class="p">.</span><span class="nx">set</span><span class="p">(</span><span class="s2">&quot;current_page&quot;</span><span class="p">,</span> <span class="p">[</span><span class="mi">1</span><span class="p">]);</span>
+		<span class="p">}</span> 
+	<span class="p">},</span>
+
+	<span class="nx">goToLastPage</span><span class="o">:</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+		<span class="kd">var</span> <span class="nx">page</span> <span class="o">=</span> <span class="k">this</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="s2">&quot;num_pages&quot;</span><span class="p">);</span>
+
+		<span class="k">if</span><span class="p">(</span> <span class="k">this</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="s2">&quot;two_up&quot;</span><span class="p">)</span> <span class="p">)</span> <span class="p">{</span>
+			<span class="k">this</span><span class="p">.</span><span class="nx">set</span><span class="p">(</span><span class="s2">&quot;current_page&quot;</span><span class="p">,</span> <span class="p">[</span><span class="nx">page</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="nx">page</span><span class="p">])</span>
+		<span class="p">}</span>
+		<span class="k">else</span> <span class="p">{</span>
+			<span class="k">this</span><span class="p">.</span><span class="nx">set</span><span class="p">(</span><span class="s2">&quot;current_page&quot;</span><span class="p">,</span> <span class="p">[</span><span class="nx">page</span><span class="p">])</span>
+		<span class="p">}</span>
+	<span class="p">},</span>
+
+	<span class="nx">savePosition</span><span class="o">:</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+		<span class="nx">Readium</span><span class="p">.</span><span class="nx">Utils</span><span class="p">.</span><span class="nx">setCookie</span><span class="p">(</span><span class="nx">_properties</span><span class="p">.</span><span class="nx">key</span><span class="p">,</span> <span class="nx">_packageDocument</span><span class="p">.</span><span class="nx">getPosition</span><span class="p">(),</span> <span class="mi">365</span><span class="p">);</span>
+	<span class="p">},</span></pre></div>             </td>           </tr>                               <tr id="section-4">             <td class="docs">               <div class="pilwrap">                 <a class="pilcrow" href="#section-4">&#182;</a>               </div>               <p>TODO: do move this into package doc class (no sense it being here)</p>             </td>             <td class="code">               <div class="highlight"><pre>	<span class="nx">resolvePath</span><span class="o">:</span> <span class="kd">function</span><span class="p">(</span><span class="nx">path</span><span class="p">)</span> <span class="p">{</span>
+		<span class="kd">var</span> <span class="nx">suffix</span><span class="p">;</span>
+		<span class="kd">var</span> <span class="nx">pack_doc_path</span> <span class="o">=</span> <span class="k">this</span><span class="p">.</span><span class="nx">packageDocument</span><span class="p">.</span><span class="nx">file_path</span><span class="p">;</span>
+		<span class="k">if</span><span class="p">(</span><span class="nx">path</span><span class="p">.</span><span class="nx">indexOf</span><span class="p">(</span><span class="s2">&quot;../&quot;</span><span class="p">)</span> <span class="o">===</span> <span class="mi">0</span><span class="p">)</span> <span class="p">{</span>
+			<span class="nx">suffix</span> <span class="o">=</span> <span class="nx">path</span><span class="p">.</span><span class="nx">substr</span><span class="p">(</span><span class="mi">3</span><span class="p">);</span>
+		<span class="p">}</span>
+		<span class="k">else</span> <span class="p">{</span>
+			<span class="nx">suffix</span> <span class="o">=</span> <span class="nx">path</span><span class="p">;</span>
+		<span class="p">}</span>
+		<span class="kd">var</span> <span class="nx">ind</span> <span class="o">=</span> <span class="nx">pack_doc_path</span><span class="p">.</span><span class="nx">lastIndexOf</span><span class="p">(</span><span class="s2">&quot;/&quot;</span><span class="p">)</span>
+		<span class="k">return</span> <span class="nx">pack_doc_path</span><span class="p">.</span><span class="nx">substr</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="nx">ind</span><span class="p">)</span> <span class="o">+</span> <span class="s2">&quot;/&quot;</span> <span class="o">+</span> <span class="nx">suffix</span><span class="p">;</span>
+	<span class="p">},</span>
+
+	<span class="nx">adjustCurrentPage</span><span class="o">:</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+		<span class="kd">var</span> <span class="nx">cp</span> <span class="o">=</span> <span class="k">this</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="s2">&quot;current_page&quot;</span><span class="p">);</span>
+		<span class="kd">var</span> <span class="nx">num</span> <span class="o">=</span> <span class="k">this</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="s2">&quot;num_pages&quot;</span><span class="p">);</span>
+		<span class="kd">var</span> <span class="nx">two_up</span> <span class="o">=</span> <span class="k">this</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="s2">&quot;two_up&quot;</span><span class="p">)</span>
+		<span class="k">if</span><span class="p">(</span><span class="nx">cp</span><span class="p">[</span><span class="nx">cp</span><span class="p">.</span><span class="nx">length</span> <span class="o">-</span> <span class="mi">1</span><span class="p">]</span> <span class="o">&gt;</span> <span class="nx">num</span><span class="p">)</span> <span class="p">{</span>
+			<span class="k">this</span><span class="p">.</span><span class="nx">goToLastPage</span><span class="p">();</span>
+		<span class="p">}</span>
+	<span class="p">},</span>	
+	
+	<span class="nx">goToNextSection</span><span class="o">:</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span></pre></div>             </td>           </tr>                               <tr id="section-5">             <td class="docs">               <div class="pilwrap">                 <a class="pilcrow" href="#section-5">&#182;</a>               </div>               <p>Is this check even necessary?
+I think package doc validations takes care of it</p>             </td>             <td class="code">               <div class="highlight"><pre>		<span class="k">if</span><span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">packageDocument</span><span class="p">.</span><span class="nx">hasNextSection</span><span class="p">()</span> <span class="p">)</span> <span class="p">{</span>
+			<span class="k">this</span><span class="p">.</span><span class="nx">packageDocument</span><span class="p">.</span><span class="nx">goToNextSection</span><span class="p">();</span>	
+		<span class="p">}</span>
+	<span class="p">},</span>
+	
+	<span class="nx">goToPrevSection</span><span class="o">:</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span></pre></div>             </td>           </tr>                               <tr id="section-6">             <td class="docs">               <div class="pilwrap">                 <a class="pilcrow" href="#section-6">&#182;</a>               </div>               <p>Is this check even necessary?
+I think package doc validations takes care of it</p>             </td>             <td class="code">               <div class="highlight"><pre>		<span class="k">if</span><span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">packageDocument</span><span class="p">.</span><span class="nx">hasPrevSection</span><span class="p">()</span> <span class="p">)</span> <span class="p">{</span>
+			<span class="k">this</span><span class="p">.</span><span class="nx">packageDocument</span><span class="p">.</span><span class="nx">goToPrevSection</span><span class="p">();</span>		
+		<span class="p">}</span>
+	<span class="p">},</span>
+	
+	<span class="nx">getSectionText</span><span class="o">:</span> <span class="kd">function</span><span class="p">(</span><span class="nx">successCallback</span><span class="p">,</span> <span class="nx">failureCallback</span><span class="p">)</span> <span class="p">{</span>
+		<span class="kd">var</span> <span class="nx">path</span> <span class="o">=</span> <span class="k">this</span><span class="p">.</span><span class="nx">packageDocument</span><span class="p">.</span><span class="nx">currentSection</span><span class="p">();</span>
+		<span class="nx">Readium</span><span class="p">.</span><span class="nx">FileSystemApi</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">fs</span><span class="p">)</span> <span class="p">{</span>
+			<span class="nx">fs</span><span class="p">.</span><span class="nx">readTextFile</span><span class="p">(</span><span class="nx">resolvePath</span><span class="p">(</span><span class="nx">path</span><span class="p">),</span> <span class="nx">successCallback</span><span class="p">,</span> <span class="nx">failureCallback</span><span class="p">);</span>
+		<span class="p">});</span>
+	<span class="p">},</span>
+
+	<span class="cm">/* NOT USED?</span>
+<span class="cm">	getAllSectionUris: function() {</span>
+<span class="cm">		var temp = this.packageDocument.get(&quot;spine&quot;);</span>
+<span class="cm">		for(var i = 0; i &lt; temp.length; i++) {</span>
+<span class="cm">			temp[i] = resolveUrl(temp[i]);</span>
+<span class="cm">		}</span>
+<span class="cm">		return temp;</span>
+<span class="cm">	},</span>
+<span class="cm">	*/</span>
+
+	<span class="nx">goToHref</span><span class="o">:</span> <span class="kd">function</span><span class="p">(</span><span class="nx">href</span><span class="p">)</span> <span class="p">{</span>
+		<span class="k">this</span><span class="p">.</span><span class="nx">packageDocument</span><span class="p">.</span><span class="nx">goToHref</span><span class="p">(</span><span class="nx">href</span><span class="p">);</span>
+	<span class="p">},</span>
+
+	<span class="nx">changPageNumber</span><span class="o">:</span> <span class="kd">function</span><span class="p">(</span><span class="nx">num</span><span class="p">)</span> <span class="p">{</span>
+		<span class="kd">var</span> <span class="nx">cp</span> <span class="o">=</span> <span class="k">this</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="s2">&quot;current_page&quot;</span><span class="p">);</span>
+		<span class="kd">var</span> <span class="nx">np</span> <span class="o">=</span> <span class="p">[];</span>
+		<span class="kd">var</span> <span class="nx">diff</span> <span class="o">=</span> <span class="nx">num</span> <span class="o">-</span> <span class="nx">cp</span><span class="p">[</span><span class="nx">cp</span><span class="p">.</span><span class="nx">length</span> <span class="o">-</span> <span class="mi">1</span><span class="p">];</span>
+		<span class="k">if</span><span class="p">(</span> <span class="nx">diff</span> <span class="o">&gt;</span> <span class="mi">0</span> <span class="p">)</span> <span class="p">{</span>
+			<span class="nx">diff</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+		<span class="p">}</span>
+		<span class="k">for</span><span class="p">(</span><span class="kd">var</span> <span class="nx">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="nx">i</span> <span class="o">&lt;</span> <span class="nx">cp</span><span class="p">.</span><span class="nx">length</span><span class="p">;</span> <span class="nx">i</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+			<span class="nx">np</span><span class="p">[</span><span class="nx">i</span><span class="p">]</span> <span class="o">=</span> <span class="nx">cp</span><span class="p">[</span><span class="nx">i</span><span class="p">]</span> <span class="o">+</span> <span class="nx">diff</span><span class="p">;</span>	
+		<span class="p">}</span>
+		<span class="k">this</span><span class="p">.</span><span class="nx">set</span><span class="p">({</span><span class="nx">num_pages</span><span class="o">:</span> <span class="nx">num</span><span class="p">,</span> <span class="nx">current_page</span><span class="o">:</span> <span class="nx">np</span><span class="p">});</span>
+	<span class="p">},</span>
+
+	<span class="nx">spinePositionChangedHandler</span><span class="o">:</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+		<span class="kd">var</span> <span class="nx">that</span> <span class="o">=</span> <span class="k">this</span><span class="p">;</span>
+		<span class="kd">var</span> <span class="nx">sect</span> <span class="o">=</span> <span class="k">this</span><span class="p">.</span><span class="nx">packageDocument</span><span class="p">.</span><span class="nx">currentSection</span><span class="p">();</span>
+		<span class="kd">var</span> <span class="nx">path</span> <span class="o">=</span> <span class="nx">sect</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="s2">&quot;href&quot;</span><span class="p">);</span>
+		<span class="kd">var</span> <span class="nx">url</span> <span class="o">=</span> <span class="k">this</span><span class="p">.</span><span class="nx">packageDocument</span><span class="p">.</span><span class="nx">resolveUri</span><span class="p">(</span><span class="nx">path</span><span class="p">);;</span>
+		<span class="nx">path</span> <span class="o">=</span> <span class="k">this</span><span class="p">.</span><span class="nx">resolvePath</span><span class="p">(</span><span class="nx">path</span><span class="p">);</span>
+		<span class="k">this</span><span class="p">.</span><span class="nx">set</span><span class="p">(</span><span class="s2">&quot;current_section_url&quot;</span><span class="p">,</span> <span class="nx">url</span><span class="p">);</span>
+		<span class="nx">$</span><span class="p">.</span><span class="nx">ajax</span><span class="p">({</span>
+			<span class="nx">url</span><span class="o">:</span> <span class="nx">path</span><span class="p">,</span>
+			<span class="nx">accept</span><span class="o">:</span> <span class="s2">&quot;xml&quot;</span><span class="p">,</span>
+			<span class="nx">cache</span><span class="o">:</span> <span class="kc">true</span><span class="p">,</span>
+			<span class="nx">success</span><span class="o">:</span> <span class="kd">function</span><span class="p">(</span><span class="nx">res</span><span class="p">)</span> <span class="p">{</span>
+				<span class="nx">that</span><span class="p">.</span><span class="nx">set</span><span class="p">(</span><span class="s2">&quot;current_content&quot;</span><span class="p">,</span> <span class="nx">res</span><span class="p">);</span>
+			<span class="p">},</span>
+			<span class="nx">error</span><span class="o">:</span> <span class="kd">function</span><span class="p">(</span><span class="nx">err</span><span class="p">)</span> <span class="p">{</span>
+				<span class="nx">alert</span><span class="p">(</span><span class="s2">&quot;Error: unable to fetch spine item&quot;</span><span class="p">);</span>
+				<span class="nb">window</span><span class="p">.</span><span class="nx">router</span><span class="p">.</span><span class="nx">navigate</span><span class="p">(</span><span class="s2">&quot;/&quot;</span><span class="p">,</span> <span class="p">{</span><span class="nx">silent</span><span class="o">:</span> <span class="kc">true</span><span class="p">});</span>
+			<span class="p">}</span>
+		<span class="p">});</span>
+		
+	<span class="p">},</span>
+
+	<span class="nx">getToc</span><span class="o">:</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+		<span class="kd">var</span> <span class="nx">item</span> <span class="o">=</span> <span class="k">this</span><span class="p">.</span><span class="nx">packageDocument</span><span class="p">.</span><span class="nx">getTocItem</span><span class="p">();</span>
+		<span class="k">if</span><span class="p">(</span><span class="o">!</span><span class="nx">item</span><span class="p">)</span> <span class="p">{</span>
+			<span class="k">return</span> <span class="kc">null</span><span class="p">;</span>
+		<span class="p">}</span>
+		<span class="k">else</span> <span class="p">{</span>
+			<span class="kd">var</span> <span class="nx">that</span> <span class="o">=</span> <span class="k">this</span><span class="p">;</span>
+			<span class="k">return</span> <span class="nx">Readium</span><span class="p">.</span><span class="nx">Models</span><span class="p">.</span><span class="nx">Toc</span><span class="p">.</span><span class="nx">getToc</span><span class="p">(</span><span class="nx">item</span><span class="p">,</span> <span class="p">{</span>
+				<span class="nx">file_path</span><span class="o">:</span> <span class="nx">that</span><span class="p">.</span><span class="nx">resolvePath</span><span class="p">(</span><span class="nx">item</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="s2">&quot;href&quot;</span><span class="p">)),</span>
+				<span class="nx">book</span><span class="o">:</span> <span class="nx">that</span>
+			<span class="p">});</span>
+		<span class="p">}</span>
+	<span class="p">},</span>
+
+	<span class="nx">goToPage</span><span class="o">:</span> <span class="kd">function</span><span class="p">(</span><span class="nx">page</span><span class="p">)</span> <span class="p">{</span>
+		<span class="k">if</span><span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="s2">&quot;two_up&quot;</span><span class="p">))</span> <span class="p">{</span>
+			<span class="k">if</span><span class="p">(</span><span class="nx">page</span> <span class="o">%</span> <span class="mi">2</span> <span class="o">===</span> <span class="mi">0</span><span class="p">)</span> <span class="p">{</span>
+				<span class="k">this</span><span class="p">.</span><span class="nx">set</span><span class="p">(</span><span class="s2">&quot;current_page&quot;</span><span class="p">,</span> <span class="p">[</span><span class="nx">page</span><span class="p">,</span> <span class="nx">page</span> <span class="o">+</span> <span class="mi">1</span><span class="p">]);</span>	
+			<span class="p">}</span>
+			<span class="k">else</span> <span class="p">{</span>
+				<span class="k">this</span><span class="p">.</span><span class="nx">set</span><span class="p">(</span><span class="s2">&quot;current_page&quot;</span><span class="p">,</span> <span class="p">[</span><span class="nx">page</span> <span class="o">-</span> <span class="mi">1</span><span class="p">,</span> <span class="nx">page</span><span class="p">]);</span>
+			<span class="p">}</span>
+		<span class="p">}</span>
+		<span class="k">else</span> <span class="p">{</span>
+			<span class="k">this</span><span class="p">.</span><span class="nx">set</span><span class="p">(</span><span class="s2">&quot;current_page&quot;</span><span class="p">,</span> <span class="p">[</span><span class="nx">page</span><span class="p">])</span>
+		<span class="p">}</span>
+	<span class="p">}</span>
+	
+<span class="p">});</span>
+
+
+<span class="nx">Readium</span><span class="p">.</span><span class="nx">Models</span><span class="p">.</span><span class="nx">ReflowableEbook</span> <span class="o">=</span> <span class="nx">Readium</span><span class="p">.</span><span class="nx">Models</span><span class="p">.</span><span class="nx">EbookBase</span><span class="p">.</span><span class="nx">extend</span><span class="p">({</span>
+
+	<span class="nx">isFixedLayout</span><span class="o">:</span> <span class="kc">false</span><span class="p">,</span>
+
+	<span class="nx">initialize</span><span class="o">:</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span></pre></div>             </td>           </tr>                               <tr id="section-7">             <td class="docs">               <div class="pilwrap">                 <a class="pilcrow" href="#section-7">&#182;</a>               </div>               <p>call the super ctor</p>             </td>             <td class="code">               <div class="highlight"><pre>		
+		<span class="nx">Readium</span><span class="p">.</span><span class="nx">Models</span><span class="p">.</span><span class="nx">EbookBase</span><span class="p">.</span><span class="nx">prototype</span><span class="p">.</span><span class="nx">initialize</span><span class="p">.</span><span class="nx">call</span><span class="p">(</span><span class="k">this</span><span class="p">);</span>
+
+	<span class="p">},</span>
+
+	<span class="nx">CreatePaginator</span><span class="o">:</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span></pre></div>             </td>           </tr>                               <tr id="section-8">             <td class="docs">               <div class="pilwrap">                 <a class="pilcrow" href="#section-8">&#182;</a>               </div>               <p>TODO do this properly later:</p>             </td>             <td class="code">               <div class="highlight"><pre>		<span class="kd">var</span> <span class="nx">optionString</span> <span class="o">=</span> <span class="nx">localStorage</span><span class="p">[</span><span class="s2">&quot;READIUM_OPTIONS&quot;</span><span class="p">];</span>
+    	<span class="kd">var</span> <span class="nx">options</span> <span class="o">=</span> <span class="p">(</span><span class="nx">optionString</span> <span class="o">&amp;&amp;</span> <span class="nx">JSON</span><span class="p">.</span><span class="nx">parse</span><span class="p">(</span><span class="nx">optionString</span><span class="p">)</span> <span class="p">)</span> <span class="o">||</span> <span class="p">{</span><span class="s2">&quot;singleton&quot;</span><span class="o">:</span> <span class="p">{}};</span>
+    	<span class="k">if</span><span class="p">(</span> <span class="nx">options</span><span class="p">[</span><span class="s2">&quot;singleton&quot;</span><span class="p">][</span><span class="s2">&quot;paginate_everything&quot;</span><span class="p">]</span> <span class="p">)</span> <span class="p">{</span>
+    		<span class="k">return</span> <span class="k">new</span> <span class="nx">Readium</span><span class="p">.</span><span class="nx">Views</span><span class="p">.</span><span class="nx">ReflowablePaginationView</span><span class="p">({</span><span class="nx">model</span><span class="o">:</span> <span class="k">this</span><span class="p">});</span>	
+    	<span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+    		<span class="k">return</span> <span class="k">new</span> <span class="nx">Readium</span><span class="p">.</span><span class="nx">Views</span><span class="p">.</span><span class="nx">ScrollingPaginationView</span><span class="p">({</span><span class="nx">model</span><span class="o">:</span> <span class="k">this</span><span class="p">});</span>		
+    	<span class="p">}</span>
+		
+	<span class="p">}</span>
+
+	
+
+<span class="p">});</span>
+
+<span class="nx">Readium</span><span class="p">.</span><span class="nx">Models</span><span class="p">.</span><span class="nx">AppleFixedEbook</span> <span class="o">=</span> <span class="nx">Readium</span><span class="p">.</span><span class="nx">Models</span><span class="p">.</span><span class="nx">EbookBase</span><span class="p">.</span><span class="nx">extend</span><span class="p">({</span>
+
+	<span class="nx">isFixedLayout</span><span class="o">:</span> <span class="kc">true</span><span class="p">,</span>
+
+	<span class="nx">defaults</span><span class="o">:</span> <span class="p">{</span>
+		<span class="s2">&quot;font_size&quot;</span><span class="o">:</span> <span class="mi">10</span><span class="p">,</span>
+    	<span class="s2">&quot;current_page&quot;</span><span class="o">:</span>  <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">],</span>
+    	<span class="s2">&quot;num_pages&quot;</span><span class="o">:</span> <span class="mi">0</span><span class="p">,</span>
+    	<span class="s2">&quot;two_up&quot;</span><span class="o">:</span> <span class="kc">false</span><span class="p">,</span>
+    	<span class="s2">&quot;full_screen&quot;</span><span class="o">:</span> <span class="kc">false</span><span class="p">,</span>
+    	<span class="s2">&quot;toolbar_visible&quot;</span><span class="o">:</span> <span class="kc">true</span>
+  	<span class="p">},</span>
+
+	<span class="nx">initialize</span><span class="o">:</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span></pre></div>             </td>           </tr>                               <tr id="section-9">             <td class="docs">               <div class="pilwrap">                 <a class="pilcrow" href="#section-9">&#182;</a>               </div>               <p>call the super ctor</p>             </td>             <td class="code">               <div class="highlight"><pre>		<span class="nx">Readium</span><span class="p">.</span><span class="nx">Models</span><span class="p">.</span><span class="nx">EbookBase</span><span class="p">.</span><span class="nx">prototype</span><span class="p">.</span><span class="nx">initialize</span><span class="p">.</span><span class="nx">call</span><span class="p">(</span><span class="k">this</span><span class="p">);</span>
+		<span class="k">this</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s2">&quot;change:current_content&quot;</span><span class="p">,</span> <span class="k">this</span><span class="p">.</span><span class="nx">parseMetaTags</span><span class="p">,</span> <span class="k">this</span><span class="p">);</span>
+	<span class="p">},</span>
+
+	<span class="nx">CreatePaginator</span><span class="o">:</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+		<span class="k">return</span> <span class="k">new</span> <span class="nx">Readium</span><span class="p">.</span><span class="nx">Views</span><span class="p">.</span><span class="nx">FixedPaginationView</span><span class="p">({</span><span class="nx">model</span><span class="o">:</span> <span class="k">this</span><span class="p">});</span>	
+	<span class="p">},</span>
+
+	<span class="nx">buildSectionJSON</span><span class="o">:</span> <span class="kd">function</span><span class="p">(</span><span class="nx">manifest_item</span><span class="p">)</span> <span class="p">{</span>
+		<span class="kd">var</span> <span class="nx">section</span> <span class="o">=</span> <span class="p">{};</span>
+		<span class="nx">section</span><span class="p">.</span><span class="nx">width</span> <span class="o">=</span> <span class="k">this</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="s2">&quot;meta_width&quot;</span><span class="p">);</span>
+		<span class="nx">section</span><span class="p">.</span><span class="nx">height</span> <span class="o">=</span> <span class="k">this</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="s2">&quot;meta_height&quot;</span><span class="p">);</span>
+		<span class="nx">section</span><span class="p">.</span><span class="nx">uri</span> <span class="o">=</span> <span class="k">this</span><span class="p">.</span><span class="nx">packageDocument</span><span class="p">.</span><span class="nx">resolveUri</span><span class="p">(</span><span class="nx">manifest_item</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="s1">&#39;href&#39;</span><span class="p">));</span>
+
+		<span class="k">return</span> <span class="nx">section</span><span class="p">;</span>
+	<span class="p">},</span>
+
+	<span class="nx">getAllSections</span><span class="o">:</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+		<span class="kd">var</span> <span class="nx">spine</span> <span class="o">=</span> <span class="k">this</span><span class="p">.</span><span class="nx">packageDocument</span><span class="p">.</span><span class="nx">getResolvedSpine</span><span class="p">();</span>
+		<span class="kd">var</span> <span class="nx">sections</span> <span class="o">=</span> <span class="p">[];</span>
+		<span class="k">for</span><span class="p">(</span><span class="kd">var</span> <span class="nx">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="nx">i</span> <span class="o">&lt;</span> <span class="nx">spine</span><span class="p">.</span><span class="nx">length</span><span class="p">;</span> <span class="nx">i</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+			<span class="nx">sections</span><span class="p">.</span><span class="nx">push</span><span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">buildSectionJSON</span><span class="p">(</span> <span class="nx">spine</span><span class="p">[</span><span class="nx">i</span><span class="p">]</span> <span class="p">));</span>
+		<span class="p">}</span>
+		<span class="k">return</span> <span class="nx">sections</span><span class="p">;</span>
+	<span class="p">},</span>
+
+
+	<span class="nx">parseViewportTag</span><span class="o">:</span> <span class="kd">function</span><span class="p">(</span><span class="nx">viewportTag</span><span class="p">)</span> <span class="p">{</span></pre></div>             </td>           </tr>                               <tr id="section-10">             <td class="docs">               <div class="pilwrap">                 <a class="pilcrow" href="#section-10">&#182;</a>               </div>               <p>this is going to be ugly</p>             </td>             <td class="code">               <div class="highlight"><pre>		<span class="kd">var</span> <span class="nx">str</span> <span class="o">=</span> <span class="nx">viewportTag</span><span class="p">.</span><span class="nx">getAttribute</span><span class="p">(</span><span class="s1">&#39;content&#39;</span><span class="p">);</span>
+		<span class="nx">str</span> <span class="o">=</span> <span class="nx">str</span><span class="p">.</span><span class="nx">replace</span><span class="p">(</span><span class="sr">/\s/g</span><span class="p">,</span> <span class="s1">&#39;&#39;</span><span class="p">);</span>
+		<span class="kd">var</span> <span class="nx">valuePairs</span> <span class="o">=</span> <span class="nx">str</span><span class="p">.</span><span class="nx">split</span><span class="p">(</span><span class="s1">&#39;,&#39;</span><span class="p">);</span>
+		<span class="kd">var</span> <span class="nx">values</span> <span class="o">=</span> <span class="p">{};</span>
+		<span class="kd">var</span> <span class="nx">pair</span><span class="p">;</span>
+		<span class="k">for</span><span class="p">(</span><span class="kd">var</span> <span class="nx">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="nx">i</span> <span class="o">&lt;</span> <span class="nx">valuePairs</span><span class="p">.</span><span class="nx">length</span><span class="p">;</span> <span class="nx">i</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+			<span class="nx">pair</span> <span class="o">=</span> <span class="nx">valuePairs</span><span class="p">[</span><span class="nx">i</span><span class="p">].</span><span class="nx">split</span><span class="p">(</span><span class="s1">&#39;=&#39;</span><span class="p">);</span>
+			<span class="k">if</span><span class="p">(</span><span class="nx">pair</span><span class="p">.</span><span class="nx">length</span> <span class="o">===</span> <span class="mi">2</span><span class="p">)</span> <span class="p">{</span>
+				<span class="nx">values</span><span class="p">[</span> <span class="nx">pair</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="p">]</span> <span class="o">=</span> <span class="nx">pair</span><span class="p">[</span><span class="mi">1</span><span class="p">];</span>
+			<span class="p">}</span>
+		<span class="p">}</span>
+		<span class="nx">values</span><span class="p">[</span><span class="s1">&#39;width&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="nb">parseFloat</span><span class="p">(</span><span class="nx">values</span><span class="p">[</span><span class="s1">&#39;width&#39;</span><span class="p">]);</span>
+		<span class="nx">values</span><span class="p">[</span><span class="s1">&#39;height&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="nb">parseFloat</span><span class="p">(</span><span class="nx">values</span><span class="p">[</span><span class="s1">&#39;height&#39;</span><span class="p">]);</span>
+		<span class="k">return</span> <span class="nx">values</span><span class="p">;</span>
+	<span class="p">},</span>
+
+	<span class="nx">parseMetaTags</span><span class="o">:</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+		<span class="kd">var</span> <span class="nx">dom</span> <span class="o">=</span> <span class="k">this</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="s2">&quot;current_content&quot;</span><span class="p">);</span>
+		<span class="k">if</span><span class="p">(</span><span class="k">typeof</span> <span class="nx">dom</span> <span class="o">===</span> <span class="s2">&quot;string&quot;</span><span class="p">)</span> <span class="p">{</span>
+			<span class="kd">var</span> <span class="nx">parser</span> <span class="o">=</span> <span class="k">new</span> <span class="nb">window</span><span class="p">.</span><span class="nx">DOMParser</span><span class="p">();</span>
+			<span class="kd">var</span> <span class="nx">dom</span> <span class="o">=</span> <span class="nx">parser</span><span class="p">.</span><span class="nx">parseFromString</span><span class="p">(</span><span class="nx">dom</span><span class="p">,</span> <span class="s1">&#39;text/xml&#39;</span><span class="p">);</span>	
+		<span class="p">}</span>
+		
+		<span class="kd">var</span> <span class="nx">tag</span> <span class="o">=</span> <span class="nx">$</span><span class="p">(</span><span class="s2">&quot;meta[name]=&#39;viewport&#39;&quot;</span><span class="p">,</span> <span class="nx">dom</span><span class="p">)[</span><span class="mi">0</span><span class="p">];</span>
+		<span class="k">if</span><span class="p">(</span><span class="nx">tag</span><span class="p">)</span> <span class="p">{</span>
+			<span class="kd">var</span> <span class="nx">pageSize</span> <span class="o">=</span> <span class="k">this</span><span class="p">.</span><span class="nx">parseViewportTag</span><span class="p">(</span><span class="nx">tag</span><span class="p">);</span>
+			<span class="k">this</span><span class="p">.</span><span class="nx">set</span><span class="p">({</span><span class="nx">meta_width</span><span class="o">:</span> <span class="nx">pageSize</span><span class="p">.</span><span class="nx">width</span><span class="p">,</span> <span class="nx">meta_height</span><span class="o">:</span> <span class="nx">pageSize</span><span class="p">.</span><span class="nx">height</span><span class="p">});</span>
+		<span class="p">}</span>
+		<span class="k">this</span><span class="p">.</span><span class="nx">packageDocument</span><span class="p">.</span><span class="nx">off</span><span class="p">(</span><span class="s2">&quot;change:spine_position&quot;</span><span class="p">);</span>
+		<span class="k">this</span><span class="p">.</span><span class="nx">off</span><span class="p">(</span><span class="s2">&quot;current_content&quot;</span><span class="p">)</span>
+		<span class="k">this</span><span class="p">.</span><span class="nx">trigger</span><span class="p">(</span><span class="s2">&quot;first_render_ready&quot;</span><span class="p">)</span>
+	<span class="p">},</span>
+
+	<span class="nx">spinePositionChangedHandler</span><span class="o">:</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+		<span class="nx">Readium</span><span class="p">.</span><span class="nx">Models</span><span class="p">.</span><span class="nx">EbookBase</span><span class="p">.</span><span class="nx">prototype</span><span class="p">.</span><span class="nx">spinePositionChangedHandler</span><span class="p">.</span><span class="nx">call</span><span class="p">(</span><span class="k">this</span><span class="p">);</span>
+		<span class="k">this</span><span class="p">.</span><span class="nx">goToPage</span><span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">packageDocument</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="s2">&quot;spine_position&quot;</span><span class="p">));</span>
+		
+	<span class="p">}</span>
+
+<span class="p">});</span>
+
+</pre></div>             </td>           </tr>                </tbody>     </table>   </div> </body> </html> 

@@ -1,0 +1,44 @@
+/**** library row item ********/
+.row-view .book-item {
+  width: 100%;
+  padding: 0px 20px;
+  height: 150px;
+}
+
+.row-view .book-item:nth-child(odd) {
+  background-color: #F3F3F3;
+
+}
+
+.row-view .cover-image {
+  position: relative;
+  width: 75px;
+  height: 105px;
+  top: -80px;
+}
+
+.row-view .book-info {
+  position: relative;
+  clear: none;
+  left: 110px;
+  top: 20px;
+}
+
+.row-view .buttons{
+  display: none;
+}
+
+.row-view .info-icon {
+  position: relative;
+  right: 20px;
+  top: -22px;
+}
+
+.row-view .info-item.title {
+  font-weight: 300;
+}
+
+.row-view .info-item.author {
+  margin-top: -5px;
+  padding-bottom: 20px;
+}

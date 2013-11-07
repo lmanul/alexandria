@@ -1,0 +1,100 @@
+#toolbar-el {
+	height: 52px;
+}
+
+.navbar {
+
+	ul.nav.pull-right {
+		padding-left: 0;
+		margin-left: 0;
+	}
+
+	.nav > li > a {
+		padding: 5px 0;
+	}
+
+	li {
+		margin: 3px;
+		padding: 0;
+	}
+
+	.brand {
+		padding: 8px;
+		margin-left: 10px;
+	}
+
+	.divider-vertical {
+		height: 52px;
+		background-color: black;
+		border-right: 1px solid #3D3D3D;
+	}
+
+	.divider-vertical.stubby {
+		margin-top: 8px;
+		height: 35px;
+	}
+
+	.nav-icon {
+		height: 36px;
+		width: 36px;
+	}
+
+	#bar-logo-img {
+		width: 142px;
+		height: 36px;
+	}
+
+
+}
+
+#logo-replace {
+	height: 36px;
+	width: 142px;
+	@include bg_image("top_bar/readium_logo.png");
+	text-indent: 100%;
+	white-space: nowrap;
+	overflow: hidden;
+	margin: 0;
+}
+
+@media (max-width: 500px) {
+	#logo-replace {
+		height: 48px;
+		width: 48px;
+		@include bg_image("main_icon/medium.png");
+	}
+
+	.navbar .brand {
+		padding: 2px;
+	}
+}
+
+
+#toolbar-title {
+	text-align: center;
+	color: #999;
+	font-weight: normal;
+	font-size: 1.0em;
+	letter-spacing: 0.5em;
+	text-transform: uppercase;
+	margin: 18px 0;
+	display: none;
+}
+
+.parchment-theme #toolbar-title {
+	color: #876C67;
+}
+
+
+#show-toolbar-button {
+	padding: 8px;
+	margin-right: 7px;
+	display: none;
+	position: absolute;
+	right: 0;
+	top: 0;
+}
+
+#add-book-li {
+	margin-right: 22px;
+}
