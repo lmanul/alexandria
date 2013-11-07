@@ -2436,10 +2436,14 @@ body {
   left: 54px;
   top: 62px; }
 
+.cover-image {
+  outline: 1px solid rgba(0, 0, 0, 0.2);
+}
+
 .book-item .cover-image {
-  -webkit-box-shadow: -7px 6px 12px rgba(50, 50, 50, 0.75);
-  -moz-box-shadow: -7px 6px 12px rgba(50, 50, 50, 0.75);
-  box-shadow: -7px 6px 12px rgba(50, 50, 50, 0.75); }
+  -webkit-box-shadow: -7px 6px 12px rgba(50, 50, 50, 0.45);
+  -moz-box-shadow: -7px 6px 12px rgba(50, 50, 50, 0.45);
+  box-shadow: -7px 6px 12px rgba(50, 50, 50, 0.45); }
 
 .book-item .info-item.title {
   font-weight: 300; }
@@ -2458,12 +2462,11 @@ img.read:hover {
     display: inline-block;
     position: relative;
     text-align: center;
-    margin-bottom: 20px; }
+    margin: 20px; }
   .block-view .info-wrap {
     position: relative; }
   .block-view .caption.book-info {
-    padding: 0 10px;
-    height: 50px; }
+    display:none; }
   .block-view .buttons {
     margin: 10px 0;
     position: relative;
@@ -2494,8 +2497,6 @@ img.read:hover {
     display: none; }
   .block-view .info-item.author {
     margin-top: -5px; }
-  .block-view .book-item {
-    width: 16.6%; }
   @media (max-width: 1200px) {
     .block-view .book-item {
       width: 20%; } }
