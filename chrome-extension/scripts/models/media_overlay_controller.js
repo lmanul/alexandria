@@ -3,18 +3,18 @@
 
 Readium.Models.MediaOverlayController = Backbone.Model.extend({
 
-	defaults: {
+  defaults: {
         "state": "unavailable", // "playing", "paused", "not_started", "unavailable"
-		"mo_text_id": null, // the current MO text fragment identifier
+    "mo_text_id": null, // the current MO text fragment identifier
         "rate": 1.0, // the playback rate
         "volume": 1.0 // the volume
-	},
+  },
 
-	// ------------------------------------------------------------------------------------ //
-	//  "PUBLIC" METHODS (THE API)                                                          //
-	// ------------------------------------------------------------------------------------ //
+  // ------------------------------------------------------------------------------------ //
+  //  "PUBLIC" METHODS (THE API)                                                          //
+  // ------------------------------------------------------------------------------------ //
 
-	initialize: function () {
+  initialize: function () {
 
         // the current media overlay
         this.mo = null;
@@ -38,8 +38,8 @@ Readium.Models.MediaOverlayController = Backbone.Model.extend({
         this.flagRestoredPosition = false;
         
         // readium epub controller, set as a constructor option
-		this.epubController = this.get("epubController");
-		
+    this.epubController = this.get("epubController");
+    
         // readium reflowable pagination view
         this.view = null;
         
@@ -50,14 +50,14 @@ Readium.Models.MediaOverlayController = Backbone.Model.extend({
         
         // print debug statements
         this.consoleTrace = false;   
-	},
+  },
     
     setView: function(view) {
         this.view = view;
     },
     
     // hooked up to the 'play/pause' button
-	playMo: function(forcePosition) {
+  playMo: function(forcePosition) {
         if (this.currentSpineItem == null || !this.currentSpineItem.hasMediaOverlay()) {
             this.mo = null;
             this.set("state", "unavailable");
@@ -82,7 +82,7 @@ Readium.Models.MediaOverlayController = Backbone.Model.extend({
         this.mo.setRate(this.get("rate"));
         this.mo.off(); // just to be safe
         this.mo.on("change:current_text_src", this.handleMoTextSrcChanged, this);
-		this.mo.on("change:is_document_done", this.handleMoDocumentDoneChanged, this);
+    this.mo.on("change:is_document_done", this.handleMoDocumentDoneChanged, this);
         
         // if we are processing a new page caused either by the user going to prev/next page
         // or by the restored position that gets loaded initially
@@ -108,16 +108,16 @@ Readium.Models.MediaOverlayController = Backbone.Model.extend({
             this.targetNode = null;
             this.mo.startPlayback(target);            
         }
-	},
+  },
 
     // hooked up to the 'play/pause' button
-	pauseMo: function() {
+  pauseMo: function() {
         if (this.mo) {
             this.set("state", "paused");
             this.mo.off();
-			this.mo.pause();
-		}
-	},
+      this.mo.pause();
+    }
+  },
     
     // hooked up to the 'mute/unmute' button
     mute: function() {
@@ -298,8 +298,8 @@ Readium.Models.MediaOverlayController = Backbone.Model.extend({
     },
     
     // ------------------------------------------------------------------------------------ //
-	//  "PRIVATE" METHODS                                                                   //
-	// ------------------------------------------------------------------------------------ //
+  //  "PRIVATE" METHODS                                                                   //
+  // ------------------------------------------------------------------------------------ //
     resumeMo: function() {
         this.set("mo_text_id", null); // clear it so that any listeners re-hear the event
         this.handleMoTextSrcChanged();

@@ -577,14 +577,14 @@ function TokenStreamBase(input, tokenData){
  */
 TokenStreamBase.createTokenData = function(tokens){
 
-    var nameMap 	= [],
-        typeMap 	= {},
-		tokenData 	= tokens.concat([]),
-		i			= 0,
-		len			= tokenData.length+1;
+    var nameMap   = [],
+        typeMap   = {},
+    tokenData   = tokens.concat([]),
+    i      = 0,
+    len      = tokenData.length+1;
     
     tokenData.UNKNOWN = -1;
-	tokenData.unshift({name:"EOF"});
+  tokenData.unshift({name:"EOF"});
 
     for (; i < len; i++){
         nameMap.push(tokenData[i].name);
@@ -601,8 +601,8 @@ TokenStreamBase.createTokenData = function(tokens){
     tokenData.type = function(c){
         return typeMap[c];
     };
-	
-	return tokenData;
+  
+  return tokenData;
 };
 
 TokenStreamBase.prototype = {
@@ -739,7 +739,7 @@ TokenStreamBase.prototype = {
         }
         
         //call token retriever method
-		token = this._getToken();
+    token = this._getToken();
 
         //if it should be hidden, don't save a token
         if (token.type > -1 && !tokenInfo[token.type].hide){
@@ -2811,7 +2811,7 @@ Parser.prototype = function(){
         
                 var tokenStream = this._tokenStream,
                     values      = [],
-					//valueParts	= [],
+          //valueParts  = [],
                     value       = null,
                     operator    = null;
                     
@@ -2828,9 +2828,9 @@ Parser.prototype = function(){
                             values.push(operator);
                         } /*else {
                             //if there's not an operator, you have a full value
-							values.push(new PropertyValue(valueParts, valueParts[0].line, valueParts[0].col));
-							valueParts = [];
-						}*/
+              values.push(new PropertyValue(valueParts, valueParts[0].line, valueParts[0].col));
+              valueParts = [];
+            }*/
                         
                         value = this._term();
                         
@@ -2841,8 +2841,8 @@ Parser.prototype = function(){
                         }
                     } while(true);
                 }
-				
-				//cleanup
+        
+        //cleanup
                 /*if (valueParts.length){
                     values.push(new PropertyValue(valueParts, valueParts[0].line, valueParts[0].col));
                 }*/
@@ -3655,12 +3655,12 @@ function isIdentStart(c){
 }
 
 function mix(receiver, supplier){
-	for (var prop in supplier){
-		if (supplier.hasOwnProperty(prop)){
-			receiver[prop] = supplier[prop];
-		}
-	}
-	return receiver;
+  for (var prop in supplier){
+    if (supplier.hasOwnProperty(prop)){
+      receiver[prop] = supplier[prop];
+    }
+  }
+  return receiver;
 }
 
 //-----------------------------------------------------------------------------
@@ -3676,7 +3676,7 @@ function mix(receiver, supplier){
  * @namespace parserlib.css
  */
 function TokenStream(input){
-	TokenStreamBase.call(this, input, Tokens);
+  TokenStreamBase.call(this, input, Tokens);
 }
 
 TokenStream.prototype = mix(new TokenStreamBase(), {
@@ -6756,7 +6756,7 @@ YUITest.TestCase.prototype = {
         var actualDelay = (typeof segment == "number" ? segment : delay);
         actualDelay = (typeof actualDelay == "number" ? actualDelay : 10000);
 
-		if (typeof segment == "function"){
+    if (typeof segment == "function"){
             throw new YUITest.Wait(segment, actualDelay);
         } else {
             throw new YUITest.Wait(function(){

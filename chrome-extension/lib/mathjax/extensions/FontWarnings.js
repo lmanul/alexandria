@@ -270,8 +270,8 @@
       if (message.match(/HTML-CSS Jax - /) && !DATA.div) {
         var HTMLCSS = MathJax.OutputJax["HTML-CSS"], FONTS = HTMLCSS.config.availableFonts, MSG;
         var localFonts = (FONTS && FONTS.length);
-	if (!localFonts) {CONFIG.HTML.fonts = [""]}
-	else if (FONTS.length === 1) {CONFIG.HTML.fonts = CONFIG.HTML[FONTS[0]+"fonts"]}
+  if (!localFonts) {CONFIG.HTML.fonts = [""]}
+  else if (FONTS.length === 1) {CONFIG.HTML.fonts = CONFIG.HTML[FONTS[0]+"fonts"]}
         if (HTMLCSS.allowWebFonts) {CONFIG.HTML.webfonts = [""]}
         if (message.match(/- Web-Font/)) {if (localFonts) {MSG = "webFont"}}
         else if (message.match(/- using image fonts/)) {MSG = "imageFonts"}

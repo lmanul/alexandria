@@ -257,8 +257,8 @@
         div = document.getElementById("MathJax_ZoomTracker");
         if (div) {div.parentNode.removeChild(div)}
         if (ZOOM.operaRefreshBug) {
-	  // force a redisplay of the page
-	  // (Opera doesn't refresh properly after the zoom is removed)
+    // force a redisplay of the page
+    // (Opera doesn't refresh properly after the zoom is removed)
           var overlay = HTML.addElement(document.body,"div",{
             style:{position:"fixed", left:0, top:0, width:"100%", height:"100%",
                    backgroundColor:"white", opacity:0},

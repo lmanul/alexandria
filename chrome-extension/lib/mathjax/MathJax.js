@@ -116,36 +116,36 @@ MathJax.fileversion = "2.0";
       constructor: function (def) {return this.SimpleSUPER.define(def)},
 
       define: function (src) {
-	var dst = {};
-	if (src != null) {
+  var dst = {};
+  if (src != null) {
           for (var id in src) {if (src.hasOwnProperty(id)) {dst[id] = this.wrap(id,src[id])}}
-	  // MSIE doesn't list toString even if it is not native so handle it separately
+    // MSIE doesn't list toString even if it is not native so handle it separately
           if (src.toString !== this.prototype.toString && src.toString !== {}.toString)
             {dst.toString = this.wrap('toString',src.toString)}
-	}
-	return dst;
+  }
+  return dst;
       },
 
       wrap: function (id,f) {
-	if (typeof(f) === 'function' && f.toString().match(/\.\s*SUPER\s*\(/)) {
-	  var fn = new Function(this.wrapper);
-	  fn.label = id; fn.original = f; f = fn;
-	  fn.toString = this.stringify;
-	}
-	return f;
+  if (typeof(f) === 'function' && f.toString().match(/\.\s*SUPER\s*\(/)) {
+    var fn = new Function(this.wrapper);
+    fn.label = id; fn.original = f; f = fn;
+    fn.toString = this.stringify;
+  }
+  return f;
       },
 
       wrapper: function () {
-	var fn = arguments.callee;
-	this.SUPER = fn.SUPER[fn.label];
-	try {var result = fn.original.apply(this,arguments)}
-	  catch (err) {delete this.SUPER; throw err}
-	delete this.SUPER;
-	return result;
+  var fn = arguments.callee;
+  this.SUPER = fn.SUPER[fn.label];
+  try {var result = fn.original.apply(this,arguments)}
+    catch (err) {delete this.SUPER; throw err}
+  delete this.SUPER;
+  return result;
       }.toString().replace(/^\s*function\s*\(\)\s*\{\s*/i,"").replace(/\s*\}\s*$/i,""),
 
       toString: function () {
-	return this.original.toString.apply(this.original,arguments);
+  return this.original.toString.apply(this.original,arguments);
       }
     })
   });
@@ -821,10 +821,10 @@ MathJax.fileversion = "2.0";
       if (loading && !loading.preloaded) {
         BASE.Message.Clear(loading.message);
         clearTimeout(loading.timeout);
-	if (loading.script) {
-	  if (SCRIPTS.length === 0) {setTimeout(REMOVESCRIPTS,0)}
-	  SCRIPTS.push(loading.script);
-	}
+  if (loading.script) {
+    if (SCRIPTS.length === 0) {setTimeout(REMOVESCRIPTS,0)}
+    SCRIPTS.push(loading.script);
+  }
         this.loaded[file] = loading.status; delete this.loading[file];
         this.addHook(file,loading.callback);
       } else {
@@ -1067,7 +1067,7 @@ MathJax.Message = {
     if (!this.div) {
       var frame = document.body;
       if (MathJax.Hub.Browser.isMSIE) {
-	  frame = this.frame = this.addDiv(document.body); frame.removeAttribute("id");
+    frame = this.frame = this.addDiv(document.body); frame.removeAttribute("id");
         frame.style.position = "absolute";
         frame.style.border = frame.style.margin = frame.style.padding = "0px";
         frame.style.zIndex = "101"; frame.style.height = "0px";
@@ -1149,10 +1149,10 @@ MathJax.Message = {
       if (this.text) {
         if (this.div.parentNode == null) {this.Init()} // see ASCIIMathML comments above
         if (this.current == null) {
-	if (this.timer) {clearTimeout(this.timer); delete this.timer}
+  if (this.timer) {clearTimeout(this.timer); delete this.timer}
           if (delay == null) {delay = 600}
           if (delay === 0) {this.Remove()}
-	    else {this.timer = setTimeout(MathJax.Callback(["Remove",this]),delay)}
+      else {this.timer = setTimeout(MathJax.Callback(["Remove",this]),delay)}
         } else if (MathJax.Hub.config.messageStyle !== "none") {
           if (this.textNodeBug) {this.div.innerHTML = this.log[this.current].filteredText}
                            else {this.text.nodeValue = this.log[this.current].filteredText}
@@ -2103,7 +2103,7 @@ MathJax.Hub.Startup = {
     preProcess: function (state) {
       var load, file = this.directory+"/"+this.JAXFILE;
       this.constructor.prototype.preProcess = function (state) {
-	if (!load.called) {return load}
+  if (!load.called) {return load}
         throw Error(file+" failed to load properly");
       }
       load = AJAX.Require(file);

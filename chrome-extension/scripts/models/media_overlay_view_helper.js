@@ -15,13 +15,13 @@
 
 Readium.Models.MediaOverlayViewHelper = Backbone.Model.extend({
 
-	// ------------------------------------------------------------------------------------ //
-	//  "PUBLIC" METHODS (THE API)                                                          //
-	// ------------------------------------------------------------------------------------ //
+  // ------------------------------------------------------------------------------------ //
+  //  "PUBLIC" METHODS (THE API)                                                          //
+  // ------------------------------------------------------------------------------------ //
 
-	initialize: function () {
-		this.epubController = this.get("epubController");
-	},
+  initialize: function () {
+    this.epubController = this.get("epubController");
+  },
 
     // active class comes from the package document metadata
     // authors can specify the class name they want to have applied to 
@@ -51,40 +51,40 @@ Readium.Models.MediaOverlayViewHelper = Backbone.Model.extend({
            that.removeActiveClass(body);
         }); 
         
-		if(currentMOFrag) {
-    		$.each(currentPages, function(idx) {
+    if(currentMOFrag) {
+        $.each(currentPages, function(idx) {
                 var body = fixedLayoutView.getPageBody(this);
                 // escape periods for jquery
                 var newFrag = $(body).find("#" + currentMOFrag.replace(".", "\\."));
                 if (newFrag.length > 0) {
-                	that.addActiveClass(newFrag);	
+                  that.addActiveClass(newFrag);  
                 } 
            });
-		}
-	},
+    }
+  },
 
-	renderFixedMoPlaying: function(currentPages, MOIsPlaying, fixedLayoutView) {
+  renderFixedMoPlaying: function(currentPages, MOIsPlaying, fixedLayoutView) {
         var that = this;
         // if we are using the author's style for highlighting, then just clear it if we are not playing
         if (this.authorActiveClassExists()) {
             if (!MOIsPlaying) {
-        		// get rid of the last highlight
+            // get rid of the last highlight
                 $.each(currentPages, function(idx) {
                    var body = fixedLayoutView.getPageBody(this);
                    that.removeActiveClass(body);
                 }); 
             }
         }
-	},
+  },
     
 
     // highlight the text
-	renderReflowableMoFragHighlight: function(currentTheme, reflowableView, currentMOFrag) {
+  renderReflowableMoFragHighlight: function(currentTheme, reflowableView, currentMOFrag) {
         if (currentTheme === "default") {
-			currentTheme = "default-theme";
-		}
+      currentTheme = "default-theme";
+    }
         // get rid of the last highlight
-		var body = reflowableView.getBody();
+    var body = reflowableView.getBody();
         var lastFrag = this.removeActiveClass(body);
         
         // if the author did not define an active class themselves
@@ -110,48 +110,48 @@ Readium.Models.MediaOverlayViewHelper = Backbone.Model.extend({
             else {
                 reflowableView.flagRehighlight();
             }
-		}
-	},	
+    }
+  },  
     
 
-	// reflowable pagination uses default readium themes, which include a 'fade' effect on the inactive MO text
-	renderReflowableMoPlaying: function(currentTheme, MOIsPlaying, reflowableView) {
-		
+  // reflowable pagination uses default readium themes, which include a 'fade' effect on the inactive MO text
+  renderReflowableMoPlaying: function(currentTheme, MOIsPlaying, reflowableView) {
+    
         // if we are using the author's default style for highlighting, then just clear it if we are not playing
         if (this.authorActiveClassExists()) {
             if (!MOIsPlaying) {
-        		// get rid of the last highlight
-        		var body = reflowableView.getBody();
+            // get rid of the last highlight
+            var body = reflowableView.getBody();
                 var lastFrag = this.removeActiveClass(body);
             }
         }
         else {
-    		if (currentTheme === "default") { 
-    			currentTheme = "default-theme";
-    		}
+        if (currentTheme === "default") { 
+          currentTheme = "default-theme";
+        }
         
-    		var body = reflowableView.getBody();
+        var body = reflowableView.getBody();
             if (MOIsPlaying) {
                 // change the color of the body text so it looks inactive compared to the MO fragment that is playing
-    			$(body).css("color", reflowableView.themes[currentTheme]["mo-color"]);
-    		}
-    		else {
+          $(body).css("color", reflowableView.themes[currentTheme]["mo-color"]);
+        }
+        else {
                 // reset the color of the text to the theme default
-    			$(body).css("color", reflowableView.themes[currentTheme]["color"]);	
+          $(body).css("color", reflowableView.themes[currentTheme]["color"]);  
 
                 // remove style info from the last MO fragment
                 var lastFrag = this.removeActiveClass(reflowableView.getBody());
                 if (lastFrag) {
                     $(lastFrag).css("color", "");
                 }
-    		}
         }
-		
-	},
+        }
+    
+  },
 
-	// ------------------------------------------------------------------------------------ //
-	//  "PRIVATE" HELPERS                                                                   //
-	// ------------------------------------------------------------------------------------ //
+  // ------------------------------------------------------------------------------------ //
+  //  "PRIVATE" HELPERS                                                                   //
+  // ------------------------------------------------------------------------------------ //
 
     getActiveClass: function() {
         var activeClass = this.epubController.packageDocument.get("metadata").active_class;

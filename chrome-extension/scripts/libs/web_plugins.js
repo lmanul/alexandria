@@ -121,8 +121,8 @@ this.db.transaction(function(a){a.executeSql(e,[],d,b)});return this}}}());
 d.event.mouseHooks;d.event.special.mousewheel={setup:function(){if(this.addEventListener)for(var a=c.length;a;)this.addEventListener(c[--a],e,!1);else this.onmousewheel=e},teardown:function(){if(this.removeEventListener)for(var a=c.length;a;)this.removeEventListener(c[--a],e,!1);else this.onmousewheel=null}};d.fn.extend({mousewheel:function(a){return a?this.bind("mousewheel",a):this.trigger("mousewheel")},unmousewheel:function(a){return this.unbind("mousewheel",a)}})})(jQuery);
 /**
 * Jath is free software provided under the MIT license.
-*	See LICENSE file for full text of the license.
-*	Copyright 2010 Dan Newcome.
+*  See LICENSE file for full text of the license.
+*  Copyright 2010 Dan Newcome.
 */
 (function(){function f(a,b,c){c===void 0&&(c=b);if(h(a)==="array"){var e=[];if(a[0]!=null)if(g=="msie"){b.setProperty("SelectionLanguage","XPath");for(var c=c.selectNodes(a[0]),d;d=c.nextNode();)e.push(f(a[1],b,d))}else if(g=="node"){c=c.find(a[0]);for(d=0;d<c.length;d++)e.push(f(a[1],b,c[d]))}else for(c=b.evaluate(a[0],c,Jath.resolver,XPathResult.ANY_TYPE,null);d=c.iterateNext();)e.push(f(a[1],b,d));else for(d=1;d<a.length;d++)e.push(f(a[d],b,c));a=e}else if(h(a)==="object"){d={};for(e in a)d[e]=
 f(a[e],b,c);a=d}else e=c,g=="msie"?(b.setProperty("SelectionLanguage","XPath"),a=h(a)=="string"&&a.substring(0,1)!=Jath.literalChar?e.selectSingleNode(a).text:a.substring(1)):g=="node"?(require("sys").puts(a),a=e.get(a).text()):a=h(a)=="string"&&a[0]!=Jath.literalChar?b.evaluate(a,e,Jath.resolver,XPathResult.STRING_TYPE,null).stringValue:a.substring(1);return a}function h(a){var b=typeof a;b==="object"&&(a?typeof a.length==="number"&&!a.propertyIsEnumerable("length")&&typeof a.splice==="function"&&

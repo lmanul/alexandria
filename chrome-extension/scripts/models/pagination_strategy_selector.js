@@ -11,59 +11,59 @@
 
 Readium.Models.PaginationStrategySelector = Backbone.Model.extend({
 
-	renderToLastPage: false,
+  renderToLastPage: false,
 
-	// ------------------------------------------------------------------------------------ //
-	//  "PUBLIC" METHODS (THE API)                                                          //
-	// ------------------------------------------------------------------------------------ //	
+  // ------------------------------------------------------------------------------------ //
+  //  "PUBLIC" METHODS (THE API)                                                          //
+  // ------------------------------------------------------------------------------------ //  
 
-	initialize: function() {
+  initialize: function() {
 
-		this.model = this.get("book");
-		this.zoomer = new Readium.Views.FixedLayoutBookZoomer();
-	},
+    this.model = this.get("book");
+    this.zoomer = new Readium.Views.FixedLayoutBookZoomer();
+  },
 
-	// Description: Determine what the current spine item is and render it
-	//   Updates which spine items have been rendered in an array of rendered spine items
-	renderSpineItems: function(renderToLast, hashFragmentId) {
-		var book = this.model;
-		var that = this;
-		var rendered_spine_positions = [];
+  // Description: Determine what the current spine item is and render it
+  //   Updates which spine items have been rendered in an array of rendered spine items
+  renderSpineItems: function(renderToLast, hashFragmentId) {
+    var book = this.model;
+    var that = this;
+    var rendered_spine_positions = [];
 
-		// clean up the old view if there is one
-		if (this.v) {
-			this.v.destruct();
-		}
+    // clean up the old view if there is one
+    if (this.v) {
+      this.v.destruct();
+    }
 
-		// Spine items as found in the package document can have attributes that override global settings for the ebook. This 
-		// requires checking/creating the correct pagination strategy for each spine item
-		var spineItem = book.getCurrentSection();
-		if (spineItem.isFixedLayout()) {
+    // Spine items as found in the package document can have attributes that override global settings for the ebook. This 
+    // requires checking/creating the correct pagination strategy for each spine item
+    var spineItem = book.getCurrentSection();
+    if (spineItem.isFixedLayout()) {
 
-			this.v = new Readium.Views.FixedPaginationView({model: book, zoomer: this.zoomer});
-		}
-		// A scrolling epub
-		else if (this.shouldScroll()) {
+      this.v = new Readium.Views.FixedPaginationView({model: book, zoomer: this.zoomer});
+    }
+    // A scrolling epub
+    else if (this.shouldScroll()) {
 
-				this.v = new Readium.Views.ScrollingPaginationView({model: book, zoomer: this.zoomer});
-		}
-		// A reflowable epub
-		else {
+        this.v = new Readium.Views.ScrollingPaginationView({model: book, zoomer: this.zoomer});
+    }
+    // A reflowable epub
+    else {
 
-			this.v = new Readium.Views.ReflowablePaginationView({model: book, zoomer: this.zoomer});
-		}
+      this.v = new Readium.Views.ReflowablePaginationView({model: book, zoomer: this.zoomer});
+    }
 
-		this.rendered_spine_positions = this.v.render(!!renderToLast, hashFragmentId);
-		return this.rendered_spine_positions;
-	},
+    this.rendered_spine_positions = this.v.render(!!renderToLast, hashFragmentId);
+    return this.rendered_spine_positions;
+  },
 
-	// ------------------------------------------------------------------------------------ //
-	//  "PRIVATE" HELPERS                                                                   //
-	// ------------------------------------------------------------------------------------ //  
+  // ------------------------------------------------------------------------------------ //
+  //  "PRIVATE" HELPERS                                                                   //
+  // ------------------------------------------------------------------------------------ //  
 
-	shouldScroll: function() {
-		var optionString = localStorage["READIUM_OPTIONS"];
-		var options = (optionString && JSON.parse(optionString) ) || {"singleton": {}};
-		return !options["singleton"]["paginate_everything"];
-	}
+  shouldScroll: function() {
+    var optionString = localStorage["READIUM_OPTIONS"];
+    var options = (optionString && JSON.parse(optionString) ) || {"singleton": {}};
+    return !options["singleton"]["paginate_everything"];
+  }
 });

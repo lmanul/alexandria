@@ -53,7 +53,7 @@
     JSIO.guessFileType = function(name) {
 
         if (name == "makefile")  { return JSIO.FileType.Text; }
-		if (name == "mimetype")  { return JSIO.FileType.Text; } 
+    if (name == "mimetype")  { return JSIO.FileType.Text; } 
 
         var lastDot = name.lastIndexOf(".");
         if (lastDot <= 0) { return JSIO.FileType.Unknown; }
@@ -84,12 +84,12 @@
         if (ext == ".rels") { return JSIO.FileType.Text; }
         if (ext == ".css")  { return JSIO.FileType.Text; }
         if (ext == ".cs")   { return JSIO.FileType.Text; }
-		
-		// Readium specific modifications to the library
-		// TODO: look at diff between JSIO.FileType.Text and JSIO.FileType.XML
-		if (ext == ".ncx")   { return JSIO.FileType.Text; }
-		if (ext == ".xhtml") { return JSIO.FileType.Text; }
-		if (ext == ".opf")   { return JSIO.FileType.Text; } 
+    
+    // Readium specific modifications to the library
+    // TODO: look at diff between JSIO.FileType.Text and JSIO.FileType.XML
+    if (ext == ".ncx")   { return JSIO.FileType.Text; }
+    if (ext == ".xhtml") { return JSIO.FileType.Text; }
+    if (ext == ".opf")   { return JSIO.FileType.Text; } 
 
 
         return JSIO.FileType.Unknown;

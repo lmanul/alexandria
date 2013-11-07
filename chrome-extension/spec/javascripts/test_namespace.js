@@ -2,14 +2,14 @@
 // the chrome extension at all.
 
 if( !window.Readium ) {
-	window.Readium = {
-		Models: {},
-		Collections: {},
-		Views: {},
-		Routers: {},
-		Utils: {},
-		Init: function() {
-			
-		}
-	};
+  window.Readium = {
+    Models: {},
+    Collections: {},
+    Views: {},
+    Routers: {},
+    Utils: {},
+    Init: function() {
+      
+    }
+  };
 };
