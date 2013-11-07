@@ -6,14 +6,14 @@ Syntax error: Undefined mixin 'linear-gradient'.
 1: /**************** THE TOC PANEL ************************/
 2: 
 3: #readium-toc {
-4: 	position: absolute;
-5: 	width: 30%;
-6: 	@include linear-gradient(top, #EEEEEE, #DDDDDD);
-7: 	top: 0;
-8: 	z-index: 999;
-9: 	bottom: 0;
-10: 	border-left: 1px solid #DDD;
-11: 	font-size: 0.8em;
+4:   position: absolute;
+5:   width: 30%;
+6:   @include linear-gradient(top, #EEEEEE, #DDDDDD);
+7:   top: 0;
+8:   z-index: 999;
+9:   bottom: 0;
+10:   border-left: 1px solid #DDD;
+11:   font-size: 0.8em;
 
 Backtrace:
 css/sass/toc.scss:6:in `linear-gradient'
@@ -64,4 +64,4 @@ css/sass/toc.scss:6
 body:before {
   white-space: pre;
   font-family: monospace;
-  content: "Syntax error: Undefined mixin 'linear-gradient'.\A         on line 6 of css/sass/toc.scss, in `linear-gradient'\A         from line 6 of css/sass/toc.scss\A \A 1: /**************** THE TOC PANEL ************************/\A 2: \A 3: #readium-toc {\A 4: 	position: absolute;\A 5: 	width: 30%;\A 6: 	@include linear-gradient(top, #EEEEEE, #DDDDDD);\A 7: 	top: 0;\A 8: 	z-index: 999;\A 9: 	bottom: 0;\A 10: 	border-left: 1px solid #DDD;\A 11: 	font-size: 0.8em;"; }
+  content: "Syntax error: Undefined mixin 'linear-gradient'.\A         on line 6 of css/sass/toc.scss, in `linear-gradient'\A         from line 6 of css/sass/toc.scss\A \A 1: /**************** THE TOC PANEL ************************/\A 2: \A 3: #readium-toc {\A 4:   position: absolute;\A 5:   width: 30%;\A 6:   @include linear-gradient(top, #EEEEEE, #DDDDDD);\A 7:   top: 0;\A 8:   z-index: 999;\A 9:   bottom: 0;\A 10:   border-left: 1px solid #DDD;\A 11:   font-size: 0.8em;"; }

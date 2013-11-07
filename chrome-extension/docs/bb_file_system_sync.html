@@ -4,16 +4,16 @@
 
 <span class="nx">BBFileSystemSync</span> <span class="o">=</span> <span class="kd">function</span><span class="p">(</span><span class="nx">method</span><span class="p">,</span> <span class="nx">model</span><span class="p">,</span> <span class="nx">options</span><span class="p">)</span> <span class="p">{</span>
 
-	<span class="k">if</span><span class="p">(</span><span class="o">!</span><span class="nx">model</span><span class="p">.</span><span class="nx">file_path</span><span class="p">)</span> <span class="p">{</span>
-		<span class="k">throw</span> <span class="s2">&quot;Cannot sync the model to the fs without a path&quot;</span><span class="p">;</span>
-	<span class="p">}</span></pre></div>             </td>           </tr>                               <tr id="section-2">             <td class="docs">               <div class="pilwrap">                 <a class="pilcrow" href="#section-2">&#182;</a>               </div>               <p>this is a read only sync, no saving for now</p>             </td>             <td class="code">               <div class="highlight"><pre>	<span class="k">switch</span> <span class="p">(</span><span class="nx">method</span><span class="p">)</span> <span class="p">{</span>
+  <span class="k">if</span><span class="p">(</span><span class="o">!</span><span class="nx">model</span><span class="p">.</span><span class="nx">file_path</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">throw</span> <span class="s2">&quot;Cannot sync the model to the fs without a path&quot;</span><span class="p">;</span>
+  <span class="p">}</span></pre></div>             </td>           </tr>                               <tr id="section-2">             <td class="docs">               <div class="pilwrap">                 <a class="pilcrow" href="#section-2">&#182;</a>               </div>               <p>this is a read only sync, no saving for now</p>             </td>             <td class="code">               <div class="highlight"><pre>  <span class="k">switch</span> <span class="p">(</span><span class="nx">method</span><span class="p">)</span> <span class="p">{</span>
         <span class="k">case</span> <span class="s2">&quot;read&quot;</span><span class="o">:</span>
             <span class="nx">Readium</span><span class="p">.</span><span class="nx">FileSystemApi</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">api</span><span class="p">)</span> <span class="p">{</span>
-            	<span class="nx">api</span><span class="p">.</span><span class="nx">readTextFile</span><span class="p">(</span><span class="nx">model</span><span class="p">.</span><span class="nx">file_path</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">a</span><span class="p">,</span><span class="nx">b</span><span class="p">)</span> <span class="p">{</span>
-            		<span class="nx">options</span><span class="p">.</span><span class="nx">success</span><span class="p">(</span><span class="nx">a</span><span class="p">);</span>
-            	<span class="p">},</span> <span class="kd">function</span><span class="p">(</span><span class="nx">e</span><span class="p">)</span> <span class="p">{</span>
-            		<span class="nx">options</span><span class="p">.</span><span class="nx">error</span><span class="p">(</span><span class="nx">e</span><span class="p">);</span>
-            	<span class="p">});</span>
+              <span class="nx">api</span><span class="p">.</span><span class="nx">readTextFile</span><span class="p">(</span><span class="nx">model</span><span class="p">.</span><span class="nx">file_path</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">a</span><span class="p">,</span><span class="nx">b</span><span class="p">)</span> <span class="p">{</span>
+                <span class="nx">options</span><span class="p">.</span><span class="nx">success</span><span class="p">(</span><span class="nx">a</span><span class="p">);</span>
+              <span class="p">},</span> <span class="kd">function</span><span class="p">(</span><span class="nx">e</span><span class="p">)</span> <span class="p">{</span>
+                <span class="nx">options</span><span class="p">.</span><span class="nx">error</span><span class="p">(</span><span class="nx">e</span><span class="p">);</span>
+              <span class="p">});</span>
             <span class="p">});</span>
             <span class="k">break</span><span class="p">;</span>
         <span class="k">case</span> <span class="s2">&quot;create&quot;</span><span class="o">:</span>
@@ -28,7 +28,7 @@
     <span class="p">}</span>
 
     <span class="k">return</span> <span class="kc">null</span><span class="p">;</span>
-	
+  
 <span class="p">}</span>
 
 </pre></div>             </td>           </tr>                </tbody>     </table>   </div> </body> </html> 

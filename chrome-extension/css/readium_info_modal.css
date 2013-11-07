@@ -4,14 +4,14 @@ Syntax error: Undefined mixin 'linear-gradient'.
         from line 5 of css/sass/readium_info_modal.scss
 
 1: #readium-info {
-2: 	text-align: center; 
-3: 	padding: 30px;
+2:   text-align: center; 
+3:   padding: 30px;
 4: 
-5: 	@include linear-gradient(top, #CCCCCC, #FFFFFF);
+5:   @include linear-gradient(top, #CCCCCC, #FFFFFF);
 6: 
-7: 	#version-info, .green, .modal-detail.green {
-8: 		color: #6FA64D;
-9: 	}
+7:   #version-info, .green, .modal-detail.green {
+8:     color: #6FA64D;
+9:   }
 10: 
 
 Backtrace:
@@ -61,4 +61,4 @@ css/sass/readium_info_modal.scss:5
 body:before {
   white-space: pre;
   font-family: monospace;
-  content: "Syntax error: Undefined mixin 'linear-gradient'.\A         on line 5 of css/sass/readium_info_modal.scss, in `linear-gradient'\A         from line 5 of css/sass/readium_info_modal.scss\A \A 1: #readium-info {\A 2: 	text-align: center; \A 3: 	padding: 30px;\A 4: \A 5: 	@include linear-gradient(top, #CCCCCC, #FFFFFF);\A 6: \A 7: 	#version-info, .green, .modal-detail.green {\A 8: 		color: #6FA64D;\A 9: 	}\A 10: "; }
+  content: "Syntax error: Undefined mixin 'linear-gradient'.\A         on line 5 of css/sass/readium_info_modal.scss, in `linear-gradient'\A         from line 5 of css/sass/readium_info_modal.scss\A \A 1: #readium-info {\A 2:   text-align: center; \A 3:   padding: 30px;\A 4: \A 5:   @include linear-gradient(top, #CCCCCC, #FFFFFF);\A 6: \A 7:   #version-info, .green, .modal-detail.green {\A 8:     color: #6FA64D;\A 9:   }\A 10: "; }

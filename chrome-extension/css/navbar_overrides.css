@@ -6,13 +6,13 @@ Syntax error: Undefined mixin 'bg_image'.
 48: }
 49: 
 50: #logo-replace {
-51: 	height: 36px;
-52: 	width: 142px;
-53: 	@include bg_image("top_bar/readium_logo.png");
-54: 	text-indent: 100%;
-55: 	white-space: nowrap;
-56: 	overflow: hidden;
-57: 	margin: 0;
+51:   height: 36px;
+52:   width: 142px;
+53:   @include bg_image("top_bar/readium_logo.png");
+54:   text-indent: 100%;
+55:   white-space: nowrap;
+56:   overflow: hidden;
+57:   margin: 0;
 58: }
 
 Backtrace:
@@ -62,4 +62,4 @@ css/sass/navbar_overrides.scss:53
 body:before {
   white-space: pre;
   font-family: monospace;
-  content: "Syntax error: Undefined mixin 'bg_image'.\A         on line 53 of css/sass/navbar_overrides.scss, in `bg_image'\A         from line 53 of css/sass/navbar_overrides.scss\A \A 48: }\A 49: \A 50: #logo-replace {\A 51: 	height: 36px;\A 52: 	width: 142px;\A 53: 	@include bg_image(\"top_bar/readium_logo.png\");\A 54: 	text-indent: 100%;\A 55: 	white-space: nowrap;\A 56: 	overflow: hidden;\A 57: 	margin: 0;\A 58: }"; }
+  content: "Syntax error: Undefined mixin 'bg_image'.\A         on line 53 of css/sass/navbar_overrides.scss, in `bg_image'\A         from line 53 of css/sass/navbar_overrides.scss\A \A 48: }\A 49: \A 50: #logo-replace {\A 51:   height: 36px;\A 52:   width: 142px;\A 53:   @include bg_image(\"top_bar/readium_logo.png\");\A 54:   text-indent: 100%;\A 55:   white-space: nowrap;\A 56:   overflow: hidden;\A 57:   margin: 0;\A 58: }"; }

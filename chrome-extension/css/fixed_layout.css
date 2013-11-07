@@ -5,15 +5,15 @@ Syntax error: Undefined mixin 'box-shadow'.
 
 13: 
 14: .fixed-page-wrap {
-15: 	position: absolute;
-16: 	left: 25%;
-17: 	overflow: hidden; 
-18: 	@include box-shadow(0 0 5px 5px rgba(80,80,80,0.5));
-19: 	background-color: #FFF;
+15:   position: absolute;
+16:   left: 25%;
+17:   overflow: hidden; 
+18:   @include box-shadow(0 0 5px 5px rgba(80,80,80,0.5));
+19:   background-color: #FFF;
 20: }
 21: 
 22: .apple-fixed-layout #spine-divider {
-23: 	    position: absolute;
+23:       position: absolute;
 
 Backtrace:
 css/sass/fixed_layout.scss:18:in `box-shadow'
@@ -60,4 +60,4 @@ css/sass/fixed_layout.scss:18
 body:before {
   white-space: pre;
   font-family: monospace;
-  content: "Syntax error: Undefined mixin 'box-shadow'.\A         on line 18 of css/sass/fixed_layout.scss, in `box-shadow'\A         from line 18 of css/sass/fixed_layout.scss\A \A 13: \A 14: .fixed-page-wrap {\A 15: 	position: absolute;\A 16: 	left: 25%;\A 17: 	overflow: hidden; \A 18: 	@include box-shadow(0 0 5px 5px rgba(80,80,80,0.5));\A 19: 	background-color: #FFF;\A 20: }\A 21: \A 22: .apple-fixed-layout #spine-divider {\A 23: 	    position: absolute;"; }
+  content: "Syntax error: Undefined mixin 'box-shadow'.\A         on line 18 of css/sass/fixed_layout.scss, in `box-shadow'\A         from line 18 of css/sass/fixed_layout.scss\A \A 13: \A 14: .fixed-page-wrap {\A 15:   position: absolute;\A 16:   left: 25%;\A 17:   overflow: hidden; \A 18:   @include box-shadow(0 0 5px 5px rgba(80,80,80,0.5));\A 19:   background-color: #FFF;\A 20: }\A 21: \A 22: .apple-fixed-layout #spine-divider {\A 23:       position: absolute;"; }

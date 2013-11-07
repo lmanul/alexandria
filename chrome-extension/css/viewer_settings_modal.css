@@ -4,15 +4,15 @@ Syntax error: Undefined mixin 'linear-gradient'.
         from line 5 of css/sass/viewer_settings_modal.scss
 
 1: #viewer-settings-modal {
-2: 	text-align: center;
-3: 	width: 352px;
-4: 	margin: -326px 0 0 -176px;
-5: 	@include linear-gradient(top, #FFFFFF, #CCCCCC);
-6: 	line-height: 1em;
+2:   text-align: center;
+3:   width: 352px;
+4:   margin: -326px 0 0 -176px;
+5:   @include linear-gradient(top, #FFFFFF, #CCCCCC);
+6:   line-height: 1em;
 7: 
-8: 	.clickable {
-9: 		@include user-select(none);
-10: 		&:hover {
+8:   .clickable {
+9:     @include user-select(none);
+10:     &:hover {
 
 Backtrace:
 css/sass/viewer_settings_modal.scss:5:in `linear-gradient'
@@ -59,4 +59,4 @@ css/sass/viewer_settings_modal.scss:5
 body:before {
   white-space: pre;
   font-family: monospace;
-  content: "Syntax error: Undefined mixin 'linear-gradient'.\A         on line 5 of css/sass/viewer_settings_modal.scss, in `linear-gradient'\A         from line 5 of css/sass/viewer_settings_modal.scss\A \A 1: #viewer-settings-modal {\A 2: 	text-align: center;\A 3: 	width: 352px;\A 4: 	margin: -326px 0 0 -176px;\A 5: 	@include linear-gradient(top, #FFFFFF, #CCCCCC);\A 6: 	line-height: 1em;\A 7: \A 8: 	.clickable {\A 9: 		@include user-select(none);\A 10: 		&:hover {"; }
+  content: "Syntax error: Undefined mixin 'linear-gradient'.\A         on line 5 of css/sass/viewer_settings_modal.scss, in `linear-gradient'\A         from line 5 of css/sass/viewer_settings_modal.scss\A \A 1: #viewer-settings-modal {\A 2:   text-align: center;\A 3:   width: 352px;\A 4:   margin: -326px 0 0 -176px;\A 5:   @include linear-gradient(top, #FFFFFF, #CCCCCC);\A 6:   line-height: 1em;\A 7: \A 8:   .clickable {\A 9:     @include user-select(none);\A 10:     &:hover {"; }

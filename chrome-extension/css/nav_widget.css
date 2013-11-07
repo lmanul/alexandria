@@ -8,11 +8,11 @@ Syntax error: Undefined mixin 'user-select'.
 47: 
 48: /* stop buttons from highlighting on double click */
 49: #settings, #settings span, #settings img {
-50: 	@include user-select(none);
+50:   @include user-select(none);
 51: }
 52: 
 53: #settings {
-54: 	@include linear-gradient(top, #353F5E, #000011);
+54:   @include linear-gradient(top, #353F5E, #000011);
 55: }
 
 Backtrace:
@@ -78,4 +78,4 @@ css/sass/nav_widget.scss:50
 body:before {
   white-space: pre;
   font-family: monospace;
-  content: "Syntax error: Undefined mixin 'user-select'.\A         on line 50 of css/sass/nav_widget.scss, in `user-select'\A         from line 50 of css/sass/nav_widget.scss\A \A 45: }\A 46: \A 47: \A 48: /* stop buttons from highlighting on double click */\A 49: #settings, #settings span, #settings img {\A 50: 	@include user-select(none);\A 51: }\A 52: \A 53: #settings {\A 54: 	@include linear-gradient(top, #353F5E, #000011);\A 55: }"; }
+  content: "Syntax error: Undefined mixin 'user-select'.\A         on line 50 of css/sass/nav_widget.scss, in `user-select'\A         from line 50 of css/sass/nav_widget.scss\A \A 45: }\A 46: \A 47: \A 48: /* stop buttons from highlighting on double click */\A 49: #settings, #settings span, #settings img {\A 50:   @include user-select(none);\A 51: }\A 52: \A 53: #settings {\A 54:   @include linear-gradient(top, #353F5E, #000011);\A 55: }"; }
