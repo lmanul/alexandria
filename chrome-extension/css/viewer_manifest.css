@@ -1392,6 +1392,10 @@ body {
   -o-user-select: none;
   user-select: none; }
 
+#next-page-button:hover, #prev-page-button:hover {
+  opacity: 0.5;
+}
+
 #readium-book-view-el, #container, #page-wrap {
   margin: 0;
   padding: 0;
