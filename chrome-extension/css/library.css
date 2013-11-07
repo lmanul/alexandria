@@ -2468,13 +2468,27 @@ img.read:hover {
   .block-view .caption.book-info {
     display:none; }
   .block-view .buttons {
-    margin: 10px 0;
-    position: relative;
-    text-align:center; }
-    .block-view .buttons .btn.read {
-      width: 36px; }
-    .block-view .buttons .btn.details {
-      width: 36px; }
+    display: block;
+    left: 0;
+    padding: 1em;
+    position: absolute;
+    right: 0;
+    text-align:center;
+    top: 24px;
+  }
+    /* Only show buttons on hover. */
+    .block-view .buttons {
+      display: none;
+    }
+    .block-view .book-item:hover .buttons {
+      display: block;
+    }
+    .block-view .buttons .btn {
+      font-size: 170%;
+      margin: 17px 0;
+      padding: 0.5em 0;
+      width: 100%;
+    }
   .block-view .info-icon {
     display: none; }
   .block-view .cover-image {
