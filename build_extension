@@ -1,0 +1,10 @@
+#!/usr/bin/python
+
+import os
+
+os.system("rm -f alexandria-extension.zip")
+os.system("cp -a chrome-extension alexandria-extension")
+os.system("rm -rf alexandria-extension/epub_content alexandria-extension/build \
+    alexandria-extension/build/*~")
+os.system("zip -r alexandria-extension.zip alexandria-extension")
+os.system("rm -rf alexandria-extension")
