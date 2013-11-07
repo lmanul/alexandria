@@ -2453,12 +2453,11 @@ img.read:hover {
   cursor: pointer; }
 
 .block-view {
-  text-align: center;
   margin: auto; }
   .block-view .book-item {
+    display: inline-block;
     position: relative;
     text-align: center;
-    float: left;
     margin-bottom: 20px; }
   .block-view .info-wrap {
     position: relative; }
