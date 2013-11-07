@@ -19,10 +19,6 @@
 
       <div class="navbar-inner" id="top-bar">
         <div class="container" style="width: 100%">
-          <a title="Readium Info" accesskey="i" class="brand" data-toggle="modal" href="#readium-info" id='bar-logo' role="button">
-            <h2 id="logo-replace">Readium</h2>
-          </a>
-
           <ul class="nav pull-right">
             <li class="divider-vertical stubby"></li>
             <li>
@@ -83,9 +79,9 @@
             </li>
             <li class="divider-vertical"></li>
             <li style="margin-right: 15px">
-              <a title="Hide Readium user interface" accesskey="x" id="hide-toolbar-button" class="toggle-bar-btn" role="button">
+              <a title="Hide user interface" accesskey="x" id="hide-toolbar-button" class="toggle-bar-btn" role="button">
                  <img src="/images/top_bar/ico_closeUI.png" class="nav-icon" alt=""/>
-                <span class="offscreenText">Hide Readium user interface</span>
+                <span class="offscreenText">Hide user interface</span>
               </a>
             </li>
 
@@ -93,9 +89,9 @@
         </div>
       </div>
       <h2 id="toolbar-title"></h2>
-      <span title="Show Readium user interface" accesskey="v" tabindex="0" id="show-toolbar-button" role="button" >
-         <img src="/images/top_bar/ico_openUI.png" class="nav-icon" alt="Show Readium user interface"/>
-        <span class="offscreenText">Show Readium user interface</span>
+      <span title="Show user interface" accesskey="v" tabindex="0" id="show-toolbar-button" role="button" >
+         <img src="/images/top_bar/ico_openUI.png" class="nav-icon" alt="Show user interface"/>
+        <span class="offscreenText">Show user interface</span>
       </span>
       </div><!-- end le top bar -->
 
@@ -187,28 +183,6 @@
         </div>
         <div class="offscreenText"> Options End </div>
       </div><!-- end le settings modal -->
-
-
-      <div class="modal fade" id="readium-info"  style="display: none"><!-- le info modal -->
-        <div class="offscreenText"> Info Start </div>
-        <div>
-          <img src="/images/info_modal/about_readium_logo.png" alt="About Readium logo">
-        </div>
-        <div>
-          <!-- UPDATE VERSION NUMBER -->
-          <h3 tabindex="-1" id="version-info">Version 0.9 Release Date 01.29.13</h3>
-        </div>
-        <p>
-          <span id="i18n_html_readium_tm_a_project">Readium<sup>TM</sup>, a project of the International Digital Publishing Forum (IDPF) and supporters, is an open source reference system and rendering engine for EPUB&reg; publications.  To learn more, visit the <a href="http://readium.org/">project homepage</a>. To date, the project development has been lead by <a href="http://evidentpoint.com/">Evident Point</a> and <a href="http://www.bluefirereader.com/">Bluefire Productions</a>. To contribute visit the <a href="https://github.com/readium/readium">github repository</a></span>
-        </p>
-        <div>
-          <img src="/images/info_modal/partner_logos.png" alt="Readium partner logos">
-        </div>
-        <button class="offscreenText" data-dismiss="modal"> Close </button>
-        <div class="offscreenText"> Info End </div>
-      </div><!-- end le info modal -->
-    </div>
-
     
       <script src="/lib/jquery-1.7.1.min.js" type="text/javascript" ></script>
     <!-- This one file: contains a bunch of libs minified and concatenated together -->

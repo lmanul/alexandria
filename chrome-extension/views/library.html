@@ -59,25 +59,6 @@
         </div>
       </div>
 
-      <div class="modal fade" id="readium-info" style="display: none" ><!-- le info modal -->
-        <div class="offscreenText"> Info Start </div>
-        <div>
-          <img src="/images/info_modal/about_readium_logo.png" alt="About Readium logo">
-        </div>
-        <div>
-          <!-- UPDATE VERSION NUMBER -->
-          <h3 tabindex="-1" id="version-info">Version 0.9 Release Date 01.29.13</h3>
-        </div>
-        <p>
-          <span id="i18n_html_readium_tm_a_project">Readium<sup>TM</sup>, a project of the International Digital Publishing Forum (IDPF) and supporters, is an open source reference system and rendering engine for EPUB&reg; publications.  To learn more, visit the <a href="http://readium.org/">project homepage</a>. To date, the project development has been lead by <a href="http://evidentpoint.com/">Evident Point</a> and <a href="http://www.bluefirereader.com/">Bluefire Productions</a>. To contribute visit the <a href="https://github.com/readium/readium">github repository</a></span>
-        </p>
-        <div>
-          <img src="/images/info_modal/partner_logos.png" alt="Readium partners logo">
-        </div>
-        <button class="offscreenText" data-dismiss="modal"> Close </button>
-        <div class="offscreenText"> Info End </div>
-      </div><!-- end le info modal -->
-
       <!-- le settings modal -->
       <div class="modal fade" id="readium-options-modal"  style="display: none">
         <div class="offscreenText"> Options Start </div>
@@ -132,26 +113,28 @@
       <div id="add-book-modal" class="modal fade" >
         <div class="offscreenText"> Add Book Start </div>
   
-        <div class="modal-header">
+        <div>
           <a class="close" data-dismiss="modal" role="button" aria-label="Close">&times;</a>
-          <h3 tabindex="-1" id="add-book-heading"><span id="i18n_add_book_to_readium_library">Add Book To Readium Library:</span></h3>
         </div>
 
         <div class="modal-body">
           <form class="form-horizontal">
-                <div class="control-group">
-              <label for="book-url"><span id="i18n_from_the_web">From the web:</span></label>
-              <div class='controls'>
-                <input type='text' id='book-url' class="span3" placeholder="http://">
-                <p class="help-block"><span id="i18n_enter_a_url">Enter a URL to a .epub file</span></p>
-              </div>
-            </div>
+
             <div class="control-group">
               <label for="files"><span id="i18n_from_local_file">From Local File:</span></label>
               <div class="controls">
                 <input type="file" id="files" name="files[]" multiple />
               </div>
             </div>
+
+            <div class="control-group">
+              <label for="book-url"><span id="i18n_from_the_web">From the web:</span></label>
+              <div class='controls'>
+                <input type='text' id='book-url' class="span3" placeholder="http://">
+                <p class="help-block"><span id="i18n_enter_a_url">Enter a URL to a .epub file</span></p>
+              </div>
+            </div>
+
             <div class="control-group" id='unpacked-input'>
               <label for="dir_input"><span id="i18n_unpacked_directory">Unpacked Directory:</span></label>
               <div class="controls">
