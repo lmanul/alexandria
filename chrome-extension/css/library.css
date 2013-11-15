@@ -860,7 +860,10 @@ legend + .control-group {
   -webkit-margin-top-collapse: separate; }
 
 .form-horizontal .control-group {
-  margin-bottom: 18px; }
+  border: 1px solid #ddd;
+  padding: 10px;
+  margin-bottom: 18px;
+}
   .form-horizontal .control-group:before, .form-horizontal .control-group:after {
     display: table;
     content: ""; }
