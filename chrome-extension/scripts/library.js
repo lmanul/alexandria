@@ -273,6 +273,7 @@ Readium.Views.FilePickerView = Backbone.View.extend({
 
   handleFileSelect: function(evt) {
     var files = evt.target.files; // FileList object
+    // TODO: Support multiple files.
     var extractor = new Readium.Models.ZipBookExtractor({file: files[0], src_filename: files[0].name});
     this.beginExtraction(extractor);
   },
