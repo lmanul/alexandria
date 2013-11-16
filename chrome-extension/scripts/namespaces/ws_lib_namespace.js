@@ -22,21 +22,6 @@ if( !window.Readium ) {
       // window.Library.fetch();
       window.Library.trigger('reset');
 
-var hc = $('#library-items-container').hasClass("row-view");
-$("#block-view-btn").attr('aria-pressed', hc ? 'false' : 'true');
-$("#row-view-btn").attr('aria-pressed', hc ? 'true' : 'false');
-      
-      $("#block-view-btn").click(function(e) {
-$("#block-view-btn").attr('aria-pressed', 'true');
-$("#row-view-btn").attr('aria-pressed', 'false');
-        $('#library-items-container').addClass("block-view").removeClass("row-view")
-      });
-      $("#row-view-btn").click(function(e) {
-$("#block-view-btn").attr('aria-pressed', 'false');
-$("#row-view-btn").attr('aria-pressed', 'true');
-        $('#library-items-container').addClass("row-view").removeClass("block-view")
-      });
-
 $('#bar-logo').attr('aria-pressed', 'false');
 $('#readium-info').on('shown', function(){
 $('#version-info').focus();
