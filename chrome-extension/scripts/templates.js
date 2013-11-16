@@ -184,11 +184,6 @@ templates['library_items_template'] = template(function (Handlebars,depth0,helpe
   helpers = helpers || Handlebars.helpers;
   var buffer = "", stack1, foundHelper, helperMissing=helpers.helperMissing, escapeExpression=this.escapeExpression;
 
-
-  buffer += "<div id='empty-message'>\n  <p id='empty-message-text' class='green'>\n    ";
-  foundHelper = helpers.fetchInzMessage;
-  stack1 = foundHelper ? foundHelper.call(depth0, "i18n_add_items", {hash:{}}) : helperMissing.call(depth0, "fetchInzMessage", "i18n_add_items", {hash:{}});
-  buffer += escapeExpression(stack1) + "\n  </p>\n  <img id='empty-arrow' src='/images/library/empty_library_arrow.png' alt='Try adding an ePUB' />\n</div>";
   return buffer;});
 templates['ncx_nav_template'] = template(function (Handlebars,depth0,helpers,partials,data) {
   helpers = helpers || Handlebars.helpers;

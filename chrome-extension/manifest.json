@@ -9,9 +9,7 @@
    "background" : {
       "page": "background/background.html"
     },
-   "description": "__MSG_chrome_extension_description__",
-   "default_locale" : "en_US",
-   
+   "description": "An ePub reader.",
    "icons": {
       "16": "images/main_icon/small.png",
       "48": "images/main_icon/medium.png",
