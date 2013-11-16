@@ -104,10 +104,7 @@ templates['library_item_template'] = template(function (Handlebars,depth0,helper
   stack1 = depth0.data;
   stack1 = stack1 == null || stack1 === false ? stack1 : stack1.cover_href;
   stack1 = typeof stack1 === functionType ? stack1() : stack1;
-  buffer += escapeExpression(stack1) + "' width='150' height='220' alt='ePUB cover'>\n    <div class=\"caption modal-buttons\">\n      <a class=\"btn btn-danger delete\" role='button'>";
-  foundHelper = helpers.fetchInzMessage;
-  stack1 = foundHelper ? foundHelper.call(depth0, "i18n_delete", {hash:{}}) : helperMissing.call(depth0, "fetchInzMessage", "i18n_delete", {hash:{}});
-  buffer += escapeExpression(stack1) + "</a>\n    </div>\n  </div>\n  <div class='caption modal-book-info'>\n    <h3 class='green modal-title'>";
+  buffer += escapeExpression(stack1) + "' width='150' height='220' alt='ePUB cover'>\n    <div class=\"caption modal-buttons\">\n      <a class=\"btn btn-danger delete\" role='button'>Delete</a>\n    </div>\n  </div>\n  <div class='caption modal-book-info'>\n    <h3 class='green modal-title'>";
   stack1 = depth0.data;
   stack1 = stack1 == null || stack1 === false ? stack1 : stack1.title;
   stack1 = typeof stack1 === functionType ? stack1() : stack1;
