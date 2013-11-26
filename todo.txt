@@ -2,3 +2,4 @@
 * Feature request: scroll wheel to change pages.
 * Bug: when a large image is included, it's not contained within one page.
 * Use a nice open book image for reading view.
+* Add a slider for cover size.
