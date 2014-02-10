@@ -3,3 +3,4 @@
 *.itmsp
 *.pyc
 *~
+common/epubchecker/*
