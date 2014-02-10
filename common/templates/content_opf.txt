@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<package xmlns="http://www.idpf.org/2007/opf" unique-identifier="pub-id" version="3.0">
+  <metadata xmlns:dc="http://purl.org/dc/elements/1.1/">
+    <dc:identifier id="pub-id">urn:uuid:%s</dc:identifier>
+    <dc:title>%s</dc:title>
+    <dc:creator id="creator">%s</dc:creator>
+    <dc:language>%s</dc:language>
+    <meta property="dcterms:modified">%sT00:00:00Z</meta>
+    <meta name="cover" content="cover-image" />
+  </metadata>
+  <manifest>
+    <item id="toc" properties="nav" href="toc.xhtml" media-type="application/xhtml+xml"/>
+    <item id="cover-image" href="Images/Cover.png" media-type="image/png"/>
+    <item id="logo-image" href="Images/alexandria_logo.png" media-type="image/png"/>
+    <item href="Text/titlepage.xhtml" id="titlepage.xhtml" media-type="application/xhtml+xml" />

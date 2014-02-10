@@ -1,0 +1,106 @@
+
+h1, h2, h3, h4, h5 {
+  text-align: center;
+}
+
+h1 {
+  font-size: 150%;
+}
+
+.title, .subtitle, .author, .logo {
+  text-align: center;
+}
+
+.title {
+  font-size: 200%;
+  font-weight: bold;
+  margin-top: 4em;
+}
+
+.subtitle {
+  font-size: 110%;
+  margin-top: 1em;
+}
+
+.author {
+  font-size: 130%;
+  margin-top: 2em;
+}
+
+.author-titles {
+  color: #444;
+  font-size: 90%;
+  margin-top: 0.5em;
+  text-align: center;
+}
+
+.logo {
+  color: #777;
+  font-size: 75%;
+  margin-top: 3em;
+  width: 100%;
+}
+
+.logo span {
+  font-family: monospace;
+  color: #bbb;
+}
+
+.logo img {
+  width: 3ex;
+}
+
+.chapter-mark {
+  page-break-before: always;
+}
+
+div.chapter-mark + p {
+  padding-top: 6em;
+}
+
+.bigskip {
+  margin-bottom: 1.3em;
+}
+
+.medskip {
+  margin-bottom: 0.8em;
+}
+
+.smallskip {
+  margin-bottom: 0.4em;
+}
+
+p.noindent {
+  text-indent: 0;
+}
+
+p.dialog {
+  text-indent: 0;
+}
+
+p.centered {
+  margin: auto;
+  text-align: center;
+  text-indent: 0;
+}
+
+p.align-right {
+  text-align: right;
+}
+
+p {
+  /** Suppress the natural margin between paragraphs. */
+  margin: 0;
+}
+
+.frontmatter ol {
+  list-style-type: none;
+}
+
+.monospace {
+  font-family: "Courier New", Courier, monospace;
+}
+
+p.disclaimer {
+  margin-bottom: 1em;
+}

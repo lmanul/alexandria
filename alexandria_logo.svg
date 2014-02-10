@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Created with Inkscape (http://www.inkscape.org/) -->
+
+<svg
+   xmlns:dc="http://purl.org/dc/elements/1.1/"
+   xmlns:cc="http://creativecommons.org/ns#"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:svg="http://www.w3.org/2000/svg"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   width="4125.9297"
+   height="5378"
+   id="svg3073"
+   version="1.1"
+   inkscape:version="0.48.4 r9939"
+   sodipodi:docname="alexandria_logo.svg"
+   inkscape:export-filename="/home/manu/books/common/alexandria_logo.png"
+   inkscape:export-xdpi="8.3674231"
+   inkscape:export-ydpi="8.3674231">
+  <defs
+     id="defs3075" />
+  <sodipodi:namedview
+     id="base"
+     pagecolor="#ffffff"
+     bordercolor="#666666"
+     borderopacity="1.0"
+     inkscape:pageopacity="0.0"
+     inkscape:pageshadow="2"
+     inkscape:zoom="0.0875"
+     inkscape:cx="-622.03501"
+     inkscape:cy="2729"
+     inkscape:document-units="px"
+     inkscape:current-layer="layer1"
+     showgrid="false"
+     fit-margin-top="0"
+     fit-margin-left="0"
+     fit-margin-right="0"
+     fit-margin-bottom="0"
+     inkscape:window-width="2205"
+     inkscape:window-height="1561"
+     inkscape:window-x="0"
+     inkscape:window-y="24"
+     inkscape:window-maximized="0" />
+  <metadata
+     id="metadata3078">
+    <rdf:RDF>
+      <cc:Work
+         rdf:about="">
+        <dc:format>image/svg+xml</dc:format>
+        <dc:type
+           rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
+        <dc:title></dc:title>
+      </cc:Work>
+    </rdf:RDF>
+  </metadata>
+  <g
+     inkscape:label="Layer 1"
+     inkscape:groupmode="layer"
+     id="layer1"
+     transform="translate(1740.1078,2116.6378)">
+    <rect
+       style="fill:#000000;fill-opacity:0.25301206;stroke-width:500;stroke-miterlimit:4;stroke-dasharray:none;display:inline"
+       id="rect3194-1"
+       width="3113.7932"
+       height="4055.1724"
+       x="-727.97113"
+       y="-793.81012" />
+    <rect
+       style="fill:#000000;fill-opacity:0.25301206;stroke-width:500;stroke-miterlimit:4;stroke-dasharray:none;display:inline"
+       id="rect3194-1-7"
+       width="3113.7932"
+       height="4055.1724"
+       x="-1740.1078"
+       y="-2116.6377" />
+  </g>
+</svg>

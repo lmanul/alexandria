@@ -1,0 +1,32 @@
+#!/usr/bin/python
+
+import os
+import sys
+
+if len(sys.argv) < 2:
+  # No folder given in argument. Use ".".
+  cwd = os.path.realpath(".")
+else:
+  cwd = os.path.realpath(sys.argv[1])
+script_dir = os.path.dirname(os.path.realpath(__file__))
+mkebook = script_dir + "/common/mkebook.py"
+configFileName = "config.ebook"
+ebookRoots = []
+
+# Pass on options to individual calls.
+arguments = " ".join(sys.argv[2:])
+
+for root, dirs, files in os.walk("."):
+  if configFileName in files:
+    ebookRoots.append(root)
+
+if len(ebookRoots) == 0:
+  print "No ebook to make. Please create a config.ebook file."
+  exit(0)
+
+for ebookRoot in ebookRoots:
+  os.chdir(ebookRoot)
+  os.system("python " + mkebook + " " + arguments)
+  os.chdir(cwd)
+
+print "All up to date."

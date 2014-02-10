@@ -1,0 +1,14 @@
+<p class="disclaimer">L'équipe du projet Alexandria apporte un soin tout 
+particulier à rendre ses ouvrages irréprochables sur les plans de 
+l'orthographe, de la présentation et de la typographie. Les livres 
+électroniques qu'elle publie sont constamment mis à jour afin de rendre 
+la lecture encore plus agréable.</p>
+
+<p class="disclaimer">Si vous constatez une erreur ou une présentation 
+qui vous semble perfectible, nous vous serions extrêmement 
+reconnaissants de nous en faire part par courriel à l'adresse <span 
+class="monospace">suggestions@alexandria-project.net</span> .</p>
+
+<p class="disclaimer">Nous vous souhaitons une excellente lecture !</p>
+
+<p class="align-right">L'équipe du projet Alexandria</p>

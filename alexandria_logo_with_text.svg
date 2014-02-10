@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Created with Inkscape (http://www.inkscape.org/) -->
+
+<svg
+   xmlns:dc="http://purl.org/dc/elements/1.1/"
+   xmlns:cc="http://creativecommons.org/ns#"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:svg="http://www.w3.org/2000/svg"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   width="17000"
+   height="5000"
+   id="svg3073"
+   version="1.1"
+   inkscape:version="0.48.3.1 r9886"
+   sodipodi:docname="alexandria_logo_with_text.svg"
+   inkscape:export-filename="/home/manucornet/alexandria-producer/common/alexandria_logo_with_text.png"
+   inkscape:export-xdpi="0.89999998"
+   inkscape:export-ydpi="0.89999998">
+  <defs
+     id="defs3075" />
+  <sodipodi:namedview
+     id="base"
+     pagecolor="#ffffff"
+     bordercolor="#666666"
+     borderopacity="1.0"
+     inkscape:pageopacity="0.0"
+     inkscape:pageshadow="2"
+     inkscape:zoom="0.04375"
+     inkscape:cx="6871.9744"
+     inkscape:cy="1743.3556"
+     inkscape:document-units="px"
+     inkscape:current-layer="layer1"
+     showgrid="false"
+     fit-margin-top="0"
+     fit-margin-left="0"
+     fit-margin-right="0"
+     fit-margin-bottom="0"
+     inkscape:window-width="1600"
+     inkscape:window-height="876"
+     inkscape:window-x="0"
+     inkscape:window-y="24"
+     inkscape:window-maximized="1" />
+  <metadata
+     id="metadata3078">
+    <rdf:RDF>
+      <cc:Work
+         rdf:about="">
+        <dc:format>image/svg+xml</dc:format>
+        <dc:type
+           rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
+        <dc:title></dc:title>
+      </cc:Work>
+    </rdf:RDF>
+  </metadata>
+  <g
+     inkscape:label="Layer 1"
+     inkscape:groupmode="layer"
+     id="layer1"
+     transform="translate(1740.1078,1738.6378)">
+    <g
+       id="g2992"
+       transform="matrix(0.89031604,0,0,0.89031604,-65.806029,255.51112)">
+      <rect
+         y="-793.81012"
+         x="-727.97113"
+         height="4055.1724"
+         width="3113.7932"
+         id="rect3194-1"
+         style="fill:#000000;fill-opacity:0.25301208;stroke-width:500;stroke-miterlimit:4;stroke-dasharray:none;display:inline" />
+      <rect
+         y="-2116.6377"
+         x="-1740.1078"
+         height="4055.1724"
+         width="3113.7932"
+         id="rect3194-1-7"
+         style="fill:#000000;fill-opacity:0.25301208;stroke-width:500;stroke-miterlimit:4;stroke-dasharray:none;display:inline" />
+    </g>
+    <text
+       xml:space="preserve"
+       style="font-size:699.67352295px;font-style:normal;font-weight:normal;line-height:125%;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:0.63013695;stroke:none;font-family:Sans"
+       x="2671.6189"
+       y="1730.9474"
+       id="text2984"
+       sodipodi:linespacing="125%"><tspan
+         sodipodi:role="line"
+         x="2671.6189"
+         y="1730.9474"
+         style="font-size:2518.82495117px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-align:start;line-height:125%;writing-mode:lr-tb;text-anchor:start;fill:#000000;fill-opacity:0.63013695;font-family:Montaga;-inkscape-font-specification:Montaga"
+         id="tspan2988">Alexandria</tspan></text>
+  </g>
+</svg>
