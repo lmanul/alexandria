@@ -153,6 +153,8 @@ def getLatestInputModTime(type, htmlFiles, imageFiles, pathToCommon,
 def downloadToolsIfNeeded(pathToCommon):
   cwd = os.getcwd()
   os.chdir(pathToCommon)
+  if not os.path.exists("epubchecker"):
+    os.system("mkdir epubchecker")
   if not os.path.exists(EPUB_CHECKER):
     fileNameBase = "epubcheck-" + EPUB_CHECKER_VERSION
     fileName = fileNameBase + ".zip"
