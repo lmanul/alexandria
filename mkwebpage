@@ -1,0 +1,123 @@
+#!/usr/bin/python
+
+import os
+import sys
+
+class Ebook:
+  def __init__(self, title, cover_path, google_id, apple_id):
+    self.title = title
+    self.cover_path = cover_path
+    self.google_id = google_id
+    self.apple_id = apple_id
+
+def one_book(ebook):
+  html = '<div class="book">'
+  html += '<img src="' + ebook.cover_path + '" /><br/>'
+  #html += '<span class="title">' + ebook.title + '</span><br/>'
+  html += '<img class="logo" src="images/google_play_thumbnail.png" /> ' + \
+      '<a href="http://play.google.com/store/books/details?id=' + ebook.google_id + '">' + \
+      'Google Play Store</a><br/>'
+  html += '<img class="logo" src="images/ibooks_thumbnail.png" /> ' + \
+      '<a href="http://itunes.apple.com/book/id' + ebook.apple_id + '">' + \
+      'iBooks Store</a><br/>'
+  html += '</div>'
+  return html
+  
+if len(sys.argv) < 2:
+  # No folder given in argument. Use ".".
+  cwd = os.path.realpath(".")
+else:
+  cwd = os.path.realpath(sys.argv[1])
+configFileName = "config.ebook"
+ebookRoots = []
+
+# Pass on options to individual calls.
+arguments = " ".join(sys.argv[2:])
+
+ebooks = []
+
+for root, dirs, files in os.walk("."):
+  if configFileName in files:
+    ebookRoots.append(root)
+
+if not os.path.exists("covers"):
+  os.mkdir("covers")
+
+os.system("rm -f index.html")
+handle = open("index.html", "w")
+handle.write('<html><meta charset="UTF-8"><title>Alexandria</title>')
+handle.write("""
+<style>
+
+  body {
+    font-family: Arial, sans-serif;
+  }
+
+  a {
+    text-decoration: none;
+  }
+
+  a:hover {
+    color: darkred;
+  }
+
+  .book {
+    display: inline-block;
+    margin: 20px;
+    text-align: center;
+    width: 170px;
+  }
+
+  .book img {
+    border: 1px solid #ccc;
+    box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.2);
+    margin-bottom: 10px;
+  }
+
+  img.logo {
+    border: none;
+    box-shadow: none;
+    margin: 0;
+    vertical-align: middle;
+    width: 20px;
+  }
+
+</style>
+""")
+
+for ebookRoot in ebookRoots:
+  config_data = open(os.path.join(ebookRoot, "config.ebook"), "r").read()
+  config_lines = config_data.split("\n")
+  config = {}
+  for line in config_lines:
+    line = line.strip()
+    if ":" not in line:
+      continue
+    pair = line.split(":", 2)
+    config[pair[0]] = pair[1]
+  if "skip" in config:
+    continue
+  cover_path = os.path.join("covers", config["filename"] + ".png")
+  os.system("mkthumb 225 " + os.path.join(ebookRoot, "Cover.png"))
+  os.system("mv " + os.path.join(ebookRoot, "Cover_thumbnail.png") + " " + cover_path)
+  google_id = "unknown"
+  if "google_id" in config:
+    google_id = config["google_id"]
+  apple_id = "unknown"
+  if "apple_id" in config:
+    apple_id = config["apple_id"]
+  ebooks.append(Ebook(config["title"], cover_path,
+      google_id, apple_id))
+  #os.chdir(ebookRoot)
+  #os.system("python " + mkebook + " " + arguments)
+  #os.chdir(cwd)
+
+for ebook in ebooks:
+  handle.write(one_book(ebook))
+
+handle.write("</html>")
+handle.close()
+
+os.system("rm -rf /srv/www/www.alexandria-project.net/index.html /srv/www/www.alexandria-project.net/covers")
+os.system("mv index.html covers /srv/www/www.alexandria-project.net")
+os.system("chmod -R a+rX /srv/www/www.alexandria-project.net/")
