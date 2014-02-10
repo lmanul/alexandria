@@ -9,7 +9,9 @@ Producer
 * Auto-generate the file name from the book title and the author.
 * Call aspell and keep list of words.
 * Check that uuids are unique.
-* Césures.
+* Hyphenation?
+* Also automatically download kindlegen.
+  http://kindlegen.s3.amazonaws.com/kindlegen_linux_2.6_i386_v2_9.tar.gz
 
 
 Chrome Extension
