@@ -1,3 +1,19 @@
+Producer
+
+* Implement some file system watch mechanism to rebuild the epub
+  on changes.
+* i18n for things like TOC, footnotes page.
+* Warn / error out if a directory is named book. Or rather do everything inside
+  a temporary dir name.
+* Add footnotes to TOC, only if there are footnotes.
+* Auto-generate the file name from the book title and the author.
+* Call aspell and keep list of words.
+* Check that uuids are unique.
+* Césures.
+
+
+Chrome Extension
+
 * Bug: switching to night mode after changing theme resets the theme.
 * Feature request: scroll wheel to change pages.
 * Bug: when a large image is included, it's not contained within one page.
