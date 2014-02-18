@@ -73,7 +73,7 @@ class TocChapter:
 
   def get_footnotes(self):
     footnotes_content = ""
-    if self.level == 1 and self.title != "":
+    if self.level == 1 and self.title != "" and self.has_footnotes():
       footnotes_content += '<h2 class="footnote-section">' + self.title + '</h2>'
     for footnote in self.footnotes:
       footnote_id = 'fn' + self.get_string_id() + '-' + str(footnote.counter)
