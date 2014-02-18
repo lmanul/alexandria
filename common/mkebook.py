@@ -31,6 +31,11 @@ class OutputType:
   ITUNES = 2
   KINDLE = 3
 
+class Footnote:
+  def __init__(self, text, counter):
+    self.text = text
+    self.counter = counter
+
 class TocChapter:
   def __init__(self, level, title, parent, filename, id):
     self.level = level
@@ -65,6 +70,28 @@ class TocChapter:
     if self.title != "":
       toc += '</li>'
     return toc
+
+  def get_footnotes(self):
+    footnotes_content = ""
+    if self.level == 1 and self.title != "":
+      footnotes_content += '<h2 class="footnote-section">' + self.title + '</h2>'
+    for footnote in self.footnotes:
+      footnote_id = 'fn' + self.get_string_id() + '-' + str(footnote.counter)
+      footnotes_content += '<p><a id="' + footnote_id + '" href="' + self.filename + \
+            '#' + footnote_id + '">' + \
+            str(footnote.counter) + '.</a> ' + \
+            footnote.text + '</p>'
+    for child in self.children:
+      footnotes_content += child.get_footnotes()
+    return footnotes_content
+
+  def has_footnotes(self):
+    if len(self.footnotes) > 0:
+      return True
+    for child in self.children:
+      if child.has_footnotes():
+        return True
+    return False
 
 # Find where the common files are.
 script_dir = os.path.dirname(os.path.realpath(__file__))
@@ -391,24 +418,6 @@ def rasterizeCover(title, author, filename):
     os.system("rm " + populatedCoverPath)
   print "    ✓ Cover "
 
-
-def gather_footnotes(htmlFiles):
-
-  footnotes = {}
-
-  for htmlFile in htmlFiles:
-    handle = open("Text/" + htmlFile, "r")
-    text = handle.read()
-    text.replace("\n", " ")
-    matches = FOOTNOTE_REGEX.finditer(text)
-    for match in matches:
-      content = match.group("content")
-      if htmlFile not in footnotes:
-        footnotes[htmlFile] = []
-      footnotes[htmlFile].append(content)
-  return footnotes
-
-
 def gatherIndex(htmlFiles):
   # TODO
   dummy = 2
@@ -464,9 +473,11 @@ def build_chapter_structure(html_files):
   root = TocChapter(0, "", None, "", "")
   current = root
   id_counter = {}
+  footnote_counter = 1
   for html_file in html_files:
     handle = open("Text/" + html_file, "r")
     content = handle.read()
+    current_footnote = ""
     lines = content.split("\n")
     for line in lines:
       matched = re.search(r"<h(.)>(.*)</h.>", line)
@@ -483,6 +494,30 @@ def build_chapter_structure(html_files):
         child = TocChapter(level, title, current, html_file, id_counter[str(level)])
         current.children.append(child)
         current = child
+        if level == 1:
+          footnote_counter = 1
+      # FOOTNOTE_REGEX re.compile(r'<footnote>(?P<content>.*?)</footnote>', re.S | re.M)
+      footnote_start_matches = re.search(r"<footnote>(.*)", line)
+      footnote_end_matches = re.search(r"(.*)</footnote>", line)
+      if footnote_start_matches and footnote_end_matches:
+        whole_footnote = re.search(r"<footnote>(.*)</footnote>", line)
+        current_footnote = whole_footnote.group(1)
+        current.footnotes.append(Footnote(current_footnote, footnote_counter))
+        footnote_counter += 1
+        current_footnote = ""
+      elif footnote_start_matches and not footnote_end_matches:
+        current_footnote = footnote_start_matches.group(1)
+      elif footnote_end_matches:
+        print "footnote end matches"
+        print current_footnote
+        current_footnote += footnote_end_matches.group(1)
+        print "..and.."
+        print current_footnote
+        current.footnotes.append(Footnote(current_footnote, footnote_counter))
+        footnote_counter += 1
+        current_footnote = ""
+      elif current_footnote != "":
+        current_footnote += line
   return root
 
 def preProcessHtml(pathToCommon, htmlFiles, language):
@@ -572,35 +607,18 @@ def postProcessHtml(input):
   return output
 
 
-def generateFootnotes(htmlFiles, footnotes, metadata, htmlHeader, htmlFooter):
+def generateFootnotes(metadata, htmlHeader, htmlFooter):
 
   footnotesFile = open("book/OEBPS/Text/" + FOOTNOTES_HTML_FILE_NAME, "w")
   footnotesContent = '<h1 class="footnotes_title">' + 'Notes' + '</h1>'
-  htmlFileCounter = 1
-  for htmlFile in htmlFiles:
-    if htmlFile in footnotes:
-      if htmlFile in metadata:
-        title = metadata[htmlFile]
-      else:
-        title = ""
-      footnotesContent = footnotesContent + '\n<h2 class="footnote-section">' + title + "</h2>"
-      footnoteCounter = 1
-      for oneFootnote in footnotes[htmlFile]:
-        footnote_id = 'fn' + str(htmlFileCounter) + '-' + str(footnoteCounter)
-        footnotesContent = footnotesContent + \
-            '<p><a id="' + footnote_id + '" href="' + htmlFile + \
-            '#' + footnote_id + '">' + \
-            str(footnoteCounter) + '.</a> ' + \
-            oneFootnote + '</p>'
-        footnoteCounter = footnoteCounter + 1
-    htmlFileCounter = htmlFileCounter + 1
+  footnotesContent += metadata.get_footnotes()
   footnotesContent = htmlHeader + "\n" + footnotesContent + htmlFooter
   footnotesContent = postProcessHtml(footnotesContent)
   footnotesFile.write(footnotesContent)
   footnotesFile.close()
 
 
-def generate_table_of_contents(htmlFiles, metadata, config):
+def generate_table_of_contents(metadata, config):
   tocHandle = open(TOC_PATH, "w")
   tocNcxHandle = open(join(pathToTemplates, "toc_ncx.txt"), "r")
   tocNcx = tocNcxHandle.read()
@@ -973,15 +991,14 @@ def main():
     appendLanguageDependentStyles(lang)
     appendLocalStyles()
 
-    footnotes = gather_footnotes(htmlFiles)
-    footnotes = []
+    #footnotes = gather_footnotes(htmlFiles)
     index = gatherIndex(htmlFiles)
     metadata = preProcessHtml(pathToCommon, htmlFiles, lang)
     imageFiles = removeUnusedImages(imageFiles, htmlFiles)
-    generateContentOpf(config, imageFiles, htmlFiles, len(footnotes) > 0)
-    #if len(footnotes) > 0:
-    #  generateFootnotes(htmlFiles, footnotes, metadata, htmlHeader, htmlFooter)
-    generate_table_of_contents(htmlFiles, metadata, config)
+    generateContentOpf(config, imageFiles, htmlFiles, metadata.has_footnotes())
+    # if len(footnotes) > 0:
+    generateFootnotes(metadata, htmlHeader, htmlFooter)
+    generate_table_of_contents(metadata, config)
     generateTitlePage(config)
     generateEpub(file_name)
     checkEpub(pathToCommon, file_name)
