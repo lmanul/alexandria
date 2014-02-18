@@ -130,7 +130,7 @@ def dependency_inputs_for_output_type(type, htmlFiles, imageFiles, pathToCommon,
         dependencies.append(os.path.join(pathToTemplates, template))
   if type == OutputType.ITUNES:
     dependencies.append(os.path.join(
-        pathToTemplates, "itunes_producer_template.itmsp", "metadata.xml"))
+        pathToTemplates, "itunes_producer_metadata.xml"))
   if type == OutputType.EPUB or type == OutputType.KINDLE:
     dependencies.append(os.path.join(pathToCommon, "models.py"))
   return dependencies
@@ -857,8 +857,7 @@ def generate_itunes_producer_file(title, subtitle, author, author_sort_name,
         categories_xml += '<subject primary="true" scheme="' + \
             category_type[0] + '">' + category_type[1] + '</subject>'
       
-  template_path = os.path.join(pathToTemplates, "itunes_producer_template.itmsp",
-      "metadata.xml")
+  template_path = os.path.join(pathToTemplates, "itunes_producer_metadata.xml")
   template = open(template_path, "r").read()
   template = template.replace("{{ITUNES_VENDOR_ID}}", itunes_vendor_id)
   template = template.replace("{{TITLE}}", title)

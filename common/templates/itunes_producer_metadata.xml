@@ -1,0 +1,509 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<package xmlns="http://apple.com/itunes/importer/publication" version="publication5.0">
+    <provider>EmmanuelCornet</provider>
+    <book>
+        <vendor_id>{{ITUNES_VENDOR_ID}}</vendor_id>
+        <metadata>
+            <publication_type>book</publication_type>
+            <title>{{TITLE}}</title>
+            <subtitle>{{SUBTITLE}}</subtitle>
+            <contributors>
+                <contributor>
+                    <primary>true</primary>
+                    <name>{{AUTHOR}}</name>
+                    <sort_name>{{AUTHOR_SORT_NAME}}</sort_name>
+                    <roles>
+                        <role>author</role>
+                    </roles>
+                </contributor>
+            </contributors>
+            <languages>
+                <language type="main">{{LANGUAGE}}</language>
+            </languages>
+            <subjects>{{SUBJECTS}}</subjects>
+            <description format="html">
+              {{DESCRIPTION}}
+            </description>
+            <publisher>{{PUBLISHER}}</publisher>
+            <preorder_previews>true</preorder_previews>
+            <publication_date>{{DATE}}</publication_date>
+            <products>
+                <product>
+                    <territory>AR</territory>
+                    <cleared_for_sale>true</cleared_for_sale>
+                    <price_tier>1</price_tier>
+                    <release_type>digital-only</release_type>
+                    <sales_start_date>{{SALES_START_DATE}}</sales_start_date>
+                    <physical_list_price currency="USD">1.00</physical_list_price>
+                    <drm_free>true</drm_free>
+                </product>
+                <product>
+                    <territory>AU</territory>
+                    <cleared_for_sale>true</cleared_for_sale>
+                    <price_tier>1</price_tier>
+                    <release_type>digital-only</release_type>
+                    <sales_start_date>{{SALES_START_DATE}}</sales_start_date>
+                    <physical_list_price currency="AUD">1.10</physical_list_price>
+                    <drm_free>true</drm_free>
+                </product>
+                <product>
+                    <territory>AT</territory>
+                    <cleared_for_sale>true</cleared_for_sale>
+                    <price_tier>1</price_tier>
+                    <release_type>digital-only</release_type>
+                    <sales_start_date>{{SALES_START_DATE}}</sales_start_date>
+                    <physical_list_price currency="EUR">0.70</physical_list_price>
+                    <drm_free>true</drm_free>
+                </product>
+                <product>
+                    <territory>BE</territory>
+                    <cleared_for_sale>true</cleared_for_sale>
+                    <price_tier>1</price_tier>
+                    <release_type>digital-only</release_type>
+                    <sales_start_date>{{SALES_START_DATE}}</sales_start_date>
+                    <physical_list_price currency="EUR">0.70</physical_list_price>
+                    <drm_free>true</drm_free>
+                </product>
+                <product>
+                    <territory>BO</territory>
+                    <cleared_for_sale>true</cleared_for_sale>
+                    <price_tier>1</price_tier>
+                    <release_type>digital-only</release_type>
+                    <sales_start_date>{{SALES_START_DATE}}</sales_start_date>
+                    <physical_list_price currency="USD">1.00</physical_list_price>
+                    <drm_free>true</drm_free>
+                </product>
+                <product>
+                    <territory>BR</territory>
+                    <cleared_for_sale>true</cleared_for_sale>
+                    <price_tier>1</price_tier>
+                    <release_type>digital-only</release_type>
+                    <sales_start_date>{{SALES_START_DATE}}</sales_start_date>
+                    <physical_list_price currency="USD">1.00</physical_list_price>
+                    <drm_free>true</drm_free>
+                </product>
+                <product>
+                    <territory>BG</territory>
+                    <cleared_for_sale>true</cleared_for_sale>
+                    <price_tier>1</price_tier>
+                    <release_type>digital-only</release_type>
+                    <sales_start_date>{{SALES_START_DATE}}</sales_start_date>
+                    <physical_list_price currency="EUR">0.70</physical_list_price>
+                    <drm_free>true</drm_free>
+                </product>
+                <product>
+                    <territory>CA</territory>
+                    <cleared_for_sale>true</cleared_for_sale>
+                    <price_tier>1</price_tier>
+                    <release_type>digital-only</release_type>
+                    <sales_start_date>{{SALES_START_DATE}}</sales_start_date>
+                    <physical_list_price currency="CAD">1.10</physical_list_price>
+                    <drm_free>true</drm_free>
+                </product>
+                <product>
+                    <territory>CL</territory>
+                    <cleared_for_sale>true</cleared_for_sale>
+                    <price_tier>1</price_tier>
+                    <release_type>digital-only</release_type>
+                    <sales_start_date>{{SALES_START_DATE}}</sales_start_date>
+                    <physical_list_price currency="USD">1.00</physical_list_price>
+                    <drm_free>true</drm_free>
+                </product>
+                <product>
+                    <territory>CO</territory>
+                    <cleared_for_sale>true</cleared_for_sale>
+                    <price_tier>1</price_tier>
+                    <release_type>digital-only</release_type>
+                    <sales_start_date>{{SALES_START_DATE}}</sales_start_date>
+                    <physical_list_price currency="USD">1.00</physical_list_price>
+                    <drm_free>true</drm_free>
+                </product>
+                <product>
+                    <territory>CR</territory>
+                    <cleared_for_sale>true</cleared_for_sale>
+                    <price_tier>1</price_tier>
+                    <release_type>digital-only</release_type>
+                    <sales_start_date>{{SALES_START_DATE}}</sales_start_date>
+                    <physical_list_price currency="USD">1.00</physical_list_price>
+                    <drm_free>true</drm_free>
+                </product>
+                <product>
+                    <territory>CY</territory>
+                    <cleared_for_sale>true</cleared_for_sale>
+                    <price_tier>1</price_tier>
+                    <release_type>digital-only</release_type>
+                    <sales_start_date>{{SALES_START_DATE}}</sales_start_date>
+                    <physical_list_price currency="EUR">0.70</physical_list_price>
+                    <drm_free>true</drm_free>
+                </product>
+                <product>
+                    <territory>CZ</territory>
+                    <cleared_for_sale>true</cleared_for_sale>
+                    <price_tier>1</price_tier>
+                    <release_type>digital-only</release_type>
+                    <sales_start_date>{{SALES_START_DATE}}</sales_start_date>
+                    <physical_list_price currency="EUR">0.70</physical_list_price>
+                    <drm_free>true</drm_free>
+                </product>
+                <product>
+                    <territory>DK</territory>
+                    <cleared_for_sale>true</cleared_for_sale>
+                    <price_tier>1</price_tier>
+                    <release_type>digital-only</release_type>
+                    <sales_start_date>{{SALES_START_DATE}}</sales_start_date>
+                    <physical_list_price currency="DKK">5.40</physical_list_price>
+                    <drm_free>true</drm_free>
+                </product>
+                <product>
+                    <territory>DO</territory>
+                    <cleared_for_sale>true</cleared_for_sale>
+                    <price_tier>1</price_tier>
+                    <release_type>digital-only</release_type>
+                    <sales_start_date>{{SALES_START_DATE}}</sales_start_date>
+                    <physical_list_price currency="USD">1.00</physical_list_price>
+                    <drm_free>true</drm_free>
+                </product>
+                <product>
+                    <territory>EC</territory>
+                    <cleared_for_sale>true</cleared_for_sale>
+                    <price_tier>1</price_tier>
+                    <release_type>digital-only</release_type>
+                    <sales_start_date>{{SALES_START_DATE}}</sales_start_date>
+                    <physical_list_price currency="USD">1.00</physical_list_price>
+                    <drm_free>true</drm_free>
+                </product>
+                <product>
+                    <territory>SV</territory>
+                    <cleared_for_sale>true</cleared_for_sale>
+                    <price_tier>1</price_tier>
+                    <release_type>digital-only</release_type>
+                    <sales_start_date>{{SALES_START_DATE}}</sales_start_date>
+                    <physical_list_price currency="USD">1.00</physical_list_price>
+                    <drm_free>true</drm_free>
+                </product>
+                <product>
+                    <territory>EE</territory>
+                    <cleared_for_sale>true</cleared_for_sale>
+                    <price_tier>1</price_tier>
+                    <release_type>digital-only</release_type>
+                    <sales_start_date>{{SALES_START_DATE}}</sales_start_date>
+                    <physical_list_price currency="EUR">0.70</physical_list_price>
+                    <drm_free>true</drm_free>
+                </product>
+                <product>
+                    <territory>FI</territory>
+                    <cleared_for_sale>true</cleared_for_sale>
+                    <price_tier>1</price_tier>
+                    <release_type>digital-only</release_type>
+                    <sales_start_date>{{SALES_START_DATE}}</sales_start_date>
+                    <physical_list_price currency="EUR">0.70</physical_list_price>
+                    <drm_free>true</drm_free>
+                </product>
+                <product>
+                    <territory>FR</territory>
+                    <cleared_for_sale>true</cleared_for_sale>
+                    <price_tier>1</price_tier>
+                    <release_type>digital-only</release_type>
+                    <sales_start_date>{{SALES_START_DATE}}</sales_start_date>
+                    <physical_list_price currency="EUR">0.70</physical_list_price>
+                    <drm_free>true</drm_free>
+                </product>
+                <product>
+                    <territory>DE</territory>
+                    <cleared_for_sale>true</cleared_for_sale>
+                    <price_tier>1</price_tier>
+                    <release_type>digital-only</release_type>
+                    <sales_start_date>{{SALES_START_DATE}}</sales_start_date>
+                    <physical_list_price currency="EUR">0.70</physical_list_price>
+                    <drm_free>true</drm_free>
+                </product>
+                <product>
+                    <territory>GR</territory>
+                    <cleared_for_sale>true</cleared_for_sale>
+                    <price_tier>1</price_tier>
+                    <release_type>digital-only</release_type>
+                    <sales_start_date>{{SALES_START_DATE}}</sales_start_date>
+                    <physical_list_price currency="EUR">0.70</physical_list_price>
+                    <drm_free>true</drm_free>
+                </product>
+                <product>
+                    <territory>GT</territory>
+                    <cleared_for_sale>true</cleared_for_sale>
+                    <price_tier>1</price_tier>
+                    <release_type>digital-only</release_type>
+                    <sales_start_date>{{SALES_START_DATE}}</sales_start_date>
+                    <physical_list_price currency="USD">1.00</physical_list_price>
+                    <drm_free>true</drm_free>
+                </product>
+                <product>
+                    <territory>HN</territory>
+                    <cleared_for_sale>true</cleared_for_sale>
+                    <price_tier>1</price_tier>
+                    <release_type>digital-only</release_type>
+                    <sales_start_date>{{SALES_START_DATE}}</sales_start_date>
+                    <physical_list_price currency="USD">1.00</physical_list_price>
+                    <drm_free>true</drm_free>
+                </product>
+                <product>
+                    <territory>HU</territory>
+                    <cleared_for_sale>true</cleared_for_sale>
+                    <price_tier>1</price_tier>
+                    <release_type>digital-only</release_type>
+                    <sales_start_date>{{SALES_START_DATE}}</sales_start_date>
+                    <physical_list_price currency="EUR">0.70</physical_list_price>
+                    <drm_free>true</drm_free>
+                </product>
+                <product>
+                    <territory>IE</territory>
+                    <cleared_for_sale>true</cleared_for_sale>
+                    <price_tier>1</price_tier>
+                    <release_type>digital-only</release_type>
+                    <sales_start_date>{{SALES_START_DATE}}</sales_start_date>
+                    <physical_list_price currency="EUR">0.70</physical_list_price>
+                    <drm_free>true</drm_free>
+                </product>
+                <product>
+                    <territory>IT</territory>
+                    <cleared_for_sale>true</cleared_for_sale>
+                    <price_tier>1</price_tier>
+                    <release_type>digital-only</release_type>
+                    <sales_start_date>{{SALES_START_DATE}}</sales_start_date>
+                    <physical_list_price currency="EUR">0.70</physical_list_price>
+                    <drm_free>true</drm_free>
+                </product>
+                <product>
+                    <territory>JP</territory>
+                    <cleared_for_sale>true</cleared_for_sale>
+                    <price_tier>2</price_tier>
+                    <release_type>digital-only</release_type>
+                    <sales_start_date>{{SALES_START_DATE}}</sales_start_date>
+                    <physical_list_price currency="JPY">103.70</physical_list_price>
+                    <drm_free>true</drm_free>
+                </product>
+                <product>
+                    <territory>LV</territory>
+                    <cleared_for_sale>true</cleared_for_sale>
+                    <price_tier>1</price_tier>
+                    <release_type>digital-only</release_type>
+                    <sales_start_date>{{SALES_START_DATE}}</sales_start_date>
+                    <physical_list_price currency="EUR">0.70</physical_list_price>
+                    <drm_free>true</drm_free>
+                </product>
+                <product>
+                    <territory>LT</territory>
+                    <cleared_for_sale>true</cleared_for_sale>
+                    <price_tier>1</price_tier>
+                    <release_type>digital-only</release_type>
+                    <sales_start_date>{{SALES_START_DATE}}</sales_start_date>
+                    <physical_list_price currency="EUR">0.70</physical_list_price>
+                    <drm_free>true</drm_free>
+                </product>
+                <product>
+                    <territory>LU</territory>
+                    <cleared_for_sale>true</cleared_for_sale>
+                    <price_tier>1</price_tier>
+                    <release_type>digital-only</release_type>
+                    <sales_start_date>{{SALES_START_DATE}}</sales_start_date>
+                    <physical_list_price currency="EUR">0.70</physical_list_price>
+                    <drm_free>true</drm_free>
+                </product>
+                <product>
+                    <territory>MT</territory>
+                    <cleared_for_sale>true</cleared_for_sale>
+                    <price_tier>1</price_tier>
+                    <release_type>digital-only</release_type>
+                    <sales_start_date>{{SALES_START_DATE}}</sales_start_date>
+                    <physical_list_price currency="EUR">0.70</physical_list_price>
+                    <drm_free>true</drm_free>
+                </product>
+                <product>
+                    <territory>MX</territory>
+                    <cleared_for_sale>true</cleared_for_sale>
+                    <price_tier>1</price_tier>
+                    <release_type>digital-only</release_type>
+                    <sales_start_date>{{SALES_START_DATE}}</sales_start_date>
+                    <physical_list_price currency="MXN">13.00</physical_list_price>
+                    <drm_free>true</drm_free>
+                </product>
+                <product>
+                    <territory>NL</territory>
+                    <cleared_for_sale>true</cleared_for_sale>
+                    <price_tier>1</price_tier>
+                    <release_type>digital-only</release_type>
+                    <sales_start_date>{{SALES_START_DATE}}</sales_start_date>
+                    <physical_list_price currency="EUR">0.70</physical_list_price>
+                    <drm_free>true</drm_free>
+                </product>
+                <product>
+                    <territory>NZ</territory>
+                    <cleared_for_sale>true</cleared_for_sale>
+                    <price_tier>1</price_tier>
+                    <release_type>digital-only</release_type>
+                    <sales_start_date>{{SALES_START_DATE}}</sales_start_date>
+                    <physical_list_price currency="NZD">1.20</physical_list_price>
+                    <drm_free>true</drm_free>
+                </product>
+                <product>
+                    <territory>NI</territory>
+                    <cleared_for_sale>true</cleared_for_sale>
+                    <price_tier>1</price_tier>
+                    <release_type>digital-only</release_type>
+                    <sales_start_date>{{SALES_START_DATE}}</sales_start_date>
+                    <physical_list_price currency="USD">1.00</physical_list_price>
+                    <drm_free>true</drm_free>
+                </product>
+                <product>
+                    <territory>NO</territory>
+                    <cleared_for_sale>true</cleared_for_sale>
+                    <price_tier>1</price_tier>
+                    <release_type>digital-only</release_type>
+                    <sales_start_date>{{SALES_START_DATE}}</sales_start_date>
+                    <physical_list_price currency="NOK">6.10</physical_list_price>
+                    <drm_free>true</drm_free>
+                </product>
+                <product>
+                    <territory>PA</territory>
+                    <cleared_for_sale>true</cleared_for_sale>
+                    <price_tier>1</price_tier>
+                    <release_type>digital-only</release_type>
+                    <sales_start_date>{{SALES_START_DATE}}</sales_start_date>
+                    <physical_list_price currency="USD">1.00</physical_list_price>
+                    <drm_free>true</drm_free>
+                </product>
+                <product>
+                    <territory>PY</territory>
+                    <cleared_for_sale>true</cleared_for_sale>
+                    <price_tier>1</price_tier>
+                    <release_type>digital-only</release_type>
+                    <sales_start_date>{{SALES_START_DATE}}</sales_start_date>
+                    <physical_list_price currency="USD">1.00</physical_list_price>
+                    <drm_free>true</drm_free>
+                </product>
+                <product>
+                    <territory>PE</territory>
+                    <cleared_for_sale>true</cleared_for_sale>
+                    <price_tier>1</price_tier>
+                    <release_type>digital-only</release_type>
+                    <sales_start_date>{{SALES_START_DATE}}</sales_start_date>
+                    <physical_list_price currency="USD">1.00</physical_list_price>
+                    <drm_free>true</drm_free>
+                </product>
+                <product>
+                    <territory>PL</territory>
+                    <cleared_for_sale>true</cleared_for_sale>
+                    <price_tier>1</price_tier>
+                    <release_type>digital-only</release_type>
+                    <sales_start_date>{{SALES_START_DATE}}</sales_start_date>
+                    <physical_list_price currency="EUR">0.70</physical_list_price>
+                    <drm_free>true</drm_free>
+                </product>
+                <product>
+                    <territory>PT</territory>
+                    <cleared_for_sale>true</cleared_for_sale>
+                    <price_tier>1</price_tier>
+                    <release_type>digital-only</release_type>
+                    <sales_start_date>{{SALES_START_DATE}}</sales_start_date>
+                    <physical_list_price currency="EUR">0.70</physical_list_price>
+                    <drm_free>true</drm_free>
+                </product>
+                <product>
+                    <territory>RO</territory>
+                    <cleared_for_sale>true</cleared_for_sale>
+                    <price_tier>1</price_tier>
+                    <release_type>digital-only</release_type>
+                    <sales_start_date>{{SALES_START_DATE}}</sales_start_date>
+                    <physical_list_price currency="EUR">0.70</physical_list_price>
+                    <drm_free>true</drm_free>
+                </product>
+                <product>
+                    <territory>SK</territory>
+                    <cleared_for_sale>true</cleared_for_sale>
+                    <price_tier>1</price_tier>
+                    <release_type>digital-only</release_type>
+                    <sales_start_date>{{SALES_START_DATE}}</sales_start_date>
+                    <physical_list_price currency="EUR">0.70</physical_list_price>
+                    <drm_free>true</drm_free>
+                </product>
+                <product>
+                    <territory>SI</territory>
+                    <cleared_for_sale>true</cleared_for_sale>
+                    <price_tier>1</price_tier>
+                    <release_type>digital-only</release_type>
+                    <sales_start_date>{{SALES_START_DATE}}</sales_start_date>
+                    <physical_list_price currency="EUR">0.70</physical_list_price>
+                    <drm_free>true</drm_free>
+                </product>
+                <product>
+                    <territory>ES</territory>
+                    <cleared_for_sale>true</cleared_for_sale>
+                    <price_tier>1</price_tier>
+                    <release_type>digital-only</release_type>
+                    <sales_start_date>{{SALES_START_DATE}}</sales_start_date>
+                    <physical_list_price currency="EUR">0.70</physical_list_price>
+                    <drm_free>true</drm_free>
+                </product>
+                <product>
+                    <territory>SE</territory>
+                    <cleared_for_sale>true</cleared_for_sale>
+                    <price_tier>1</price_tier>
+                    <release_type>digital-only</release_type>
+                    <sales_start_date>{{SALES_START_DATE}}</sales_start_date>
+                    <physical_list_price currency="SEK">6.40</physical_list_price>
+                    <drm_free>true</drm_free>
+                </product>
+                <product>
+                    <territory>CH</territory>
+                    <cleared_for_sale>true</cleared_for_sale>
+                    <price_tier>1</price_tier>
+                    <release_type>digital-only</release_type>
+                    <sales_start_date>{{SALES_START_DATE}}</sales_start_date>
+                    <physical_list_price currency="CHF">0.90</physical_list_price>
+                    <drm_free>true</drm_free>
+                </product>
+                <product>
+                    <territory>GB</territory>
+                    <cleared_for_sale>true</cleared_for_sale>
+                    <price_tier>1</price_tier>
+                    <release_type>digital-only</release_type>
+                    <sales_start_date>{{SALES_START_DATE}}</sales_start_date>
+                    <physical_list_price currency="GBP">0.60</physical_list_price>
+                    <drm_free>true</drm_free>
+                </product>
+                <product>
+                    <territory>US</territory>
+                    <cleared_for_sale>true</cleared_for_sale>
+                    <price_tier>1</price_tier>
+                    <release_type>digital-only</release_type>
+                    <sales_start_date>{{SALES_START_DATE}}</sales_start_date>
+                    <physical_list_price currency="USD">1.00</physical_list_price>
+                    <drm_free>true</drm_free>
+                </product>
+                <product>
+                    <territory>VE</territory>
+                    <cleared_for_sale>true</cleared_for_sale>
+                    <price_tier>1</price_tier>
+                    <release_type>digital-only</release_type>
+                    <sales_start_date>{{SALES_START_DATE}}</sales_start_date>
+                    <physical_list_price currency="USD">1.00</physical_list_price>
+                    <drm_free>true</drm_free>
+                </product>
+            </products>
+        </metadata>
+        <assets>
+            <asset type="artwork">
+                <data_file>
+                    <file_name>Cover.png</file_name>
+                    <size>{{COVER_IMG_SIZE}}</size>
+                    <checksum type="md5">{{COVER_IMG_MD5}}</checksum>
+                </data_file>
+            </asset>
+            <asset type="full">
+                <data_file>
+                    <file_name>{{EPUB_FILENAME}}</file_name>
+                    <size>{{EPUB_SIZE}}</size>
+                    <checksum type="md5">{{EPUB_MD5}}</checksum>
+                </data_file>
+            </asset>
+        </assets>
+    </book>
+</package>
