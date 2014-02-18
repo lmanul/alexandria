@@ -563,10 +563,10 @@ def preProcessHtml(pathToCommon, htmlFiles, language):
     footnoteCounter = 1
     while re.search(FOOTNOTE_REGEX, generatedContent):
       footnote_id = 'fn' + str(htmlFileCounter) + '-' + str(footnoteCounter)
-      replacement = '<sup><a epub:type="noteref" href="' + \
+      replacement = '<a epub:type="noteref" href="' + \
           FOOTNOTES_HTML_FILE_NAME + '#' + \
-          footnote_id + '" id="' + footnote_id + '">' + str(footnoteCounter) + \
-          '</a></sup>'
+          footnote_id + '" id="' + footnote_id + '"><sup>' + str(footnoteCounter) + \
+          '</sup></a>'
       generatedContent = re.sub(FOOTNOTE_REGEX, replacement, generatedContent, 1)
       footnoteCounter = footnoteCounter + 1
     # TODO: Handle the index.
