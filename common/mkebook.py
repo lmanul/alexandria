@@ -508,11 +508,11 @@ def build_chapter_structure(html_files):
       elif footnote_start_matches and not footnote_end_matches:
         current_footnote = footnote_start_matches.group(1)
       elif footnote_end_matches:
-        print "footnote end matches"
-        print current_footnote
+        #print "footnote end matches"
+        #print current_footnote
         current_footnote += footnote_end_matches.group(1)
-        print "..and.."
-        print current_footnote
+        #print "..and.."
+        #print current_footnote
         current.footnotes.append(Footnote(current_footnote, footnote_counter))
         footnote_counter += 1
         current_footnote = ""
