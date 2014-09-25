@@ -110,7 +110,9 @@ COVER_HEIGHT_FOR_ITUNES = 2500
 DISCLAIMER_PATH = "Text/00000_disclaimer.html"
 EPUB_CHECKER_VERSION = "3.0.1"
 EPUB_CHECKER = "epubchecker/epubcheck-" + EPUB_CHECKER_VERSION + ".jar"
-FOOTNOTES_HTML_FILE_NAME = "999_footnotes.html"
+EPUB_CHECKER_FULL_JAR_PATH = "epubchecker/epubcheck-" + EPUB_CHECKER_VERSION + \
+    ".jar/epubcheck-" + EPUB_CHECKER_VERSION + ".jar"
+FOOTNOTES_HTML_FILE_NAME = "9999_footnotes.html"
 FOOTNOTE_REGEX = re.compile(r'<footnote>(?P<content>.*?)</footnote>', re.S | re.M)
 INDEX_REGEX = re.compile(r'<index>(?P<content>.*?)</index>', re.S)
 STYLE_FILE_BASE_NAME = "style.css"
@@ -190,7 +192,7 @@ def downloadToolsIfNeeded(pathToCommon):
     print "I need to download epubcheck, please be patient..."
     os.system("wget \"" + url + "\"")
     os.system("unzip " + fileName)
-    os.system("mv " + fileNameBase + "/" + fileNameBase + ".jar " + EPUB_CHECKER)
+    os.system("mv " + fileNameBase + " " + EPUB_CHECKER)
     os.system("rm -rf " + fileNameBase + "*")
   os.chdir(cwd)
 
@@ -803,7 +805,8 @@ def generateEpub(filename):
 
 
 def checkEpub(pathToCommon, filename):
-  args = [JAVA, "-jar", pathToCommon + EPUB_CHECKER, filename + ".epub"]
+  args = [JAVA, "-jar", pathToCommon + EPUB_CHECKER_FULL_JAR_PATH,
+      filename + ".epub"]
   proc = subprocess.Popen(" ".join(args), stdout=subprocess.PIPE,
       stderr=subprocess.PIPE, shell=True)
   (out, err) = proc.communicate()
