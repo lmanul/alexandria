@@ -22,6 +22,9 @@ parser.add_option("-k", "--kindle", dest="kindle",
 parser.add_option("-f", "--force", dest="force",
                   action="store_true",
                   help="Force generate output, even if input is older")
+parser.add_option("-d", "--debug", dest="debug",
+                  action="store_true",
+                  help="Enable debug mode.")
 
 (options, args) = parser.parse_args()
 
@@ -934,6 +937,8 @@ def clean_up():
 
 def main():
 
+  if options.debug:
+    clean_up()
   downloadToolsIfNeeded(pathToCommon)
   config = readConfigurationFile()
   if "skip" in config:
@@ -1016,7 +1021,8 @@ def main():
       htmlFiles, imageFiles, pathToCommon, pathToTemplates, config, itunes_vendor_id):
     generateMobi(pathToCommon, file_name)
 
-  clean_up()
+  if not options.debug:
+    clean_up()
 
 
 if  __name__ =='__main__':main()
