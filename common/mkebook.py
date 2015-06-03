@@ -89,11 +89,11 @@ class TocChapter:
     return footnotes_content
 
   def has_footnotes(self):
-    if len(self.footnotes) > 0:
-      return True
-    for child in self.children:
-      if child.has_footnotes():
-        return True
+    #if len(self.footnotes) > 0:
+    #  return True
+    #for child in self.children:
+    #  if child.has_footnotes():
+    #    return True
     return False
 
 # Find where the common files are.
@@ -502,27 +502,27 @@ def build_chapter_structure(html_files):
         if level == 1:
           footnote_counter = 1
       # FOOTNOTE_REGEX re.compile(r'<footnote>(?P<content>.*?)</footnote>', re.S | re.M)
-      footnote_start_matches = re.search(r"<footnote>(.*)", line)
-      footnote_end_matches = re.search(r"(.*)</footnote>", line)
-      if footnote_start_matches and footnote_end_matches:
-        whole_footnote = re.search(r"<footnote>(.*)</footnote>", line)
-        current_footnote = whole_footnote.group(1)
-        current.footnotes.append(Footnote(current_footnote, footnote_counter))
-        footnote_counter += 1
-        current_footnote = ""
-      elif footnote_start_matches and not footnote_end_matches:
-        current_footnote = footnote_start_matches.group(1)
-      elif footnote_end_matches:
-        #print "footnote end matches"
-        #print current_footnote
-        current_footnote += footnote_end_matches.group(1)
-        #print "..and.."
-        #print current_footnote
-        current.footnotes.append(Footnote(current_footnote, footnote_counter))
-        footnote_counter += 1
-        current_footnote = ""
-      elif current_footnote != "":
-        current_footnote += line
+      #footnote_start_matches = re.search(r"<footnote>(.*)", line)
+      #footnote_end_matches = re.search(r"(.*)</footnote>", line)
+      #if footnote_start_matches and footnote_end_matches:
+      #  whole_footnote = re.search(r"<footnote>(.*)</footnote>", line)
+      #  current_footnote = whole_footnote.group(1)
+      #  current.footnotes.append(Footnote(current_footnote, footnote_counter))
+      #  footnote_counter += 1
+      #  current_footnote = ""
+      #elif footnote_start_matches and not footnote_end_matches:
+      #  current_footnote = footnote_start_matches.group(1)
+      #elif footnote_end_matches:
+      #  #print "footnote end matches"
+      #  #print current_footnote
+      #  current_footnote += footnote_end_matches.group(1)
+      #  #print "..and.."
+      #  #print current_footnote
+      #  current.footnotes.append(Footnote(current_footnote, footnote_counter))
+      #  footnote_counter += 1
+      #  current_footnote = ""
+      #elif current_footnote != "":
+      #  current_footnote += line
   return root
 
 def preProcessHtml(pathToCommon, htmlFiles, language):
@@ -566,14 +566,14 @@ def preProcessHtml(pathToCommon, htmlFiles, language):
     generatedContent = re.sub(r'<tocchapter>.*?</tocchapter>', "",
         generatedContent)
     footnoteCounter = 1
-    while re.search(FOOTNOTE_REGEX, generatedContent):
-      footnote_id = 'fn' + str(htmlFileCounter) + '-' + str(footnoteCounter)
-      replacement = '<a epub:type="noteref" href="' + \
-          FOOTNOTES_HTML_FILE_NAME + '#' + \
-          footnote_id + '" id="' + footnote_id + '"><sup>' + str(footnoteCounter) + \
-          '</sup></a>'
-      generatedContent = re.sub(FOOTNOTE_REGEX, replacement, generatedContent, 1)
-      footnoteCounter = footnoteCounter + 1
+    #while re.search(FOOTNOTE_REGEX, generatedContent):
+    #  footnote_id = 'fn' + str(htmlFileCounter) + '-' + str(footnoteCounter)
+    #  replacement = '<a epub:type="noteref" href="' + \
+    #      FOOTNOTES_HTML_FILE_NAME + '#' + \
+    #      footnote_id + '" id="' + footnote_id + '"><sup>' + str(footnoteCounter) + \
+    #      '</sup></a>'
+    #  generatedContent = re.sub(FOOTNOTE_REGEX, replacement, generatedContent, 1)
+    #  footnoteCounter = footnoteCounter + 1
     # TODO: Handle the index.
     # while re.search(INDEX_REGEX, generatedContent):
     generatedContent = re.sub(r"<index>.*?</index>", "", generatedContent)
@@ -1005,7 +1005,7 @@ def main():
     imageFiles = removeUnusedImages(imageFiles, htmlFiles)
     generateContentOpf(config, imageFiles, htmlFiles, metadata.has_footnotes())
     # if len(footnotes) > 0:
-    generateFootnotes(metadata, htmlHeader, htmlFooter)
+    #generateFootnotes(metadata, htmlHeader, htmlFooter)
     generate_table_of_contents(metadata, config)
     generateTitlePage(config)
     generateEpub(file_name)
