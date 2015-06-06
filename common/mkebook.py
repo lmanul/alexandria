@@ -9,24 +9,10 @@ import shutil
 import subprocess
 import sys
 
-from optparse import OptionParser
 from os import listdir
 from os.path import isfile, join, getmtime
 
 from models import *
-
-parser = OptionParser()
-parser.add_option("-k", "--kindle", dest="kindle",
-                  action="store_true",
-                  help="Generate Kindle file")
-parser.add_option("-f", "--force", dest="force",
-                  action="store_true",
-                  help="Force generate output, even if input is older")
-parser.add_option("-d", "--debug", dest="debug",
-                  action="store_true",
-                  help="Enable debug mode.")
-
-(options, args) = parser.parse_args()
 
 class OutputType:
   EPUB = 0
@@ -220,7 +206,7 @@ def listImageFiles():
   return imageFiles
 
 
-def readConfigurationFile():
+def read_configuration_file():
   configFile = open("config.ebook", "r")
   configString = configFile.read()
   configItems = configString.split("\n")
@@ -935,12 +921,11 @@ def clean_up():
   if os.path.exists(DISCLAIMER_PATH):
     os.system("rm " + DISCLAIMER_PATH)
 
-def main():
-
+def make_ebook(options, root):
   if options.debug:
     clean_up()
   downloadToolsIfNeeded(pathToCommon)
-  config = readConfigurationFile()
+  config = read_configuration_file()
   if "skip" in config:
     return
   mandatoryFields = ["filename", "title", "author", "uuid", "date", "lang",
@@ -1023,7 +1008,4 @@ def main():
 
   if not options.debug:
     clean_up()
-
-
-if  __name__ =='__main__':main()
 
