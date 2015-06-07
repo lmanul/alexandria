@@ -29,7 +29,6 @@ ebookRoots = []
 
 for root, dirs, files in os.walk("."):
   if configFileName in files:
-    print "Appending " + root
     ebookRoots.append(root)
 
 if len(ebookRoots) == 0:
@@ -40,7 +39,5 @@ for ebookRoot in ebookRoots:
   os.chdir(ebookRoot)
   mkebook.make_ebook(options, ebookRoot)
   os.chdir(cwd)
-  #os.chdir(ebookRoot)
-  #os.system("python " + mkebook + " " + arguments)
 
 print "All up to date."
