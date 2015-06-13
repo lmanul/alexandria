@@ -708,6 +708,8 @@ def fix_punctuation(input, language):
       [r"\?\s*,", r"?,"],
       [r"!\s*\.", r"!."],
       [r"\?\s*\.", r"?."],
+      # No need for the special "three dots" character.
+      [r"…", r"..."],
       #  ["<p>\s*", "<p>"],
       #  [\s + "*" + "<p>", "<"],
       [r"^\s*", r""],
