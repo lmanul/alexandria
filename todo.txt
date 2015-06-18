@@ -1,5 +1,6 @@
 Producer
 
+* Fix config.ebook fields that have a colon.
 * Implement some file system watch mechanism to rebuild the epub
   on changes.
 * i18n for things like TOC, footnotes page.
