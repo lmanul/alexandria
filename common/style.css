@@ -7,6 +7,10 @@ h1 {
   font-size: 150%;
 }
 
+.italics {
+  font-style: italic;
+}
+
 .title, .subtitle, .author, .logo {
   text-align: center;
 }
@@ -78,15 +82,21 @@ div.chapter-mark + p {
   color: #333;
   font-variant: small-caps;
   font-weight: bold;
+  margin: auto;
   margin-top: 1em;
   margin-bottom: 0.3em
   text-align: center;
+  text-indent: 0;
 }
 
 .blocking {
   color: #333;
   font-variant: normal;
   font-weight: normal;
+}
+
+p.indent {
+  text-indent: 1.5em;
 }
 
 p.noindent {
