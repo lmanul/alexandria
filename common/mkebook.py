@@ -915,6 +915,10 @@ def generateMobi(pathToCommon, filename):
       "| grep -v -e '^$'")
   print "    ✓ Kindle "
 
+def generate_kindle_cover():
+  os.system("mkjpg Cover_iTunes.png")
+  os.system("mv Cover_iTunes.jpg Cover_Amazon.jpg")
+
 def clean_up():
   # There should be nothing of value inside "book".
   shutil.rmtree("book", True)
@@ -1007,6 +1011,7 @@ def make_ebook(options, root):
   if options.kindle and needsBuilding(OutputType.KINDLE, options.force,
       htmlFiles, imageFiles, pathToCommon, pathToTemplates, config, itunes_vendor_id):
     generateMobi(pathToCommon, file_name)
+    generate_kindle_cover()
 
   if not options.debug:
     clean_up()
