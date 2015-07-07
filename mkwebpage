@@ -109,7 +109,7 @@ for ebookRoot in ebookRoots:
   os.system("mv " + os.path.join(ebookRoot, "Cover_thumbnail.png") + " " + cover_path)
   amazon_id = "unknown"
   if "amazon_id" in config:
-    amazon_id = amazon["google_id"]
+    amazon_id = config["amazon_id"]
   google_id = "unknown"
   if "google_id" in config:
     google_id = config["google_id"]
