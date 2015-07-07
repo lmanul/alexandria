@@ -4,9 +4,10 @@ import os
 import sys
 
 class Ebook:
-  def __init__(self, title, cover_path, google_id, apple_id):
+  def __init__(self, title, cover_path, amazon_id, google_id, apple_id):
     self.title = title
     self.cover_path = cover_path
+    self.amazon_id = amazon_id
     self.google_id = google_id
     self.apple_id = apple_id
 
@@ -14,12 +15,18 @@ def one_book(ebook):
   html = '<div class="book">'
   html += '<img src="' + ebook.cover_path + '" /><br/>'
   #html += '<span class="title">' + ebook.title + '</span><br/>'
-  html += '<img class="logo" src="images/google_play_thumbnail.png" /> ' + \
-      '<a href="http://play.google.com/store/books/details?id=' + ebook.google_id + '">' + \
-      'Google Play Store</a><br/>'
-  html += '<img class="logo" src="images/ibooks_thumbnail.png" /> ' + \
-      '<a href="http://itunes.apple.com/book/id' + ebook.apple_id + '">' + \
-      'iBooks Store</a><br/>'
+  if ebook.amazon_id != "unknown":
+    html += '<img class="logo" src="images/amazon_thumbnail.png" /> ' + \
+        '<a href="http://www.amazon.com/dp/B00HT535WE/' + ebook.amazon_id + '">' + \
+        'Amazon</a><br/>'
+  if ebook.google_id != "unknown":
+    html += '<img class="logo" src="images/google_play_thumbnail.png" /> ' + \
+        '<a href="http://play.google.com/store/books/details?id=' + ebook.google_id + '">' + \
+        'Google Play Store</a><br/>'
+  if ebook.apple_id != "unknown":
+    html += '<img class="logo" src="images/ibooks_thumbnail.png" /> ' + \
+        '<a href="http://itunes.apple.com/book/id' + ebook.apple_id + '">' + \
+        'iBooks Store</a><br/>'
   html += '</div>'
   return html
   
@@ -100,6 +107,9 @@ for ebookRoot in ebookRoots:
   cover_path = os.path.join("covers", config["filename"] + ".png")
   os.system("mkthumb 225 " + os.path.join(ebookRoot, "Cover.png"))
   os.system("mv " + os.path.join(ebookRoot, "Cover_thumbnail.png") + " " + cover_path)
+  amazon_id = "unknown"
+  if "amazon_id" in config:
+    amazon_id = amazon["google_id"]
   google_id = "unknown"
   if "google_id" in config:
     google_id = config["google_id"]
@@ -107,7 +117,7 @@ for ebookRoot in ebookRoots:
   if "apple_id" in config:
     apple_id = config["apple_id"]
   ebooks.append(Ebook(config["title"], cover_path,
-      google_id, apple_id))
+      amazon_id, google_id, apple_id))
   #os.chdir(ebookRoot)
   #os.system("python " + mkebook + " " + arguments)
   #os.chdir(cwd)
