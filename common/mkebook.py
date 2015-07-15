@@ -14,6 +14,8 @@ from os.path import isfile, join, getmtime
 
 from models import *
 
+all_footnotes = []
+
 class OutputType:
   EPUB = 0
   COVER = 1
@@ -21,9 +23,13 @@ class OutputType:
   KINDLE = 3
 
 class Footnote:
-  def __init__(self, text, counter):
+  def __init__(self, text, counter, owner, html_file):
     self.text = text
     self.counter = counter
+    self.owner = owner
+    self.html_file = html_file
+  def get_id(self):
+    return 'fn-' + self.owner.get_string_id() + '-' + str(self.counter)
 
 class TocChapter:
   def __init__(self, level, title, parent, filename, id):
@@ -36,7 +42,11 @@ class TocChapter:
     self.footnotes = []
 
   def __str__(self):
-    retval = "[" + str(self.level) + ", '" + self.title + "' > "
+    retval = "[" + str(self.level) + ", '" + self.title + "'"
+    if len(self.footnotes) > 0:
+      retval += ' (' + str(len(self.footnotes)) + ' footnotes) '
+    if len(self.children) > 0:
+      retval += " > "
     for child in self.children:
       retval += child.__str__()
     retval += "]"
@@ -65,9 +75,8 @@ class TocChapter:
     if self.level == 1 and self.title != "" and self.has_footnotes():
       footnotes_content += '<h2 class="footnote-section">' + self.title + '</h2>'
     for footnote in self.footnotes:
-      footnote_id = 'fn' + self.get_string_id() + '-' + str(footnote.counter)
-      footnotes_content += '<p><a id="' + footnote_id + '" href="' + self.filename + \
-            '#' + footnote_id + '">' + \
+      footnotes_content += '\n<p><a id="' + footnote.get_id() + '" href="' + footnote.html_file + \
+            '#' + footnote.get_id() + '">' + \
             str(footnote.counter) + '.</a> ' + \
             footnote.text + '</p>'
     for child in self.children:
@@ -75,11 +84,11 @@ class TocChapter:
     return footnotes_content
 
   def has_footnotes(self):
-    #if len(self.footnotes) > 0:
-    #  return True
-    #for child in self.children:
-    #  if child.has_footnotes():
-    #    return True
+    if len(self.footnotes) > 0:
+      return True
+    for child in self.children:
+      if child.has_footnotes():
+        return True
     return False
 
 # Find where the common files are.
@@ -219,7 +228,7 @@ def read_configuration_file():
   return config
 
 def needsBuilding(type, force, htmlFiles, imageFiles, pathToCommon,
-    pathToTemplate, config, itunes_vendor_id):
+    pathToTemplate, config, itunes_vendor_id, debug):
 
   if type == OutputType.COVER and os.path.exists("Cover_manual.png"):
     return False
@@ -237,9 +246,16 @@ def needsBuilding(type, force, htmlFiles, imageFiles, pathToCommon,
     output = config["filename"] + ".mobi"
   elif type == OutputType.ITUNES:
     output = itunes_vendor_id + ".itmsp/metadata.xml"
+  if debug:
+    print "Checking if output exists: " + os.getcwd() + "/" + output
   if not os.path.exists(output):
+    if debug:
+      print "Output doesn't exist"
     return True
   output_mod_time = os.path.getmtime(output)
+  if debug:
+    print "Output does exist, mod time is " + str(output_mod_time) + " and " + \
+        "latest input mod time is " + str(latestInputModTime)
   return output_mod_time <= latestInputModTime
 
 
@@ -409,7 +425,7 @@ def rasterizeCover(title, author, filename):
     os.system("rm " + populatedCoverPath)
   print "    ✓ Cover "
 
-def gatherIndex(htmlFiles):
+def gather_index(htmlFiles):
   # TODO
   dummy = 2
 
@@ -487,28 +503,34 @@ def build_chapter_structure(html_files):
         current = child
         if level == 1:
           footnote_counter = 1
-      # FOOTNOTE_REGEX re.compile(r'<footnote>(?P<content>.*?)</footnote>', re.S | re.M)
-      #footnote_start_matches = re.search(r"<footnote>(.*)", line)
-      #footnote_end_matches = re.search(r"(.*)</footnote>", line)
-      #if footnote_start_matches and footnote_end_matches:
-      #  whole_footnote = re.search(r"<footnote>(.*)</footnote>", line)
-      #  current_footnote = whole_footnote.group(1)
-      #  current.footnotes.append(Footnote(current_footnote, footnote_counter))
-      #  footnote_counter += 1
-      #  current_footnote = ""
-      #elif footnote_start_matches and not footnote_end_matches:
-      #  current_footnote = footnote_start_matches.group(1)
-      #elif footnote_end_matches:
-      #  #print "footnote end matches"
-      #  #print current_footnote
-      #  current_footnote += footnote_end_matches.group(1)
-      #  #print "..and.."
-      #  #print current_footnote
-      #  current.footnotes.append(Footnote(current_footnote, footnote_counter))
-      #  footnote_counter += 1
-      #  current_footnote = ""
-      #elif current_footnote != "":
-      #  current_footnote += line
+      footnote_start_matches = re.search(r"<footnote>(.*)", line)
+      footnote_end_matches = re.search(r"(.*)</footnote>", line)
+      if footnote_start_matches and footnote_end_matches:
+        whole_footnote = re.search(r"<footnote>(.*)</footnote>", line)
+        current_footnote = whole_footnote.group(1)
+        # print "Found whole footnote group " + str(footnote_counter)
+        footnote = Footnote(current_footnote, footnote_counter, current, html_file)
+        current.footnotes.append(footnote)
+        all_footnotes.append(footnote)
+        footnote_counter += 1
+        current_footnote = ""
+      elif footnote_start_matches and not footnote_end_matches:
+        # print "Only footnote start"
+        current_footnote = footnote_start_matches.group(1)
+      elif footnote_end_matches:
+        # print "footnote end matches"
+        # print current_footnote
+        current_footnote += footnote_end_matches.group(1)
+        # print "..and.."
+        # print current_footnote
+        footnote = Footnote(current_footnote, footnote_counter, current, html_file)
+        current.footnotes.append(footnote)
+        all_footnotes.append(footnote)
+        footnote_counter += 1
+        current_footnote = ""
+      elif current_footnote != "":
+        current_footnote += line
+  # print root
   return root
 
 def preProcessHtml(pathToCommon, htmlFiles, language):
@@ -551,17 +573,16 @@ def preProcessHtml(pathToCommon, htmlFiles, language):
     generatedContent = '<div class="chapter-mark"></div>\n' + generatedContent
     generatedContent = re.sub(r'<tocchapter>.*?</tocchapter>', "",
         generatedContent)
-    footnoteCounter = 1
-    #while re.search(FOOTNOTE_REGEX, generatedContent):
-    #  footnote_id = 'fn' + str(htmlFileCounter) + '-' + str(footnoteCounter)
-    #  replacement = '<a epub:type="noteref" href="' + \
-    #      FOOTNOTES_HTML_FILE_NAME + '#' + \
-    #      footnote_id + '" id="' + footnote_id + '"><sup>' + str(footnoteCounter) + \
-    #      '</sup></a>'
-    #  generatedContent = re.sub(FOOTNOTE_REGEX, replacement, generatedContent, 1)
-    #  footnoteCounter = footnoteCounter + 1
-    # TODO: Handle the index.
-    # while re.search(INDEX_REGEX, generatedContent):
+    while re.search(FOOTNOTE_REGEX, generatedContent):
+      footnote = all_footnotes.pop(0)
+      footnote_id = footnote.get_id()
+      replacement = '<a epub:type="noteref" href="' + \
+          FOOTNOTES_HTML_FILE_NAME + '#' + \
+          footnote_id + '" id="' + footnote_id + '"><sup>' + str(footnote.counter) + \
+          '</sup></a>'
+      generatedContent = re.sub(FOOTNOTE_REGEX, replacement, generatedContent, 1)
+     # TODO: Handle the index.
+    #while re.search(INDEX_REGEX, generatedContent):
     generatedContent = re.sub(r"<index>.*?</index>", "", generatedContent)
     generatedContent = htmlHeader + "\n" + generatedContent + htmlFooter
     generatedContent = postProcessHtml(generatedContent)
@@ -598,7 +619,7 @@ def postProcessHtml(input):
   return output
 
 
-def generateFootnotes(metadata, htmlHeader, htmlFooter):
+def generate_footnotes(metadata, htmlHeader, htmlFooter):
 
   footnotesFile = open("book/OEBPS/Text/" + FOOTNOTES_HTML_FILE_NAME, "w")
   footnotesContent = '<h1 class="footnotes_title">' + 'Notes' + '</h1>'
@@ -942,6 +963,8 @@ def make_ebook(options, root):
       sys.exit(1)
   print "* " + config["title"] + "..."
 
+  if options.debug:
+    print "Copying common files..."
   copyCommonFiles(pathToCommon)
 
   title = config["title"]
@@ -974,7 +997,9 @@ def make_ebook(options, root):
   htmlFiles = listHtmlFiles()
   imageFiles = listImageFiles()
   if needsBuilding(OutputType.COVER, options.force, htmlFiles, imageFiles,
-      pathToCommon, pathToTemplates, config, itunes_vendor_id):
+      pathToCommon, pathToTemplates, config, itunes_vendor_id, options.debug):
+    if options.debug:
+      print "Rasterizing cover..."
     rasterizeCover(title, author, file_name)
   elif os.path.exists("Cover_manual.png"):
     os.system("cp Cover_manual.png book/OEBPS/Images/Cover.png")
@@ -985,31 +1010,35 @@ def make_ebook(options, root):
     os.system("cp Cover.png book/OEBPS/Images/")
 
   if needsBuilding(OutputType.EPUB, options.force, htmlFiles, imageFiles,
-      pathToCommon, pathToTemplates, config, itunes_vendor_id):
+      pathToCommon, pathToTemplates, config, itunes_vendor_id, options.debug):
+    if options.debug:
+      print "Building epub..."
 
     appendLanguageDependentStyles(lang)
     appendLocalStyles()
 
-    #footnotes = gather_footnotes(htmlFiles)
-    index = gatherIndex(htmlFiles)
+    index = gather_index(htmlFiles)
+    if options.debug:
+      print "Gathering metadata..."
     metadata = preProcessHtml(pathToCommon, htmlFiles, lang)
     imageFiles = removeUnusedImages(imageFiles, htmlFiles)
     generateContentOpf(config, imageFiles, htmlFiles, metadata.has_footnotes())
-    # if len(footnotes) > 0:
-    #generateFootnotes(metadata, htmlHeader, htmlFooter)
+    if metadata.has_footnotes():
+      generate_footnotes(metadata, htmlHeader, htmlFooter)
     generate_table_of_contents(metadata, config)
     generateTitlePage(config)
     generateEpub(file_name)
     checkEpub(pathToCommon, file_name)
 
   if needsBuilding(OutputType.ITUNES, options.force, htmlFiles, imageFiles,
-      pathToCommon, pathToTemplates, config, itunes_vendor_id):
+      pathToCommon, pathToTemplates, config, itunes_vendor_id, options.debug):
     generate_itunes_producer_file(title, subtitle, author, author_sort_name,
         description, publisher, date, lang, file_name, itunes_vendor_id,
         category)
 
   if options.kindle and needsBuilding(OutputType.KINDLE, options.force,
-      htmlFiles, imageFiles, pathToCommon, pathToTemplates, config, itunes_vendor_id):
+      htmlFiles, imageFiles, pathToCommon, pathToTemplates, config, itunes_vendor_id,
+      options.debug):
     generateMobi(pathToCommon, file_name)
     generate_kindle_cover()
 
