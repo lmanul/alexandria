@@ -72,13 +72,14 @@ handle.write("""
     display: inline-block;
     margin: 20px;
     text-align: center;
+    vertical-align: top;
     width: 170px;
   }
 
   .book img {
     border: 1px solid #ccc;
     box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.2);
-    margin-bottom: 10px;
+    margin-bottom: 20px;
   }
 
   img.logo {
@@ -109,7 +110,7 @@ for ebookRoot in ebookRoots:
   os.system("mv " + os.path.join(ebookRoot, "Cover_thumbnail.png") + " " + cover_path)
   amazon_id = "unknown"
   if "amazon_id" in config:
-    amazon_id = amazon["google_id"]
+    amazon_id = config["amazon_id"]
   google_id = "unknown"
   if "google_id" in config:
     google_id = config["google_id"]
