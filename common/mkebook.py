@@ -533,7 +533,7 @@ def build_chapter_structure(html_files):
   # print root
   return root
 
-def preProcessHtml(pathToCommon, htmlFiles, language):
+def preprocess_html(pathToCommon, htmlFiles, language, options):
   if not os.path.exists("book/OEBPS/Text"):
     os.system("mkdir -p book/OEBPS/Text")
 
@@ -573,7 +573,15 @@ def preProcessHtml(pathToCommon, htmlFiles, language):
     generatedContent = '<div class="chapter-mark"></div>\n' + generatedContent
     generatedContent = re.sub(r'<tocchapter>.*?</tocchapter>', "",
         generatedContent)
-    while re.search(FOOTNOTE_REGEX, generatedContent):
+    if options.debug:
+      print "Ready to replace footnote tags, got " + str(len(all_footnotes)) + " notes"
+    
+    results = re.search(FOOTNOTE_REGEX, generatedContent)
+    while results:
+      if options.debug:
+        print "Footnote, " + str(len(all_footnotes)) + " left: " + results.group(1)
+      if len(all_footnotes) <= 0:
+        break
       footnote = all_footnotes.pop(0)
       footnote_id = footnote.get_id()
       replacement = '<a epub:type="noteref" href="' + \
@@ -581,6 +589,7 @@ def preProcessHtml(pathToCommon, htmlFiles, language):
           footnote_id + '" id="' + footnote_id + '"><sup>' + str(footnote.counter) + \
           '</sup></a>'
       generatedContent = re.sub(FOOTNOTE_REGEX, replacement, generatedContent, 1)
+      results = re.search(FOOTNOTE_REGEX, generatedContent)
      # TODO: Handle the index.
     #while re.search(INDEX_REGEX, generatedContent):
     generatedContent = re.sub(r"<index>.*?</index>", "", generatedContent)
@@ -1020,7 +1029,7 @@ def make_ebook(options, root):
     index = gather_index(htmlFiles)
     if options.debug:
       print "Gathering metadata..."
-    metadata = preProcessHtml(pathToCommon, htmlFiles, lang)
+    metadata = preprocess_html(pathToCommon, htmlFiles, lang, options)
     imageFiles = removeUnusedImages(imageFiles, htmlFiles)
     generateContentOpf(config, imageFiles, htmlFiles, metadata.has_footnotes())
     if metadata.has_footnotes():
