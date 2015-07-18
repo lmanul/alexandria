@@ -169,15 +169,23 @@ def dependency_inputs_for_output_type(type, htmlFiles, imageFiles, pathToCommon,
 
 
 def getLatestInputModTime(type, htmlFiles, imageFiles, pathToCommon,
-    pathToTemplates):
+    pathToTemplates, debug):
   dependencies = dependency_inputs_for_output_type(type, htmlFiles,
       imageFiles, pathToCommon, pathToTemplates)
   latestInputModTime = 0
+  latestInput = ""
 
   for input in dependencies:
+    # Ignore generated files.
+    if input == DISCLAIMER_PATH:
+      continue
     if os.path.exists(input):
       mTime = os.path.getmtime(input)
-      latestInputModTime = max(latestInputModTime, mTime)
+      if mTime > latestInputModTime:
+        latestInputModTime = mTime
+        latestInput = input
+  if debug:
+    print "Latest input is " + latestInput
 
   return latestInputModTime
 
@@ -242,7 +250,7 @@ def needsBuilding(type, force, htmlFiles, imageFiles, pathToCommon,
     return True
 
   latestInputModTime = getLatestInputModTime(type, htmlFiles, imageFiles,
-      pathToCommon, pathToTemplates)
+      pathToCommon, pathToTemplates, debug)
   if type == OutputType.EPUB:
     output = config["filename"] + ".epub"
   elif type == OutputType.COVER:
@@ -417,6 +425,7 @@ def rasterizeCover(title, author, filename):
       join(pathToCommon, "batik", "batik-rasterizer.jar " + \
       "-h " + str(COVER_HEIGHT) + " -d book/OEBPS/Images/Cover.png " + coverToRasterize + \
       " 2> /dev/null > /dev/null"))
+  # TODO: Rasterizing is expensive, resize instead.
   os.system(JAVA + " -jar " + \
       join(pathToCommon, "batik", "batik-rasterizer.jar " + \
       "-h " + str(COVER_HEIGHT_FOR_ITUNES) + " -d ./Cover_iTunes.png " + coverToRasterize + \
@@ -511,15 +520,13 @@ def build_chapter_structure(html_files, options):
       footnote_end_matches = re.search(r"(.*)</footnote>", line)
       footnote_start_then_end_matches = re.search(r"<footnote>(.*)</footnote>", line)
       if footnote_start_then_end_matches:
-        if options.debug:
-          print "Line has start and end tags for a footnote: " + line
         whole_footnote = re.search(r"<footnote>(.*)</footnote>", line)
         current_footnote = whole_footnote.group(1)
         # print "Found whole footnote group " + str(footnote_counter)
         footnote = Footnote(current_footnote, footnote_counter, current, html_file)
         current.footnotes.append(footnote)
-        if options.debug:
-          print "Found single-line footnote: " + str(footnote)
+        #if options.debug:
+        #  print "Found single-line footnote: " + str(footnote)
         all_footnotes.append(footnote)
         footnote_counter += 1
         current_footnote = ""
@@ -534,8 +541,8 @@ def build_chapter_structure(html_files, options):
         # print current_footnote
         footnote = Footnote(current_footnote, footnote_counter, current, html_file)
         current.footnotes.append(footnote)
-        if options.debug:
-          print "Found multi-line footnote: " + str(footnote)
+        #if options.debug:
+        #  print "Found multi-line footnote: " + str(footnote)
         all_footnotes.append(footnote)
         footnote_counter += 1
         current_footnote = ""
@@ -584,13 +591,9 @@ def preprocess_html(pathToCommon, htmlFiles, language, options):
     generatedContent = '<div class="chapter-mark"></div>\n' + generatedContent
     generatedContent = re.sub(r'<tocchapter>.*?</tocchapter>', "",
         generatedContent)
-    if options.debug:
-      print "Ready to replace footnote tags, got " + str(len(all_footnotes)) + " notes"
     
     results = re.search(FOOTNOTE_REGEX, generatedContent)
     while results:
-      if options.debug:
-        print "Footnote, " + str(len(all_footnotes)) + " left: " + results.group(1)
       footnote = all_footnotes.pop(0)
       footnote_id = footnote.get_id()
       replacement = '<a epub:type="noteref" href="' + \
