@@ -28,8 +28,13 @@ class Footnote:
     self.counter = counter
     self.owner = owner
     self.html_file = html_file
+
   def get_id(self):
     return 'fn-' + self.owner.get_string_id() + '-' + str(self.counter)
+
+  def __str__(self):
+    return "[Footnote #" + str(self.counter) + " in " + self.html_file + ": '" + \
+        self.text[0:15] + "...']"
 
 class TocChapter:
   def __init__(self, level, title, parent, filename, id):
@@ -476,7 +481,7 @@ def generateContentOpf(config, imageFiles, htmlFiles, hasFootnotes):
   opfHandle.close()
 
 
-def build_chapter_structure(html_files):
+def build_chapter_structure(html_files, options):
   root = TocChapter(0, "", None, "", "")
   current = root
   id_counter = {}
@@ -501,16 +506,20 @@ def build_chapter_structure(html_files):
         child = TocChapter(level, title, current, html_file, id_counter[str(level)])
         current.children.append(child)
         current = child
-        if level == 1:
-          footnote_counter = 1
+      # TODO: Handle footnote ending on same line as another starts.
       footnote_start_matches = re.search(r"<footnote>(.*)", line)
       footnote_end_matches = re.search(r"(.*)</footnote>", line)
-      if footnote_start_matches and footnote_end_matches:
+      footnote_start_then_end_matches = re.search(r"<footnote>(.*)</footnote>", line)
+      if footnote_start_then_end_matches:
+        if options.debug:
+          print "Line has start and end tags for a footnote: " + line
         whole_footnote = re.search(r"<footnote>(.*)</footnote>", line)
         current_footnote = whole_footnote.group(1)
         # print "Found whole footnote group " + str(footnote_counter)
         footnote = Footnote(current_footnote, footnote_counter, current, html_file)
         current.footnotes.append(footnote)
+        if options.debug:
+          print "Found single-line footnote: " + str(footnote)
         all_footnotes.append(footnote)
         footnote_counter += 1
         current_footnote = ""
@@ -525,6 +534,8 @@ def build_chapter_structure(html_files):
         # print current_footnote
         footnote = Footnote(current_footnote, footnote_counter, current, html_file)
         current.footnotes.append(footnote)
+        if options.debug:
+          print "Found multi-line footnote: " + str(footnote)
         all_footnotes.append(footnote)
         footnote_counter += 1
         current_footnote = ""
@@ -540,7 +551,7 @@ def preprocess_html(pathToCommon, htmlFiles, language, options):
   htmlFileCounter = 1
   current_chapter = None
   id_counter = {}
-  metadata = build_chapter_structure(htmlFiles)
+  metadata = build_chapter_structure(htmlFiles, options)
   for htmlFile in htmlFiles:
     manual_file = open("Text/" + htmlFile, "r")
     manual_content = manual_file.read()
@@ -580,8 +591,6 @@ def preprocess_html(pathToCommon, htmlFiles, language, options):
     while results:
       if options.debug:
         print "Footnote, " + str(len(all_footnotes)) + " left: " + results.group(1)
-      if len(all_footnotes) <= 0:
-        break
       footnote = all_footnotes.pop(0)
       footnote_id = footnote.get_id()
       replacement = '<a epub:type="noteref" href="' + \
