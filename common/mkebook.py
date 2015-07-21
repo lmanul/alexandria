@@ -468,9 +468,6 @@ def generateContentOpf(config, imageFiles, htmlFiles, hasFootnotes):
     opf += '    <item href="Text/' + htmlFile + '" id="t' + \
         name + '" media-type="application/xhtml+xml" />\n'
 
-  if hasFootnotes:
-    opf += '    <item href="Text/' + FOOTNOTES_HTML_FILE_NAME + \
-        '" id="footnotes" media-type="application/xhtml+xml" />\n'
 
   opf += """    <item href="Styles/style.css" id="style.css" media-type="text/css" />
   </manifest>
@@ -480,9 +477,6 @@ def generateContentOpf(config, imageFiles, htmlFiles, hasFootnotes):
   for htmlFile in htmlFiles:
     name = htmlFile.split(".", 2)[0]
     opf += '    <itemref idref="t' + name + '" />\n'
-
-  if hasFootnotes:
-    opf += '    <itemref idref="footnotes" />\n'
 
   opf += """  </spine>\n</package>\n"""
 
@@ -1042,10 +1036,11 @@ def make_ebook(options, root):
     if options.debug:
       print "Gathering metadata..."
     metadata = preprocess_html(pathToCommon, htmlFiles, lang, options)
-    imageFiles = removeUnusedImages(imageFiles, htmlFiles)
-    generateContentOpf(config, imageFiles, htmlFiles, metadata.has_footnotes())
     if metadata.has_footnotes():
       generate_footnotes(metadata, htmlHeader, htmlFooter)
+      htmlFiles.append(FOOTNOTES_HTML_FILE_NAME)
+    imageFiles = removeUnusedImages(imageFiles, htmlFiles)
+    generateContentOpf(config, imageFiles, htmlFiles, metadata.has_footnotes())
     generate_table_of_contents(metadata, config)
     generateTitlePage(config)
     generateEpub(file_name)
