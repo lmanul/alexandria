@@ -495,6 +495,8 @@ def build_chapter_structure(html_files, options):
     current_footnote = ""
     lines = content.split("\n")
     for line in lines:
+      # Restore a space at the end instead of the line break.
+      line += " "
       matched = re.search(r"<h(.)>(.*)</h.>", line)
       if matched:
         level = int(matched.group(1))
