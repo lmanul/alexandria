@@ -234,9 +234,11 @@ def read_configuration_file():
   configItems = configString.split("\n")
   config = {}
   for configItem in configItems:
+    if configItem.startswith("#"):
+      continue
     if ":" in configItem:
       configItem = configItem.strip()
-      keyAndValue = configItem.split(":")
+      keyAndValue = configItem.split(":", 1)
       config[keyAndValue[0]] = keyAndValue[1]
   return config
 
