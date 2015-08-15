@@ -885,8 +885,14 @@ def generate_itunes_producer_file(title, subtitle, author, author_sort_name,
   cover_size = os.path.getsize(cover_path)
   cover_md5 = md5Checksum(cover_path)
   sales_start_date = date
+  bc = False
+  if date.startswith("-"):
+    bc = True
+    sales_start_date = sales_start_date[1:]
   sales_start_date_parts = sales_start_date.split("-")
   year = int(sales_start_date_parts[0])
+  if bc:
+    year = 0 - year
   if year < 1900:
     sales_start_date = "1900-01-01"
   # Now manage categories
