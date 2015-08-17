@@ -6,6 +6,7 @@ import subprocess
 from sets import Set
 
 configFileName = "config.ebook"
+start_directory = os.getcwd()
 
 ebookRoots = []
 for root, dirs, files in os.walk("."):
@@ -13,6 +14,7 @@ for root, dirs, files in os.walk("."):
     ebookRoots.append(root)
 
 for ebook_root in ebookRoots:
+  print ebook_root + "..."
   os.chdir(ebook_root)
   if not os.path.exists("aspell.fr.pws"):
     os.system("echo 'personal_ws-1.1 fr 0 utf-8' > aspell.fr.pws")
@@ -32,7 +34,7 @@ for ebook_root in ebookRoots:
     word = word.strip()
     if word == "":
       continue
-    print word + " -- (Enter, Local or Global, or eXit): ",
+    print word + " -- (Enter, Local or Global, Skip or eXit): ",
     input_variable = raw_input()
     lc_input_variable = input_variable.strip().lower()
     if lc_input_variable == "":
@@ -41,6 +43,8 @@ for ebook_root in ebookRoots:
       global_words.add(word)
     elif lc_input_variable == "l":
       local_words.add(word)
+    elif lc_input_variable == "s":
+      continue
     elif lc_input_variable == "x":
       break
     else:
@@ -58,3 +62,4 @@ for ebook_root in ebookRoots:
     local_handle = open("aspell.fr.pws", "a")
     local_handle.write(local_word_append)
     local_handle.close()
+  os.chdir(start_directory)
