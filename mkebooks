@@ -38,6 +38,7 @@ if len(ebookRoots) == 0:
 for ebookRoot in ebookRoots:
   os.chdir(ebookRoot)
   mkebook.make_ebook(options, ebookRoot)
+  os.system("checkspelling")
   os.chdir(cwd)
 
 print "All up to date."
