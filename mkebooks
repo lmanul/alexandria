@@ -6,6 +6,7 @@ import sys
 from optparse import OptionParser
 from common import mkebook
 
+script_path = os.path.dirname(os.path.realpath(sys.argv[0]))
 parser = OptionParser()
 parser.add_option("-k", "--kindle", dest="kindle",
                   action="store_true",
@@ -16,6 +17,9 @@ parser.add_option("-f", "--force", dest="force",
 parser.add_option("-d", "--debug", dest="debug",
                   action="store_true",
                   help="Enable debug mode.")
+parser.add_option("-s", "--skip_spelling", dest="skip_spelling",
+                  action="store_true",
+                  help="Skip spell-checking")
 
 (options, args) = parser.parse_args()
 
@@ -38,7 +42,8 @@ if len(ebookRoots) == 0:
 for ebookRoot in ebookRoots:
   os.chdir(ebookRoot)
   mkebook.make_ebook(options, ebookRoot)
-  os.system("checkspelling")
+  if not options.skip_spelling:
+    os.system(os.path.join(script_path, "checkspelling"))
   os.chdir(cwd)
 
 print "All up to date."

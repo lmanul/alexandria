@@ -39,8 +39,11 @@ for ebook_root in ebookRoots:
       word = word.strip()
       if word == "":
         continue
+      print "################################################"
+      print "######### " + html_file
       print "################################################\n"
-      os.system("grep -C 1 \"" + word + "\" Text/" + html_file)
+      os.system("grep -C 1 -e \"\s*" + word + "\s*\" Text/" + \
+          html_file)
       print "\n################################################\n"
       print word + " -- (Enter, Local or Global, Skip or eXit): ",
       input_variable = raw_input()
