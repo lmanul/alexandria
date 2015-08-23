@@ -35,16 +35,28 @@ for ebook_root in ebookRoots:
     for word in words:
       word_set.add(word)
 
+    word_index = 0
+    word_count = len(word_set)
     for word in word_set:
       word = word.strip()
       if word == "":
         continue
-      print "################################################"
-      print "######### " + html_file
-      print "################################################\n"
-      os.system("grep -C 1 -e \"\s*" + word + "\s*\" Text/" + \
-          html_file)
-      print "\n################################################\n"
+
+      width = 80
+      to_print = ""
+      for i in range(0, width):
+        to_print += "#"
+      to_print += "\n"
+      to_print += html_file + "\n"
+      for i in range(0, int(float(word_index)/float(word_count) * width)):
+        to_print += "-"
+      to_print += ">"
+      print (to_print + "\n") 
+      
+      noltr = "[^a-zA-Z]"
+      os.system("grep -C 1 -e \"\(" + noltr + word + noltr + "\|^" + word + \
+          noltr + "\)\" Text/" + html_file)
+      print "--\n"
       print word + " -- (Enter, Local or Global, Skip or eXit): ",
       input_variable = raw_input()
       lc_input_variable = input_variable.strip().lower()
@@ -61,7 +73,8 @@ for ebook_root in ebookRoots:
         break
       else:
         # Replacement word
-        os.system("sed -i 's|" + word + "|" + input_variable + "|g' Text/" + html_file)
+        os.system("sed -i \"s|" + word + "|" + input_variable + "|g\" Text/" + html_file)
+      word_index = word_index + 1
 
   if len(global_words) != 0:
     global_word_append = "\n".join(global_words) + "\n"
