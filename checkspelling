@@ -7,6 +7,8 @@ from sets import Set
 
 configFileName = "config.ebook"
 start_directory = os.getcwd()
+# TODO: Configure
+language = "fr"
 
 ebookRoots = []
 for root, dirs, files in os.walk("."):
@@ -19,6 +21,7 @@ for ebook_root in ebookRoots:
   if not os.path.exists("aspell.fr.pws"):
     os.system("echo 'personal_ws-1.1 fr 0 utf-8' > aspell.fr.pws")
   html_files = [f for f in os.listdir("Text") if f.endswith(".html")]
+  html_files.sort()
   global_words = Set([])
   local_words = Set([])
   skip_to_next_book = False
@@ -26,8 +29,11 @@ for ebook_root in ebookRoots:
     if skip_to_next_book:
       break
     words_list = subprocess.check_output([
-      "cat Text/" + html_file + " | aspell -l fr --add-extra-dicts ./aspell.fr.pws " + \
-      "--add-extra-dicts ./../../aspell.fr.pws --encoding=utf-8 list"], shell=True)
+      "cat Text/" + html_file + \
+          " | aspell -l " + language + " " + \
+          "--add-extra-dicts ./aspell." + language + ".pws " + \
+          "--add-extra-dicts ./../../aspell." + language + ".pws " + \
+          "--encoding=utf-8 list"], shell=True)
 
     words = words_list.split("\n")
 
