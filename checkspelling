@@ -15,8 +15,13 @@ for root, dirs, files in os.walk("."):
   if configFileName in files:
     ebookRoots.append(root)
 
+aspell_command = "aspell -l " + language + " " + \
+          "--add-extra-dicts ./aspell." + language + ".pws " + \
+          "--add-extra-dicts ./../../aspell." + language + ".pws " + \
+          "--encoding=utf-8 list"
+
 for ebook_root in ebookRoots:
-  print ebook_root + "..."
+  # print ebook_root + "..."
   os.chdir(ebook_root)
   if not os.path.exists("aspell.fr.pws"):
     os.system("echo 'personal_ws-1.1 fr 0 utf-8' > aspell.fr.pws")
@@ -30,16 +35,31 @@ for ebook_root in ebookRoots:
       break
     words_list = subprocess.check_output([
       "cat Text/" + html_file + \
-          " | aspell -l " + language + " " + \
-          "--add-extra-dicts ./aspell." + language + ".pws " + \
-          "--add-extra-dicts ./../../aspell." + language + ".pws " + \
-          "--encoding=utf-8 list"], shell=True)
+          " | " + aspell_command], shell=True)
 
     words = words_list.split("\n")
 
     word_set = Set([])
     for word in words:
-      word_set.add(word)
+      should_check_word = True
+      if "-" in word:
+        parts = word.split("-")
+        for part in parts:
+          bad_word = subprocess.check_output(["echo \"" + part + "\" | " + \
+              aspell_command], shell=True)
+          if len(bad_word) > 0:
+            break
+          should_check_word = False
+      if "'" in word:
+        parts = word.split("'")
+        for part in parts:
+          bad_word = subprocess.check_output(["echo \"" + part + "\" | " + \
+              aspell_command], shell=True)
+          if len(bad_word) > 0:
+            break
+          should_check_word = False
+      if should_check_word:
+        word_set.add(word)
 
     word_index = 0
     word_count = len(word_set)
