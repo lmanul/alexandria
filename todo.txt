@@ -1,12 +1,10 @@
 Producer
 
-* Fix config.ebook fields that have a colon.
 * Implement some file system watch mechanism to rebuild the epub
   on changes.
 * i18n for things like TOC, footnotes page.
 * Warn / error out if a directory is named book. Or rather do everything inside
   a temporary dir name.
-* Add footnotes to TOC, only if there are footnotes.
 * Auto-generate the file name from the book title and the author.
 * Call aspell and keep list of words.
 * Check that uuids are unique.
@@ -15,6 +13,7 @@ Producer
 * Handle missing even one chapter gracefully.
 * Also automatically download kindlegen.
   http://kindlegen.s3.amazonaws.com/kindlegen_linux_2.6_i386_v2_9.tar.gz
+* Show time it took to do each step.
 
 
 Chrome Extension
