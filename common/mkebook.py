@@ -1,6 +1,7 @@
 #!/usr/bin/python
 # coding=utf-8
 
+import datetime
 import hashlib
 import math
 import os
@@ -95,6 +96,9 @@ class TocChapter:
       if child.has_footnotes():
         return True
     return False
+
+def now_seconds():
+  return int(datetime.datetime.now().strftime("%s"))
 
 # Find where the common files are.
 script_dir = os.path.dirname(os.path.realpath(__file__))
@@ -350,7 +354,7 @@ def max_length(words):
   return the_max
 
 def rasterizeCover(title, author, filename):
-
+  start = now_seconds()
   coverPath = "cover.svg"
   if os.path.exists(coverPath):
     coverToRasterize = coverPath
@@ -439,7 +443,7 @@ def rasterizeCover(title, author, filename):
     #os.system("cp " + populatedCoverPath + " /home/manucornet")
     #os.system("cp book/OEBPS/Images/Cover.png /home/manucornet/Cover" + filename + ".png")
     os.system("rm " + populatedCoverPath)
-  print "    ✓ Cover "
+  print "    ✓ Cover (" + str(now_seconds() - start) + "s)"
 
 def gather_index(htmlFiles):
   # TODO
@@ -821,6 +825,7 @@ def fix_punctuation(input, language):
 
 
 def generateEpub(filename):
+  start = now_seconds()
   os.chdir("book")
   # TODO: Use proper Python-style wildcards.
   os.system("rm -f OEBPS/*~ META-INF/*~ OEBPS/Text/*~ OEBPS/Styles/*~")
@@ -832,10 +837,11 @@ def generateEpub(filename):
     pass
   os.system("mv " + filename + ".zip ../" + filename + ".epub")
   os.chdir("..")
-  print "    ✓ ePub "
+  print "    ✓ ePub (" + str(now_seconds() - start) + "s)" 
 
 
 def checkEpub(pathToCommon, filename):
+  start = now_seconds()
   args = [JAVA, "-jar", pathToCommon + EPUB_CHECKER_FULL_JAR_PATH,
       filename + ".epub"]
   proc = subprocess.Popen(" ".join(args), stdout=subprocess.PIPE,
@@ -864,6 +870,7 @@ def checkEpub(pathToCommon, filename):
           print error
         if not has_expected_format:
           print error
+  print "    ✓ ePub validation (" + str(now_seconds() - start) + "s)"
 
 def md5Checksum(filePath):
     with open(filePath, 'rb') as fh:
@@ -878,6 +885,7 @@ def md5Checksum(filePath):
 def generate_itunes_producer_file(title, subtitle, author, author_sort_name,
         description, publisher, date, language, file_name, itunes_vendor_id,
         category):
+  start = now_seconds()
   epub_filename = file_name + ".epub"
   epub_size = os.path.getsize(epub_filename)
   epub_md5 = md5Checksum(epub_filename)
@@ -940,9 +948,10 @@ def generate_itunes_producer_file(title, subtitle, author, author_sort_name,
   metadata.close()
   os.system("cp Cover_iTunes.png " + itunes_producer_dir + "/Cover.png")
   os.system("cp " + epub_filename + " " + itunes_producer_dir + "/")
-  print "    ✓ iTunes producer "
+  print "    ✓ iTunes producer (" + str(now_seconds() - start) + "s)"
 
 def generateMobi(pathToCommon, filename):
+  start = now_seconds()
   uname = subprocess.check_output(["uname", "-a"])
   if uname.lower().find("darwin") != -1:
     # print "This is Mac OS X, generating Kindle file..."
@@ -959,7 +968,7 @@ def generateMobi(pathToCommon, filename):
       "| grep -v 'Copyright Amazon.com' " + \
       # Remove blank lines too.
       "| grep -v -e '^$'")
-  print "    ✓ Kindle "
+  print "    ✓ Kindle (" + str(now_seconds() - start) + "s)"
 
 def generate_kindle_cover():
   os.system("mkjpg Cover_iTunes.png")
@@ -1070,4 +1079,5 @@ def make_ebook(options, root):
 
   if not options.debug:
     clean_up()
+
 
