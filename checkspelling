@@ -81,7 +81,7 @@ for ebook_root in ebookRoots:
       
       noltr = "[^a-zA-Z]"
       os.system("grep -C 1 -e \"\(" + noltr + word + noltr + "\|^" + word + \
-          noltr + "\)\" Text/" + html_file)
+          noltr + "\|" + word + "$" + "\)\" Text/" + html_file)
       print "--\n"
       print word + " -- (Enter, Local or Global, Skip or eXit): ",
       input_variable = raw_input()
