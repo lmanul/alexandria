@@ -15,6 +15,16 @@ from os.path import isfile, join, getmtime
 
 from models import *
 
+uname = subprocess.check_output(["uname", "-a"])
+if uname.lower().find("darwin") != -1:
+  is_mac = True
+else:
+  is_mac = False
+
+SED_INLINE = "sed -i"
+if is_mac:
+  SED_INLINE = "sed -i bup"
+
 all_footnotes = []
 
 class OutputType:
@@ -409,8 +419,8 @@ def rasterizeCover(title, author, filename):
         join(pathToCommon, "batik", "batik-ttf2svg.jar") + \
         " " + ttfFontPath + " -autorange -id " + fontFamily + " -o " + svgFontPath + \
         " 2> /dev/null > /dev/null")
-    os.system("sed -i '1d' " + svgFontPath)
-    os.system("sed -i '$d' " + svgFontPath)
+    os.system(SED_INLINE + " '1d' " + svgFontPath)
+    os.system(SED_INLINE + " '$d' " + svgFontPath)
     svgFontHandle = open(svgFontPath, "r")
     svgFontData = svgFontHandle.read()
     # TODO: Make this configurable
