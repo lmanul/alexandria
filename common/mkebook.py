@@ -769,11 +769,17 @@ def fix_punctuation(input, language):
       [r"^\s*", r""],
       # Fix HTML entities.
       [r"(&[^;\s]*) ;", r"\1;"],
-      # Fix space between quotes and parentheses.
+      # Fix space between quotes and parentheses, and colons and parenttheses.
       [r"»\s*\)", r"»)"],
       [r"\(\s*«", r"(«"],
       [r"\"\s*\)", r"\")"],
+      [r":\s*\)", r":)"],
       [r"\(\s*\"", r"(\""],
+      # Fix space between several "!" and "?"
+      [r"\?\s*\?", r"??"],
+      [r"!\s*!", r"!!"],
+      [r"\?\s*!", r"?!"],
+      [r"!\s*\?", r"!?"],
       # Fix space between an apostrophy and an opening quote
       [r"'\s*«", r"'«"],
       # Fix space after a punctuation and before closing paren.
