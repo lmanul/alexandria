@@ -1,8 +1,8 @@
-<p class="disclaimer">L'équipe du projet Alexandria apporte un soin tout 
-particulier à rendre ses ouvrages irréprochables sur les plans de 
-l'orthographe, de la présentation et de la typographie. Les livres 
-électroniques qu'elle publie sont constamment mis à jour afin de rendre 
-la lecture encore plus agréable.</p>
+<p class="disclaimer">Nous apportons un soin tout 
+particulier à rendre nos ouvrages irréprochables sur les plans de 
+l'orthographe, de la présentation et de la typographie. Nos livres 
+électroniques sont constamment mis à jour afin de rendre 
+leur lecture encore plus agréable.</p>
 
 <p class="disclaimer">Si vous constatez une erreur ou une présentation 
 qui vous semble perfectible, nous vous serions extrêmement 
