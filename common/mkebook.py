@@ -363,7 +363,7 @@ def max_length(words):
     the_max = max(the_max, len(word))
   return the_max
 
-def rasterizeCover(title, author, filename):
+def rasterizeCover(title, author, filename, debug):
   start = now_seconds()
   coverPath = "cover.svg"
   if os.path.exists(coverPath):
@@ -452,7 +452,8 @@ def rasterizeCover(title, author, filename):
     # Cleanup the populated cover
     #os.system("cp " + populatedCoverPath + " /home/manucornet")
     #os.system("cp book/OEBPS/Images/Cover.png /home/manucornet/Cover" + filename + ".png")
-    os.system("rm " + populatedCoverPath)
+    if not debug:
+      os.system("rm " + populatedCoverPath)
   print "    ✓ Cover (" + str(now_seconds() - start) + "s)"
 
 def gather_index(htmlFiles):
@@ -1050,7 +1051,7 @@ def make_ebook(options, root):
       pathToCommon, pathToTemplates, config, itunes_vendor_id, options.debug):
     if options.debug:
       print "Rasterizing cover..."
-    rasterizeCover(title, author, file_name)
+    rasterizeCover(title, author, file_name, options.debug)
   elif os.path.exists("Cover_manual.png"):
     os.system("cp Cover_manual.png book/OEBPS/Images/Cover.png")
     os.system("mkthumb 2500 Cover_manual.png && " +\
