@@ -21,6 +21,9 @@ if uname.lower().find("darwin") != -1:
 else:
   is_mac = False
 
+LOG = "/tmp/mkebookslog"
+os.system("touch " + LOG)
+
 SED_INLINE = "sed -i"
 if is_mac:
   SED_INLINE = "sed -i bup"
@@ -418,7 +421,7 @@ def rasterizeCover(title, author, filename, debug):
     os.system(JAVA + " -jar " + \
         join(pathToCommon, "batik", "batik-ttf2svg.jar") + \
         " " + ttfFontPath + " -autorange -id " + fontFamily + " -o " + svgFontPath + \
-        " 2> /dev/null > /dev/null")
+        " 2>> " + LOG + " >> " + LOG)
     os.system(SED_INLINE + " '1d' " + svgFontPath)
     os.system(SED_INLINE + " '$d' " + svgFontPath)
     svgFontHandle = open(svgFontPath, "r")
@@ -440,18 +443,16 @@ def rasterizeCover(title, author, filename, debug):
   os.system(JAVA + " -jar " + \
       join(pathToCommon, "batik", "batik-rasterizer.jar " + \
       "-h " + str(COVER_HEIGHT) + " -d book/OEBPS/Images/Cover.png " + coverToRasterize + \
-      " 2> /dev/null > /dev/null"))
+      " 2>> " + LOG + " >> " + LOG))
   # TODO: Rasterizing is expensive, resize instead.
   os.system(JAVA + " -jar " + \
       join(pathToCommon, "batik", "batik-rasterizer.jar " + \
       "-h " + str(COVER_HEIGHT_FOR_ITUNES) + " -d ./Cover_iTunes.png " + coverToRasterize + \
-      " 2> /dev/null > /dev/null"))
+      " 2>> " + LOG + " >> " + LOG))
   # Also copy the cover locally.
   os.system("cp book/OEBPS/Images/Cover.png .")
   if not os.path.exists(coverPath):
     # Cleanup the populated cover
-    #os.system("cp " + populatedCoverPath + " /home/manucornet")
-    #os.system("cp book/OEBPS/Images/Cover.png /home/manucornet/Cover" + filename + ".png")
     if not debug:
       os.system("rm " + populatedCoverPath)
   print "    ✓ Cover (" + str(now_seconds() - start) + "s)"
