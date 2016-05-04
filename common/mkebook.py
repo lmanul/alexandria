@@ -440,11 +440,14 @@ def rasterizeCover(title, author, filename, debug):
     populatedCoverHandle.close()
     coverToRasterize = populatedCoverPath
     os.system("rm -f " + svgFontPath)
-  os.system("rsvg-convert -o book/OEBPS/Images/Cover.png -h " + str(COVER_HEIGHT) + " " + coverToRasterize)
-  #os.system(JAVA + " -jar " + \
-  #    join(pathToCommon, "batik", "batik-rasterizer.jar " + \
-  #    "-h " + str(COVER_HEIGHT) + " -d book/OEBPS/Images/Cover.png " + coverToRasterize + \
-  #    " 2>> " + LOG + " >> " + LOG))
+  
+  if is_mac:
+    os.system(JAVA + " -jar " + \
+        join(pathToCommon, "batik", "batik-rasterizer.jar " + \
+        "-h " + str(COVER_HEIGHT) + " -d book/OEBPS/Images/Cover.png " + coverToRasterize + \
+        " 2>> " + LOG + " >> " + LOG))
+  else:
+    os.system("rsvg-convert -o book/OEBPS/Images/Cover.png -h " + str(COVER_HEIGHT) + " " + coverToRasterize)
   # TODO: Rasterizing is expensive, resize instead.
   os.system(JAVA + " -jar " + \
       join(pathToCommon, "batik", "batik-rasterizer.jar " + \
