@@ -48,7 +48,9 @@ if len(ebookRoots) == 0:
 
 for ebookRoot in ebookRoots:
   os.chdir(ebookRoot)
-  mkebook.make_ebook(options, ebookRoot)
+  retval = mkebook.make_ebook(options, ebookRoot)
+  if retval is not 0:
+    sys.exit(retval)
   # Aspell issues on Mac.
   if not options.skip_spelling and not is_mac:
     os.system(os.path.join(script_path, "checkspelling"))
