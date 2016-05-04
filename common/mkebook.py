@@ -440,10 +440,11 @@ def rasterizeCover(title, author, filename, debug):
     populatedCoverHandle.close()
     coverToRasterize = populatedCoverPath
     os.system("rm -f " + svgFontPath)
-  os.system(JAVA + " -jar " + \
-      join(pathToCommon, "batik", "batik-rasterizer.jar " + \
-      "-h " + str(COVER_HEIGHT) + " -d book/OEBPS/Images/Cover.png " + coverToRasterize + \
-      " 2>> " + LOG + " >> " + LOG))
+  os.system("rsvg-convert -o book/OEBPS/Images/Cover.png -h " + str(COVER_HEIGHT) + " " + coverToRasterize)
+  #os.system(JAVA + " -jar " + \
+  #    join(pathToCommon, "batik", "batik-rasterizer.jar " + \
+  #    "-h " + str(COVER_HEIGHT) + " -d book/OEBPS/Images/Cover.png " + coverToRasterize + \
+  #    " 2>> " + LOG + " >> " + LOG))
   # TODO: Rasterizing is expensive, resize instead.
   os.system(JAVA + " -jar " + \
       join(pathToCommon, "batik", "batik-rasterizer.jar " + \
@@ -1005,8 +1006,9 @@ def make_ebook(options, root):
     clean_up()
   downloadToolsIfNeeded(pathToCommon)
   config = read_configuration_file()
-  if "skip" in config:
-    return
+  if "skip" in config and not options.force:
+    print "Config file defines 'skip' -- not doing anything."
+    return -1
   mandatoryFields = ["filename", "title", "author", "uuid", "date", "lang",
       "description", "publisher"]
   for field in mandatoryFields:
@@ -1097,5 +1099,4 @@ def make_ebook(options, root):
 
   if not options.debug:
     clean_up()
-
-
+  return 0
