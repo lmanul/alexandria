@@ -445,11 +445,18 @@ def rasterizeCover(title, author, filename, debug):
   #    join(pathToCommon, "batik", "batik-rasterizer.jar " + \
   #    "-h " + str(COVER_HEIGHT) + " -d book/OEBPS/Images/Cover.png " + coverToRasterize + \
   #    " 2>> " + LOG + " >> " + LOG))
-  # TODO: Rasterizing is expensive, resize instead.
-  os.system(JAVA + " -jar " + \
-      join(pathToCommon, "batik", "batik-rasterizer.jar " + \
-      "-h " + str(COVER_HEIGHT_FOR_ITUNES) + " -d ./Cover_iTunes.png " + coverToRasterize + \
-      " 2>> " + LOG + " >> " + LOG))
+  if os.path.exists("/usr/bin/convert"):
+    print "Using convert"
+    size = str(COVER_HEIGHT_FOR_ITUNES)
+    command = "convert -size " + size + "x" + size + " Cover.png -resize " + \
+        size + "x" + size + ' +profile "*" Cover_iTunes.png'
+    #print command
+    os.system(command)
+  else:
+    os.system(JAVA + " -jar " + \
+        join(pathToCommon, "batik", "batik-rasterizer.jar " + \
+        "-h " + str(COVER_HEIGHT_FOR_ITUNES) + " -d ./Cover_iTunes.png " + coverToRasterize + \
+        " 2>> " + LOG + " >> " + LOG))
   # Also copy the cover locally.
   os.system("cp book/OEBPS/Images/Cover.png .")
   if not os.path.exists(coverPath):
