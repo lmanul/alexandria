@@ -152,3 +152,7 @@ p {
 p.disclaimer {
   margin-bottom: 1em;
 }
+
+h2.footnote-section {
+  font-size: 125%;
+}

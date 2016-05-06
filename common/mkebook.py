@@ -92,12 +92,12 @@ class TocChapter:
   def get_footnotes(self):
     footnotes_content = ""
     if self.level == 1 and self.title != "" and self.has_footnotes():
-      footnotes_content += '<h2 class="footnote-section">' + self.title + '</h2>'
+      footnotes_content += '\n\n<h2 class="footnote-section">' + self.title + '</h2>'
     for footnote in self.footnotes:
-      footnotes_content += '\n<p><a id="' + footnote.get_id() + '" href="' + footnote.html_file + \
+      footnotes_content += '\n<aside epub:type="footnote" id="' + footnote.get_id() + '-popup"><a id="' + footnote.get_id() + '" href="' + footnote.html_file + \
             '#' + footnote.get_id() + '">' + \
-            str(footnote.counter) + '.</a> ' + \
-            footnote.text + '</p>'
+            str(footnote.counter) + '</a>. ' + \
+            footnote.text + "</aside>"
     for child in self.children:
       footnotes_content += child.get_footnotes()
     return footnotes_content
@@ -440,13 +440,16 @@ def rasterizeCover(title, author, filename, debug):
     populatedCoverHandle.close()
     coverToRasterize = populatedCoverPath
     os.system("rm -f " + svgFontPath)
-  os.system("rsvg-convert -o book/OEBPS/Images/Cover.png -h " + str(COVER_HEIGHT) + " " + coverToRasterize)
-  #os.system(JAVA + " -jar " + \
-  #    join(pathToCommon, "batik", "batik-rasterizer.jar " + \
-  #    "-h " + str(COVER_HEIGHT) + " -d book/OEBPS/Images/Cover.png " + coverToRasterize + \
-  #    " 2>> " + LOG + " >> " + LOG))
+  
+  if is_mac:
+    os.system(JAVA + " -jar " + \
+        join(pathToCommon, "batik", "batik-rasterizer.jar " + \
+        "-h " + str(COVER_HEIGHT) + " -d book/OEBPS/Images/Cover.png " + coverToRasterize + \
+        " 2>> " + LOG + " >> " + LOG))
+  else:
+    os.system("rsvg-convert -o book/OEBPS/Images/Cover.png -h " + str(COVER_HEIGHT) + " " + coverToRasterize)
+
   if os.path.exists("/usr/bin/convert"):
-    print "Using convert"
     size = str(COVER_HEIGHT_FOR_ITUNES)
     command = "convert -size " + size + "x" + size + " Cover.png -resize " + \
         size + "x" + size + ' +profile "*" Cover_iTunes.png'
@@ -457,6 +460,7 @@ def rasterizeCover(title, author, filename, debug):
         join(pathToCommon, "batik", "batik-rasterizer.jar " + \
         "-h " + str(COVER_HEIGHT_FOR_ITUNES) + " -d ./Cover_iTunes.png " + coverToRasterize + \
         " 2>> " + LOG + " >> " + LOG))
+
   # Also copy the cover locally.
   os.system("cp book/OEBPS/Images/Cover.png .")
   if not os.path.exists(coverPath):
@@ -618,10 +622,11 @@ def preprocess_html(pathToCommon, htmlFiles, language, options):
     while results:
       footnote = all_footnotes.pop(0)
       footnote_id = footnote.get_id()
-      replacement = '<a epub:type="noteref" href="' + \
+      caller = '<a epub:type="noteref" href="' + \
           FOOTNOTES_HTML_FILE_NAME + '#' + \
-          footnote_id + '" id="' + footnote_id + '"><sup>' + str(footnote.counter) + \
+          footnote_id + '-popup" id="' + footnote_id + '"><sup>' + str(footnote.counter) + \
           '</sup></a>'
+      replacement = caller
       generatedContent = re.sub(FOOTNOTE_REGEX, replacement, generatedContent, 1)
       results = re.search(FOOTNOTE_REGEX, generatedContent)
      # TODO: Handle the index.
@@ -644,6 +649,7 @@ def postProcessHtml(input):
   output = re.sub(r'<p><h', '<h', output)
   output = re.sub(r'<p>\s*<p', '<p', output)
   output = re.sub(r'</p>\s*</p>', '</p>', output)
+  output = re.sub(r'</aside></p>', '</aside>', output)
   # Assume paragraphs starting with an image don't want indent.
   output = re.sub(r'<p><img', '<p class="noindent"><img', output)
   output = re.sub("<p><div", "<div", output)
