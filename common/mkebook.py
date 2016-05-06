@@ -1019,9 +1019,6 @@ def make_ebook(options, root):
     clean_up()
   downloadToolsIfNeeded(pathToCommon)
   config = read_configuration_file()
-  if "skip" in config and not options.force:
-    print "Config file defines 'skip' -- not doing anything."
-    return -1
   mandatoryFields = ["filename", "title", "author", "uuid", "date", "lang",
       "description", "publisher"]
   for field in mandatoryFields:
@@ -1029,6 +1026,9 @@ def make_ebook(options, root):
       print os.getcwd() + ": please specify a " + field
       sys.exit(1)
   print "* " + config["title"] + "..."
+  if "skip" in config and not options.force:
+    print "    (Skipping...)"
+    return -1
 
   if options.debug:
     print "Copying common files..."
