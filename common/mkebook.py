@@ -1029,7 +1029,7 @@ def make_ebook(options, root):
   print "* " + config["title"] + "..."
   if "skip" in config and not options.force:
     print "    (Skipping...)"
-    return -1
+    return 2
 
   if options.debug:
     print "Copying common files..."
