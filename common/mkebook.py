@@ -448,6 +448,8 @@ def rasterizeCover(title, author, filename, debug):
         " 2>> " + LOG + " >> " + LOG))
   else:
     os.system("rsvg-convert -o book/OEBPS/Images/Cover.png -h " + str(COVER_HEIGHT) + " " + coverToRasterize)
+  # Also copy the cover locally.
+  os.system("cp book/OEBPS/Images/Cover.png .")
 
   if os.path.exists("/usr/bin/convert"):
     size = str(COVER_HEIGHT_FOR_ITUNES)
@@ -462,8 +464,6 @@ def rasterizeCover(title, author, filename, debug):
         "-h " + str(COVER_HEIGHT_FOR_ITUNES) + " -d ./Cover_iTunes.png " + coverToRasterize + \
         " 2>> " + LOG + " >> " + LOG))
 
-  # Also copy the cover locally.
-  os.system("cp book/OEBPS/Images/Cover.png .")
   if not os.path.exists(coverPath):
     # Cleanup the populated cover
     if not debug:
