@@ -453,7 +453,8 @@ def rasterizeCover(title, author, filename, debug):
     size = str(COVER_HEIGHT_FOR_ITUNES)
     command = "convert -size " + size + "x" + size + " Cover.png -resize " + \
         size + "x" + size + ' +profile "*" Cover_iTunes.png'
-    #print command
+    if debug:
+      print command
     os.system(command)
   else:
     os.system(JAVA + " -jar " + \
