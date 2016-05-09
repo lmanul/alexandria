@@ -15,7 +15,7 @@
   </text>
   <image preserveAspectRatio="xMidYMid slice" y="31500" x="0"
      xlink:href="data:image/jpeg;base64,{{IMAGE_BASE64_DATA}} "
-     height="81350.531" width="66900" />
+     height="68500" width="66900" />
   <rect x="61033.172" y="92700" width="3114" height="4055"
      style="fill:#ffffff;fill-opacity:0.5;stroke-width:500;stroke-miterlimit:4;display:inline" />
   <rect x="60021.035" y="91500" width="3114" height="4055"

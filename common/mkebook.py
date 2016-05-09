@@ -448,6 +448,8 @@ def rasterizeCover(title, author, filename, debug):
         " 2>> " + LOG + " >> " + LOG))
   else:
     os.system("rsvg-convert -o book/OEBPS/Images/Cover.png -h " + str(COVER_HEIGHT) + " " + coverToRasterize)
+  # Also copy the cover locally.
+  os.system("cp book/OEBPS/Images/Cover.png .")
 
   # Also copy the cover locally.
   os.system("cp book/OEBPS/Images/Cover.png .")
@@ -458,7 +460,8 @@ def rasterizeCover(title, author, filename, debug):
   elif os.path.exists("/usr/bin/convert"):
     command = "convert -size " + size + "x" + size + " Cover.png -resize " + \
         size + "x" + size + ' +profile "*" Cover_iTunes.png'
-    #print command
+    if debug:
+      print command
     os.system(command)
   else:
     os.system(JAVA + " -jar " + \
@@ -1031,7 +1034,7 @@ def make_ebook(options, root):
   print "* " + config["title"] + "..."
   if "skip" in config and not options.force:
     print "    (Skipping...)"
-    return -1
+    return 2
 
   if options.debug:
     print "Copying common files..."

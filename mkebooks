@@ -49,10 +49,8 @@ if len(ebookRoots) == 0:
 for ebookRoot in ebookRoots:
   os.chdir(ebookRoot)
   retval = mkebook.make_ebook(options, ebookRoot)
-  if retval is not 0:
-    sys.exit(retval)
-  # Aspell issues on Mac.
-  if not options.skip_spelling and not is_mac:
+  # Retval 2 means skip. Aspell issues on Mac.
+  if retval is not 2 and not options.skip_spelling and not is_mac:
     os.system(os.path.join(script_path, "checkspelling"))
   os.chdir(cwd)
 
