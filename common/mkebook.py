@@ -202,7 +202,7 @@ def getLatestInputModTime(type, htmlFiles, imageFiles, pathToCommon,
         latestInputModTime = mTime
         latestInput = input
   if debug:
-    print "Latest input is " + latestInput
+    print("Latest input is " + latestInput)
 
   return latestInputModTime
 
@@ -217,7 +217,7 @@ def downloadToolsIfNeeded(pathToCommon):
     fileName = fileNameBase + ".zip"
     url = "https://github.com/IDPF/epubcheck/releases/download/v" + \
         EPUB_CHECKER_VERSION + "/" + fileName
-    print "I need to download epubcheck, please be patient..."
+    print("I need to download epubcheck, please be patient...")
     os.system("wget \"" + url + "\"")
     os.system("unzip " + fileName)
     os.system("mv " + fileNameBase + " " + EPUB_CHECKER)
@@ -279,15 +279,15 @@ def needsBuilding(type, force, htmlFiles, imageFiles, pathToCommon,
   elif type == OutputType.ITUNES:
     output = itunes_vendor_id + ".itmsp/metadata.xml"
   if debug:
-    print "Checking if output exists: " + os.getcwd() + "/" + output
+    print("Checking if output exists: " + os.getcwd() + "/" + output)
   if not os.path.exists(output):
     if debug:
-      print "Output doesn't exist"
+      print("Output doesn't exist")
     return True
   output_mod_time = os.path.getmtime(output)
   if debug:
-    print "Output does exist, mod time is " + str(output_mod_time) + " and " + \
-        "latest input mod time is " + str(latestInputModTime)
+    print("Output does exist, mod time is " + str(output_mod_time) + " and " + \
+        "latest input mod time is " + str(latestInputModTime))
   return output_mod_time <= latestInputModTime
 
 
@@ -333,8 +333,8 @@ def removeUnusedImages(image_files, html_files):
       unused_image_files.append(image_file)
       os.system("rm " + os.path.join("book/OEBPS/Images", image_file))
   if len(unused_image_files) != 0:
-    print "The following images don't seem to be used and have been " + \
-        "removed from the generated ebooks: " + str(unused_image_files)
+    print("The following images don't seem to be used and have been " + \
+        "removed from the generated ebooks: " + str(unused_image_files))
   return used_image_files
 
 def appendLanguageDependentStyles(language):
@@ -345,7 +345,7 @@ def appendLanguageDependentStyles(language):
   else:
     styles = styles + """p + p {text-indent: 1.5em;}\n\n"""
   handle.write(styles)
-  handle.close()  
+  handle.close()
 
 def appendLocalStyles():
   if os.path.exists("style.css"):
@@ -407,7 +407,7 @@ def rasterizeCover(title, author, filename, debug):
             one_title_part(third_third, 33450, 21000)
         max_line_length = max_length([first_third, second_third, third_third])
 
-      
+
     title_font_size = 25000 / math.sqrt(max_line_length)
 
     coverTemplateData = coverTemplateHandle.read()
@@ -440,7 +440,7 @@ def rasterizeCover(title, author, filename, debug):
     populatedCoverHandle.close()
     coverToRasterize = populatedCoverPath
     os.system("rm -f " + svgFontPath)
-  
+
   if is_mac:
     os.system(JAVA + " -jar " + \
         join(pathToCommon, "batik", "batik-rasterizer.jar " + \
@@ -456,12 +456,12 @@ def rasterizeCover(title, author, filename, debug):
 
   size = str(COVER_HEIGHT_FOR_ITUNES)
   if is_mac:
-    os.system("sips -Z " + size + " Cover.png --out Cover_iTunes.png > /dev/null")    
+    os.system("sips -Z " + size + " Cover.png --out Cover_iTunes.png > /dev/null")
   elif os.path.exists("/usr/bin/convert"):
     command = "convert -size " + size + "x" + size + " Cover.png -resize " + \
         size + "x" + size + ' +profile "*" Cover_iTunes.png'
     if debug:
-      print command
+      print(command)
     os.system(command)
   else:
     os.system(JAVA + " -jar " + \
@@ -473,7 +473,7 @@ def rasterizeCover(title, author, filename, debug):
     # Cleanup the populated cover
     if not debug:
       os.system("rm " + populatedCoverPath)
-  print "    ✓ Cover (" + str(now_seconds() - start) + "s)"
+  print("    ✓ Cover (" + str(now_seconds() - start) + "s)")
 
 def gather_index(htmlFiles):
   # TODO
@@ -623,7 +623,7 @@ def preprocess_html(pathToCommon, htmlFiles, language, options):
     generatedContent = '<div class="chapter-mark"></div>\n' + generatedContent
     generatedContent = re.sub(r'<tocchapter>.*?</tocchapter>', "",
         generatedContent)
-    
+
     results = re.search(FOOTNOTE_REGEX, generatedContent)
     while results:
       footnote = all_footnotes.pop(0)
@@ -875,7 +875,7 @@ def generateEpub(filename):
     pass
   os.system("mv " + filename + ".zip ../" + filename + ".epub")
   os.chdir("..")
-  print "    ✓ ePub (" + str(now_seconds() - start) + "s)" 
+  print("    ✓ ePub (" + str(now_seconds() - start) + "s)")
 
 
 def checkEpub(pathToCommon, filename):
@@ -886,7 +886,7 @@ def checkEpub(pathToCommon, filename):
       stderr=subprocess.PIPE, shell=True)
   (out, err) = proc.communicate()
   if "No errors or warnings detected." not in out:
-    print "The epub checker found some problems:\n"
+    print("The epub checker found some problems:\n")
     errors = err.strip().split("\n")
     for error in errors:
       error = error.strip()
@@ -902,13 +902,13 @@ def checkEpub(pathToCommon, filename):
           column = int(match.group("column"))
           os.system("sed -n '" + str(line) + "p' book/" + filepath)
           for i in range(0, column):
-            print " ",
-          print "^"
-          print "--------------------------------------------------------------------------------"
-          print error
+            print(" ", end="")
+          print("^")
+          print("--------------------------------------------------------------------------------")
+          print(error)
         if not has_expected_format:
-          print error
-  print "    ✓ ePub validation (" + str(now_seconds() - start) + "s)"
+          print(error)
+  print("    ✓ ePub validation (" + str(now_seconds() - start) + "s)")
 
 def md5Checksum(filePath):
     with open(filePath, 'rb') as fh:
@@ -960,7 +960,7 @@ def generate_itunes_producer_file(title, subtitle, author, author_sort_name,
       for category_type in categories_dict[category]:
         categories_xml += '<subject primary="true" scheme="' + \
             category_type[0] + '">' + category_type[1] + '</subject>'
-      
+
   template_path = os.path.join(pathToTemplates, "itunes_producer_metadata.xml")
   template = open(template_path, "r").read()
   template = template.replace("{{ITUNES_VENDOR_ID}}", itunes_vendor_id)
@@ -986,7 +986,7 @@ def generate_itunes_producer_file(title, subtitle, author, author_sort_name,
   metadata.close()
   os.system("cp Cover_iTunes.png " + itunes_producer_dir + "/Cover.png")
   os.system("cp " + epub_filename + " " + itunes_producer_dir + "/")
-  print "    ✓ iTunes producer (" + str(now_seconds() - start) + "s)"
+  print("    ✓ iTunes producer (" + str(now_seconds() - start) + "s)")
 
 def generateMobi(pathToCommon, filename):
   start = now_seconds()
@@ -1006,7 +1006,7 @@ def generateMobi(pathToCommon, filename):
       "| grep -v 'Copyright Amazon.com' " + \
       # Remove blank lines too.
       "| grep -v -e '^$'")
-  print "    ✓ Kindle (" + str(now_seconds() - start) + "s)"
+  print("    ✓ Kindle (" + str(now_seconds() - start) + "s)")
 
 def generate_kindle_cover():
   os.system("mkjpg Cover_iTunes.png")
@@ -1029,15 +1029,15 @@ def make_ebook(options, root):
       "description", "publisher"]
   for field in mandatoryFields:
     if field not in config:
-      print os.getcwd() + ": please specify a " + field
+      print(os.getcwd() + ": please specify a " + field)
       sys.exit(1)
-  print "* " + config["title"] + "..."
+  print("* " + config["title"] + "...")
   if "skip" in config and not options.force:
-    print "    (Skipping...)"
+    print("    (Skipping...)")
     return 2
 
   if options.debug:
-    print "Copying common files..."
+    print("Copying common files...")
   copyCommonFiles(pathToCommon)
 
   title = config["title"]
@@ -1072,7 +1072,7 @@ def make_ebook(options, root):
   if needsBuilding(OutputType.COVER, options.force, htmlFiles, imageFiles,
       pathToCommon, pathToTemplates, config, itunes_vendor_id, options.debug):
     if options.debug:
-      print "Rasterizing cover..."
+      print("Rasterizing cover...")
     rasterizeCover(title, author, file_name, options.debug)
   elif os.path.exists("Cover_manual.png"):
     os.system("cp Cover_manual.png book/OEBPS/Images/Cover.png")
@@ -1085,14 +1085,14 @@ def make_ebook(options, root):
   if needsBuilding(OutputType.EPUB, options.force, htmlFiles, imageFiles,
       pathToCommon, pathToTemplates, config, itunes_vendor_id, options.debug):
     if options.debug:
-      print "Building epub..."
+      print("Building epub...")
 
     appendLanguageDependentStyles(lang)
     appendLocalStyles()
 
     index = gather_index(htmlFiles)
     if options.debug:
-      print "Gathering metadata..."
+      print("Gathering metadata...")
     metadata = preprocess_html(pathToCommon, htmlFiles, lang, options)
     if metadata.has_footnotes():
       generate_footnotes(metadata, htmlHeader, htmlFooter)

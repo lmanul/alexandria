@@ -43,7 +43,7 @@ for root, dirs, files in os.walk("."):
     ebookRoots.append(root)
 
 if len(ebookRoots) == 0:
-  print "No ebook to make. Please create a config.ebook file."
+  print("No ebook to make. Please create a config.ebook file.")
   exit(0)
 
 for ebookRoot in ebookRoots:
@@ -54,4 +54,4 @@ for ebookRoot in ebookRoots:
     os.system(os.path.join(script_path, "checkspelling"))
   os.chdir(cwd)
 
-print "All up to date."
+print("All up to date.")
