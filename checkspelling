@@ -3,8 +3,6 @@
 import os
 import subprocess
 
-from sets import Set
-
 configFileName = "config.ebook"
 start_directory = os.getcwd()
 # TODO: Configure
@@ -27,8 +25,8 @@ for ebook_root in ebookRoots:
     os.system("echo 'personal_ws-1.1 fr 0 utf-8' > aspell.fr.pws")
   html_files = [f for f in os.listdir("Text") if f.endswith(".html")]
   html_files.sort()
-  global_words = Set([])
-  local_words = Set([])
+  global_words = set([])
+  local_words = set([])
   skip_to_next_book = False
   for html_file in html_files:
     if skip_to_next_book:
@@ -77,13 +75,13 @@ for ebook_root in ebookRoots:
       for i in range(0, int(float(word_index)/float(word_count) * width)):
         to_print += "-"
       to_print += ">"
-      print (to_print + "\n") 
-      
+      print(to_print + "\n")
+
       noltr = "[^a-zA-Z]"
       os.system("grep -C 1 -e \"\(" + noltr + word + noltr + "\|^" + word + \
           noltr + "\|" + word + "$" + "\)\" Text/" + html_file)
-      print "--\n"
-      print word + " -- (Enter, Local or Global, Skip or eXit): ",
+      print("--\n")
+      print(word + " -- (Enter, Local or Global, Skip or eXit): ", end="")
       input_variable = raw_input()
       lc_input_variable = input_variable.strip().lower()
       if lc_input_variable == "":

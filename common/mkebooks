@@ -5,9 +5,9 @@ import subprocess
 import sys
 
 from optparse import OptionParser
-from common import mkebook
+import mkebook
 
-uname = subprocess.check_output(["uname", "-a"])
+uname = subprocess.check_output(["uname", "-a"]).decode()
 if uname.lower().find("darwin") != -1:
   is_mac = True
 else:
@@ -50,8 +50,8 @@ for ebookRoot in ebookRoots:
   os.chdir(ebookRoot)
   retval = mkebook.make_ebook(options, ebookRoot)
   # Retval 2 means skip. Aspell issues on Mac.
-  if retval is not 2 and not options.skip_spelling and not is_mac:
-    os.system(os.path.join(script_path, "checkspelling"))
+  if retval != 2 and not options.skip_spelling and not is_mac:
+    os.system(os.path.join(script_path, "..", "checkspelling"))
   os.chdir(cwd)
 
 print("All up to date.")

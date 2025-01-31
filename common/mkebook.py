@@ -15,7 +15,7 @@ from os.path import isfile, join, getmtime
 
 from models import *
 
-uname = subprocess.check_output(["uname", "-a"])
+uname = subprocess.check_output(["uname", "-a"]).decode()
 if uname.lower().find("darwin") != -1:
   is_mac = True
 else:
@@ -353,7 +353,7 @@ def appendLocalStyles():
 
 
 def get_base64_data(file_path):
-  return subprocess.check_output(["base64", file_path])
+  return subprocess.check_output(["base64", file_path]).decode()
 
 
 def one_title_part(text, x, y):
@@ -885,9 +885,9 @@ def checkEpub(pathToCommon, filename):
   proc = subprocess.Popen(" ".join(args), stdout=subprocess.PIPE,
       stderr=subprocess.PIPE, shell=True)
   (out, err) = proc.communicate()
-  if "No errors or warnings detected." not in out:
+  if "No errors or warnings detected." not in out.decode():
     print("The epub checker found some problems:\n")
-    errors = err.strip().split("\n")
+    errors = err.decode().strip().split("\n")
     for error in errors:
       error = error.strip()
       if error != "":
